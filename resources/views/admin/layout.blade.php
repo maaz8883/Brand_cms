@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Dashboard') - Urban CMS</title>
+    <title>@yield('title', 'Admin Dashboard') - Brand CMS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
@@ -13,7 +13,7 @@
     <!-- Sidebar -->
     <nav class="sidebar">
         <div class="brand">
-            <h4><i class="bi bi-layout-text-window-reverse"></i> Urban CMS</h4>
+            <h4><i class="bi bi-layout-text-window-reverse"></i> Brand CMS</h4>
         </div>
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -21,7 +21,7 @@
                     <i class="bi bi-speedometer2"></i> <span>Dashboard</span>
                 </a>
             </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}" href="{{ route('admin.blogs.index') }}">
                             <i class="bi bi-journal-text"></i> <span>Blogs</span>
                         </a>
@@ -29,6 +29,11 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
                             <i class="bi bi-tags"></i> <span>Categories</span>
+                        </a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.brands.*') ? 'active' : '' }}" href="{{ route('admin.brands.index') }}">
+                            <i class="bi bi-award"></i> <span>Brands</span>
                         </a>
                     </li>
                     <li class="nav-item">

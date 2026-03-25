@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProfileController;
 
@@ -27,6 +28,17 @@ Route::prefix('admin')->group(function () {
         Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('admin.profile.update');
         Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('admin.profile.password');
         
+        // Brands Routes
+        Route::resource('brands', BrandController::class)->names([
+            'index' => 'admin.brands.index',
+            'create' => 'admin.brands.create',
+            'store' => 'admin.brands.store',
+            'show' => 'admin.brands.show',
+            'edit' => 'admin.brands.edit',
+            'update' => 'admin.brands.update',
+            'destroy' => 'admin.brands.destroy',
+        ]);
+
         // Categories Routes
         Route::resource('categories', CategoryController::class)->names([
             'index' => 'admin.categories.index',
