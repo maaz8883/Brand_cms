@@ -77,7 +77,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="content_en" class="form-label">Content (English) *</label>
-                                <div id="editor_en" style="min-height: 300px;"></div>
+                                <div id="editor_en" class="quill-editor-host"></div>
                                 <input type="hidden" id="content_en" name="content_en" value="{{ old('content_en', $blog->content_en) }}" required>
                                 @error('content_en')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -87,7 +87,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="content_de" class="form-label">Content (German / Deutsch)</label>
-                                <div id="editor_de" style="min-height: 300px;"></div>
+                                <div id="editor_de" class="quill-editor-host"></div>
                                 <input type="hidden" id="content_de" name="content_de" value="{{ old('content_de', $blog->content_de) }}">
                                 @error('content_de')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -130,7 +130,7 @@
                 <label for="featured_image" class="form-label">Featured Image</label>
                 @if($blog->featured_image)
                     <div class="mb-2">
-                        <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="Featured Image" class="img-thumbnail" style="max-width: 200px;">
+                        <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="Featured Image" class="img-thumbnail featured-image-thumb">
                     </div>
                 @endif
                 <input type="file" class="form-control @error('featured_image') is-invalid @enderror" id="featured_image" name="featured_image" accept="image/*">
@@ -230,52 +230,4 @@
     });
 </script>
 
-<style>
-    .ql-container {
-        font-size: 16px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    .ql-editor {
-        min-height: 300px;
-    }
-    
-    .ql-toolbar {
-        border-top: 1px solid #ccc;
-        border-left: 1px solid #ccc;
-        border-right: 1px solid #ccc;
-        border-radius: 8px 8px 0 0;
-        background: #f8f9fa;
-    }
-    
-    .ql-container {
-        border-bottom: 1px solid #ccc;
-        border-left: 1px solid #ccc;
-        border-right: 1px solid #ccc;
-        border-radius: 0 0 8px 8px;
-    }
-    
-    .ql-toolbar .ql-stroke {
-        stroke: #1a4d3c;
-    }
-    
-    .ql-toolbar .ql-fill {
-        fill: #1a4d3c;
-    }
-    
-    .ql-toolbar button:hover,
-    .ql-toolbar button.ql-active {
-        color: #1a4d3c;
-    }
-    
-    .ql-toolbar button:hover .ql-stroke,
-    .ql-toolbar button.ql-active .ql-stroke {
-        stroke: #1a4d3c;
-    }
-    
-    .ql-toolbar button:hover .ql-fill,
-    .ql-toolbar button.ql-active .ql-fill {
-        fill: #1a4d3c;
-    }
-</style>
 @endsection

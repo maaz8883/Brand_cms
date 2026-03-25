@@ -92,7 +92,7 @@
             </div>
             <div class="card-body">
                 <div class="text-center mb-3">
-                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width: 80px; height: 80px; font-size: 2rem; font-weight: 600;">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto avatar-lg">
                         {{ strtoupper(substr($user->name, 0, 1)) }}
                     </div>
                     <h5 class="mt-3 mb-1">{{ $user->name }}</h5>

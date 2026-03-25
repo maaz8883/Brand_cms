@@ -57,7 +57,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body p-4">
-                <h5 class="card-title mb-3" style="color: #1a4d3c;">
+                <h5 class="card-title mb-3 heading-urban">
                     <i class="bi bi-lightning-charge text-warning"></i> Quick Actions
                 </h5>
                 <div class="d-grid gap-2">
@@ -74,7 +74,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body p-4">
-                <h5 class="card-title mb-3" style="color: #1a4d3c;">
+                <h5 class="card-title mb-3 heading-urban">
                     <i class="bi bi-graph-up text-success"></i> Statistics
                 </h5>
                 <div class="row text-center">
@@ -114,12 +114,12 @@
                         <table class="table table-hover mb-0">
                             <thead>
                                 <tr>
-                                    <th style="width: 5%">#</th>
-                                    <th style="width: 35%">Title</th>
-                                    <th style="width: 15%">Status</th>
-                                    <th style="width: 20%">Author</th>
-                                    <th style="width: 15%">Created</th>
-                                    <th style="width: 10%">Actions</th>
+                                    <th class="table-col-5">#</th>
+                                    <th class="table-col-35">Title</th>
+                                    <th class="table-col-15">Status</th>
+                                    <th class="table-col-20">Author</th>
+                                    <th class="table-col-15">Created</th>
+                                    <th class="table-col-10">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -142,7 +142,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; font-size: 0.85rem; font-weight: 600;">
+                                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center avatar-sm">
                                                     {{ strtoupper(substr($blog->user->name, 0, 1)) }}
                                                 </div>
                                                 <span class="ms-2">{{ $blog->user->name }}</span>
@@ -171,7 +171,7 @@
                     </div>
                 @else
                     <div class="text-center p-5">
-                        <i class="bi bi-inbox" style="font-size: 3rem; color: #dee2e6;"></i>
+                        <i class="bi bi-inbox empty-state-icon"></i>
                         <p class="text-muted mt-3 mb-4">No blogs found. Start by creating your first blog!</p>
                         <a href="{{ route('admin.blogs.create') }}" class="btn btn-primary">
                             <i class="bi bi-plus-circle"></i> Create Your First Blog
@@ -190,46 +190,4 @@
     </div>
 </div>
 
-<style>
-    .stat-card {
-        position: relative;
-    }
-    
-    .stat-card .stat-value {
-        font-size: 2.5rem;
-    }
-    
-    .card-body {
-        background: #fff;
-    }
-    
-    .card-body h5 {
-        color: #1a4d3c;
-    }
-    
-    .badge.bg-success {
-        background-color: #1a4d3c !important;
-    }
-    
-    .badge.bg-warning {
-        background-color: #ffc107 !important;
-        color: #000 !important;
-    }
-    
-    @media (max-width: 768px) {
-        main {
-            margin-left: 0;
-            padding: 1rem;
-        }
-        
-        .sidebar {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .stat-card .stat-value {
-            font-size: 2rem;
-        }
-    }
-</style>
 @endsection
