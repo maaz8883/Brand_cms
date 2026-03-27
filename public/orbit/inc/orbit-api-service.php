@@ -24,10 +24,18 @@ function orbitApiBaseUrl(): string
 
 function orbitApiBaseUrlFromCurrentRequest(): string
 {
-	$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? ''));
-	$basePath = str_ends_with($scriptDir, '/orbit')
-		? substr($scriptDir, 0, -strlen('/orbit'))
-		: '';
+	// REQUEST_URI is reliable with Apache rewrite (index.php/texas/houston); dirname(SCRIPT_NAME) is not.
+	$requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '';
+	$requestPath = str_replace('\\', '/', $requestPath);
+	$orbitPos = stripos($requestPath, '/orbit/');
+	if ($orbitPos !== false) {
+		$basePath = substr($requestPath, 0, $orbitPos);
+	} else {
+		$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? ''));
+		$basePath = str_ends_with($scriptDir, '/orbit')
+			? substr($scriptDir, 0, -strlen('/orbit'))
+			: '';
+	}
 	$scheme = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
 	$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
 
@@ -103,4 +111,84 @@ function orbitGetParentServices(string $brandSlug = ORBIT_BRAND_SLUG): array
 function orbitSafeUpper(string $value): string
 {
 	return function_exists('mb_strtoupper') ? mb_strtoupper($value, 'UTF-8') : strtoupper($value);
+}
+
+/**
+ * Laravel public URL for /storage/... paths (strip /api/v1 from ORBIT_API_BASE_URL).
+ */
+function orbitCmsPublicBaseUrl(): string
+{
+	$u = orbitApiBaseUrl();
+	if (str_ends_with($u, '/api/v1')) {
+		return rtrim(substr($u, 0, -strlen('/api/v1')), '/');
+	}
+
+	return rtrim($u, '/');
+}
+
+function orbitMediaUrl(?string $path): string
+{
+	if ($path === null || $path === '') {
+		return '';
+	}
+	if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+		return $path;
+	}
+
+	return rtrim(orbitCmsPublicBaseUrl(), '/') . '/' . ltrim($path, '/');
+}
+
+/**
+ * Path after /orbit/ from REQUEST_URI, e.g. "texas" or "texas/houston" (no leading slash).
+ * Uses first "/orbit/" in path so nested URLs work with /public/orbit/... prefixes.
+ */
+function orbit_request_service_path_from_uri(): ?string
+{
+	$path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '';
+	$path = str_replace('\\', '/', $path);
+	$lower = strtolower($path);
+	$needle = '/orbit/';
+	$pos = strpos($lower, $needle);
+	if ($pos === false) {
+		return null;
+	}
+	$rest = substr($path, $pos + strlen($needle));
+	if (stripos($rest, 'index.php/') === 0) {
+		$rest = substr($rest, strlen('index.php/'));
+	}
+	$rest = trim($rest, '/');
+	$rest = preg_replace('#\.php$#i', '', $rest);
+	if ($rest === '' || strcasecmp($rest, 'index') === 0) {
+		return null;
+	}
+	if (! preg_match('#^[a-z0-9]+(?:-[a-z0-9]+)*(?:/[a-z0-9]+(?:-[a-z0-9]+)*)*$#i', $rest)) {
+		return null;
+	}
+
+	return $rest;
+}
+
+/**
+ * Single or nested service path, e.g. "texas" or "texas/houston".
+ *
+ * @return array{brand:array,service:array}|null
+ */
+function orbitFetchServiceShow(string $brandSlug, string $servicePath): ?array
+{
+	$servicePath = trim(str_replace('\\', '/', $servicePath), '/');
+	if ($servicePath === '') {
+		return null;
+	}
+	$segments = array_values(array_filter(explode('/', $servicePath), static fn ($s) => $s !== ''));
+	if ($segments === []) {
+		return null;
+	}
+	$encoded = implode('/', array_map('rawurlencode', $segments));
+	$url = orbitApiBaseUrl() . '/brands/' . rawurlencode($brandSlug) . '/services/' . $encoded;
+	$payload = orbitFetchJson($url);
+	if (! is_array($payload) || empty($payload['success']) || ! is_array($payload['data'] ?? null)) {
+		return null;
+	}
+
+	return $payload['data'];
 }

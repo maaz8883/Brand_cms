@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+	<base href="<?php echo htmlspecialchars($base_url, ENT_QUOTES, 'UTF-8'); ?>">
 	<meta charset="utf-8">
 	<meta name="p:domain_verify" content="bc955305a2d7b16ce43b37fc0decf7ec"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +13,14 @@
 	$uri_segments = explode('/', $uri_path);
 	$seg1 = $uri_segments[1] ?? '';
 	$script = '';
-	if ($pageSlug === 'location') {
+	if (! empty($orbit_service_payload['service'])) {
+		$class = 'service-dynamic';
+		$svc = $orbit_service_payload['service'];
+		$title = ! empty($svc['meta_title']) ? $svc['meta_title'] : (($svc['title'] ?? 'Service') . ' | Orbit Book Publishers');
+		$discription = $svc['meta_description'] ?? '';
+		$robots = 'NOINDEX, NOFOLLOW';
+		$script = '';
+	} elseif ($pageSlug === 'location') {
 		$class = 'location-page';
 		$title = 'Locations | Orbit Book Publishers';
 		$discription = 'Explore where Orbit Book Publishers serves authors across the United States. Find book publishing and marketing support in your state.';

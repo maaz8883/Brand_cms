@@ -93,33 +93,69 @@ if ($http_referer !== '' && false !== stripos($http_referer, "https://www.bing.c
 } else {
     $lead_source = "Organic";
 }
-$base_url = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
-$script_dir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
-$base_url .= preg_replace('@/+$@', '', $script_dir) . '/';
 $current_url = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $post_url = htmlspecialchars((isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . str_replace('index.php/', '', $_SERVER["PHP_SELF"]));
-$path = str_replace($base_url, '', $current_url);
-$path_prams = explode('?', $path);
-$path = $path_prams[0];
-$prams = !empty($path_prams[1]) ? $path_prams[1] : '';
-$pages = explode('/', $path);
-if (!empty($pages) && count($pages) > 0) {
-	$page = array_pop($pages);
-	$path = implode('/', $pages);
-	$path = !empty($path) ? $path . '/' : '';
+
+// REQUEST_URI-based routing: .htaccess sends /orbit/texas/houston → index.php/texas/houston, which breaks
+// dirname(SCRIPT_NAME) and makes $base_url not match — nested pages then get wrong $path/$page and 404.
+$requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '';
+$requestPath = str_replace('\\', '/', $requestPath);
+$orbitPos = stripos($requestPath, '/orbit/');
+if ($orbitPos !== false) {
+	$base_url = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
+	$base_url .= substr($requestPath, 0, $orbitPos + strlen('/orbit/'));
+
+	$relative = substr($requestPath, $orbitPos + strlen('/orbit/'));
+	if (stripos($relative, 'index.php/') === 0) {
+		$relative = substr($relative, strlen('index.php/'));
+	} elseif (strcasecmp($relative, 'index.php') === 0) {
+		$relative = '';
+	}
+	$relative = trim($relative, '/');
+	if (preg_match('#\.php$#i', $relative)) {
+		$relative = preg_replace('#\.php$#i', '', $relative);
+	}
+	if ($relative === '' || strcasecmp($relative, 'index') === 0) {
+		$page = 'home';
+		$path = '';
+	} else {
+		$parts = array_values(array_filter(explode('/', $relative), static fn ($s) => $s !== ''));
+		$page = array_pop($parts);
+		$path = count($parts) ? implode('/', $parts) . '/' : '';
+	}
+	if (strpos($page, '.php') !== false) {
+		$page = str_replace('.php', '', $page);
+	}
+	$page = (empty($page) || $page == 'index') ? 'home' : $page;
+	$page .= '.php';
 } else {
-	$page = $path;
-	$path = '';
+	$base_url = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
+	$script_dir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
+	$base_url .= preg_replace('@/+$@', '', $script_dir) . '/';
+	$path = str_replace($base_url, '', $current_url);
+	$path_prams = explode('?', $path);
+	$path = $path_prams[0];
+	$pages = explode('/', $path);
+	if (!empty($pages) && count($pages) > 0) {
+		$page = array_pop($pages);
+		$path = implode('/', $pages);
+		$path = !empty($path) ? $path . '/' : '';
+	} else {
+		$page = $path;
+		$path = '';
+	}
+	if (strpos($page, '.php') !== false) {
+		$page = str_replace('.php', '', $page);
+	}
+	$page = (empty($page) || $page == 'index') ? 'home' : $page;
+	$page .= '.php';
 }
-if (strpos($page, '.php') !== false) {
-	$page = str_replace('.php', '', $page);
-}
-$page = (empty($page) || $page == 'index') ? 'home' : $page;
-$page .= '.php';
+$path_prams = explode('?', str_replace($base_url, '', $current_url));
+$prams = !empty($path_prams[1]) ? $path_prams[1] : '';
 $exampted_pages = array('thankyou.php', '404.php', 'enroll-now.php', 'logo.php', 'website.php', 'brief/seo.php', 'smm.php', 'create_link.php', 'link_details.php', 'paynow.php', 'charge.php', 'fail.php', 'confirm_payment.php', 'publishing-experts/index.php');
 $exampt_allfiles = array('create_payment.php', 'confirm_payment.php');
 $no = "+1 (754) 225-2490";
-// $add = "300 Peachtree St NE Ste CS2, 30308, Atlanta, United States";
+$add = '300 Peachtree St NE Ste CS2, 30308, Atlanta, United States';
 $url = "https://orbitbookpublishers.com/";
 $bname = "Orbit Book Publishers";
 $date = date('d-m-y_h:i:s');
@@ -183,3 +219,4 @@ require_once('geoplugin.class.php');
 $geoplugin = new geoPlugin();
 $geoplugin->locate();
 
+$orbit_service_payload = null;
