@@ -4,7 +4,6 @@ declare(strict_types=1);
 require_once __DIR__ . '/inc/orbit-api-service.php';
 
 $orbitServiceData = orbitGetParentServices(ORBIT_BRAND_SLUG);
-$apiV1Base = $orbitServiceData['api_base'];
 $listUrl = $orbitServiceData['list_url'];
 $orbitParentServices = $orbitServiceData['items'];
 ?>
@@ -48,9 +47,9 @@ $orbitParentServices = $orbitServiceData['items'];
 				if ($slug === '') {
 					continue;
 				}
-				$showHref = $apiV1Base . '/brands/' . ORBIT_BRAND_SLUG . '/services/' . rawurlencode($slug);
+				$servicePageHref = rtrim($base_url, '/') . '/' . implode('/', array_map('rawurlencode', explode('/', trim((string) $slug, '/'))));
 				?>
-			<a class="orbit-state-pill" role="listitem" href="<?= htmlspecialchars($showHref, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer"><?= htmlspecialchars(orbitSafeUpper((string) $title), ENT_QUOTES, 'UTF-8'); ?></a>
+			<a class="orbit-state-pill btn" role="listitem" href="<?= htmlspecialchars($servicePageHref, ENT_QUOTES, 'UTF-8'); ?>"><?= htmlspecialchars(orbitSafeUpper((string) $title), ENT_QUOTES, 'UTF-8'); ?></a>
 			<?php } ?>
 		</div>
 		<?php } ?>
