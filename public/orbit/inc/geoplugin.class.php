@@ -88,30 +88,32 @@ zh-CN
 		$data = array();
 		
 		$response = $this->fetch($host);
-		
-		$data = unserialize($response);
-		
-		//set the geoPlugin vars
+
+		$data = @unserialize((string) $response);
+		if (!is_array($data)) {
+			$data = array();
+		}
+
 		$this->ip = $ip;
-		$this->city = $data['geoplugin_city'];
-		$this->region = $data['geoplugin_region'];
-		$this->regionCode = $data['geoplugin_regionCode'];
-		$this->regionName = $data['geoplugin_regionName'];
-		$this->dmaCode = $data['geoplugin_dmaCode'];
-		$this->countryCode = $data['geoplugin_countryCode'];
-		$this->countryName = $data['geoplugin_countryName'];
-		$this->inEU = $data['geoplugin_inEU'];
-		$this->euVATrate = $data['geoplugin_euVATrate'];
-		$this->continentCode = $data['geoplugin_continentCode'];
-		$this->continentName = $data['geoplugin_continentName'];
-		$this->latitude = $data['geoplugin_latitude'];
-		$this->longitude = $data['geoplugin_longitude'];
-		$this->locationAccuracyRadius = $data['geoplugin_locationAccuracyRadius'];
-		$this->timezone = $data['geoplugin_timezone'];
-		$this->currencyCode = $data['geoplugin_currencyCode'];
-		$this->currencySymbol = $data['geoplugin_currencySymbol'];
-		$this->currencyConverter = $data['geoplugin_currencyConverter'];
-		
+		$this->city = $data['geoplugin_city'] ?? null;
+		$this->region = $data['geoplugin_region'] ?? null;
+		$this->regionCode = $data['geoplugin_regionCode'] ?? null;
+		$this->regionName = $data['geoplugin_regionName'] ?? null;
+		$this->dmaCode = $data['geoplugin_dmaCode'] ?? null;
+		$this->countryCode = $data['geoplugin_countryCode'] ?? null;
+		$this->countryName = $data['geoplugin_countryName'] ?? null;
+		$this->inEU = $data['geoplugin_inEU'] ?? null;
+		$this->euVATrate = $data['geoplugin_euVATrate'] ?? false;
+		$this->continentCode = $data['geoplugin_continentCode'] ?? null;
+		$this->continentName = $data['geoplugin_continentName'] ?? null;
+		$this->latitude = $data['geoplugin_latitude'] ?? null;
+		$this->longitude = $data['geoplugin_longitude'] ?? null;
+		$this->locationAccuracyRadius = $data['geoplugin_locationAccuracyRadius'] ?? null;
+		$this->timezone = $data['geoplugin_timezone'] ?? null;
+		$this->currencyCode = $data['geoplugin_currencyCode'] ?? null;
+		$this->currencySymbol = $data['geoplugin_currencySymbol'] ?? null;
+		$this->currencyConverter = $data['geoplugin_currencyConverter'] ?? null;
+
 	}
 	
 	function fetch($host) {

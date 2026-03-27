@@ -12,7 +12,10 @@
                 <h3>{{ $brand->name }}</h3>
                 <p class="text-muted mb-0">Slug: <code>{{ $brand->slug }}</code></p>
             </div>
-            <div>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{{ route('admin.brands.services.index', $brand) }}" class="btn btn-primary">
+                    <i class="bi bi-journal-richtext"></i> Service pages
+                </a>
                 <a href="{{ route('admin.brands.edit', $brand) }}" class="btn btn-warning">
                     <i class="bi bi-pencil"></i> Edit
                 </a>

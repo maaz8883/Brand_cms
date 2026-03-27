@@ -69,46 +69,33 @@ $test_email = null;
 // 	return $code;
 // }
 
-
-
-if (strpos($page, '.php') !== false) {	
- 	$page = str_replace('.php', '',$page);
-}
-if (false !== stripos($_SERVER['HTTP_REFERER'], "https://www.bing.com/")){
+$http_referer = $_SERVER['HTTP_REFERER'] ?? '';
+if ($http_referer !== '' && false !== stripos($http_referer, "https://www.bing.com/")) {
     $lead_source = "Bing PPC";
-}
-elseif (false !== stripos($_SERVER['HTTP_REFERER'],"https://bing.com/")){
+} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://bing.com/")) {
     $lead_source = "Bing PPC";
-}
-elseif (false !== stripos($_SERVER['HTTP_REFERER'],"https://www.bing.com/aclk")){
+} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://www.bing.com/aclk")) {
     $lead_source = "Bing PPC";
-}
-elseif (false !== stripos($_SERVER['HTTP_REFERER'],"https://bing.com/aclk")){
+} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://bing.com/aclk")) {
     $lead_source = "Bing PPC";
-}
-elseif (false !== stripos($_SERVER['HTTP_REFERER'],"https://www.googleadservices.com/")){
+} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://www.googleadservices.com/")) {
     $lead_source = "Google PPC";
-}
-elseif (false !== stripos($_SERVER['HTTP_REFERER'],"https://googleadservices.com/")){
+} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://googleadservices.com/")) {
     $lead_source = "Google PPC";
-}
-elseif (false !== stripos($_SERVER['HTTP_REFERER'],"https://www.googleadservices.com/pagead/")){
+} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://www.googleadservices.com/pagead/")) {
     $lead_source = "Google PPC";
-}
-elseif (false !== stripos($_SERVER['HTTP_REFERER'],"https://googleadservices.com/pagead/")){
+} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://googleadservices.com/pagead/")) {
     $lead_source = "Google PPC";
-}
-elseif (false !== stripos($_SERVER['HTTP_REFERER'],"https://www.googleadservices.com/pagead/aclk")){
+} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://www.googleadservices.com/pagead/aclk")) {
     $lead_source = "Google PPC";
-}
-elseif (false !== stripos($_SERVER['HTTP_REFERER'],"https://googleadservices.com/pagead/aclk")){
+} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://googleadservices.com/pagead/aclk")) {
     $lead_source = "Google PPC";
-}
-else{
+} else {
     $lead_source = "Organic";
 }
 $base_url = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
-$base_url .= preg_replace('@/+$@', '', dirname($_SERVER['SCRIPT_NAME'])) . '/';
+$script_dir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
+$base_url .= preg_replace('@/+$@', '', $script_dir) . '/';
 $current_url = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $post_url = htmlspecialchars((isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . str_replace('index.php/', '', $_SERVER["PHP_SELF"]));
 $path = str_replace($base_url, '', $current_url);
@@ -155,7 +142,7 @@ $smtp['port'] = '465';
 $from_email = "noreply@orbitbookpublishers.com";
 $from_name = $bname;
 
-$source= $_POST['source'];
+$source = $_POST['source'] ?? 'organic';
 // $lead_source = "Organic";
 // $source = "organic";
 $cta_email = "info@orbitbookpublishers.com";

@@ -1,7 +1,11 @@
 <?php
+
 require 'inc/global.php';
 require 'inc/form.php';
+
 if(!in_array($page,$exampted_pages)){
+
+   
     if (!file_exists($path.$page)) {
         header('Location: '.$base_url.'404');
         die();
@@ -29,4 +33,6 @@ else{
     require $path.$page;
     require 'inc/chat.php';
 }
+
+
 ?>

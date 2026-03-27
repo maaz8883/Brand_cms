@@ -1,9 +1,12 @@
 <?php
 $directoryURI = $_SERVER['REQUEST_URI'];
-$paths = parse_url($directoryURI, PHP_URL_PATH);
+$paths = parse_url($directoryURI, PHP_URL_PATH) ?: '/';
 $components = explode('/', $paths);
-$first_part = $components[2];
-
+if (!empty($components[1]) && $components[1] === 'index.php' && isset($components[2])) {
+	$first_part = $components[2];
+} else {
+	$first_part = $components[1] ?? '';
+}
 
 ?>
 <header>

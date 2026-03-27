@@ -35,6 +35,9 @@
                             <td>{{ Str::limit($brand->description ?? '', 40) }}</td>
                             <td>{{ $brand->created_at->format('M d, Y') }}</td>
                             <td>
+                                <a href="{{ route('admin.brands.services.index', $brand) }}" class="btn btn-sm btn-primary" title="Service pages">
+                                    <i class="bi bi-journal-richtext"></i>
+                                </a>
                                 <a href="{{ route('admin.brands.show', $brand) }}" class="btn btn-sm btn-info">
                                     <i class="bi bi-eye"></i>
                                 </a>

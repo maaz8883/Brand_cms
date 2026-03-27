@@ -7,33 +7,35 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<?php
-	$uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+	$uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';
 	$uri_segments = explode('/', $uri_path);
-	if ($uri_segments[1] == "index.php" || $uri_segments[1] == "") {
+	$seg1 = $uri_segments[1] ?? '';
+	$script = '';
+	if ($seg1 == "index.php" || $seg1 == "") {
 		$class = "home";
 		$title = "Orbit book publishers | Providing Book Services to Authors";
 		$discription = "Orbit Book Publishers provides book writing, book publishing, book marketing services to all authors, whether you’re a new author or an experienced one. Call Us ";
 		$robots = "NOINDEX , NOFOLLOW";
 		
-	}elseif ($uri_segments[1] == "privacy-policy") {
+	} elseif ($seg1 == "privacy-policy") {
 		$class = "privacy-policy";
 		$title = "Privacy Policy | Orbit Book Publishers ";
 		$discription = "Read the privacy policy of Orbit Book Publishers and read about how we protect your data and the precautions we take to process it.";
 		$robots = "NOINDEX , NOFOLLOW";
 		$script = "";
-	} elseif ($uri_segments[1] == "terms-conditions") {
+	} elseif ($seg1 == "terms-conditions") {
 		$class = "terms-conditions";
 		$title = "Terms & Conditions of Orbit Book Publishers";
 		$discription = "Read Orbit Book Publishers’ terms and conditions and get transparent guidelines about our terms.";
 		$robots = "NOINDEX, NOFOLLOW";
 		$script = "";
-	} elseif ($uri_segments[1] == "404") {
+	} elseif ($seg1 == "404") {
 		$class = "404";
 		$title = "404 | Oops.. Page Not Found | Orbit Book Publishers";
 		$discription = "404 - This page does not exist on Orbit Book Publishers and we’re sorry for the inconvenience.";
 		$robots = "NOINDEX, NOFOLLOW";
 		$script = "";
-	} elseif ($uri_segments[1] == "thankyou") {
+	} elseif ($seg1 == "thankyou") {
 		$class = "thankyou";
 		$title = "Thank You for Contacting to Orbit Book Publishers";
 		$discription = "Thank you for reaching out to Orbit Book Publishers. One of our representatives will contact you soon!";

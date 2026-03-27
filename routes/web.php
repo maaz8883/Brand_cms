@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\BrandServiceController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProfileController;
 
@@ -38,6 +39,19 @@ Route::prefix('admin')->group(function () {
             'update' => 'admin.brands.update',
             'destroy' => 'admin.brands.destroy',
         ]);
+
+        Route::resource('brands.services', BrandServiceController::class)
+            ->except(['show'])
+            ->names([
+                'index' => 'admin.brands.services.index',
+                'create' => 'admin.brands.services.create',
+                'store' => 'admin.brands.services.store',
+                'edit' => 'admin.brands.services.edit',
+                'update' => 'admin.brands.services.update',
+                'destroy' => 'admin.brands.services.destroy',
+            ]);
+        Route::get('brands/{brand}/services/{service}/children', [BrandServiceController::class, 'children'])
+            ->name('admin.brands.services.children');
 
         // Categories Routes
         Route::resource('categories', CategoryController::class)->names([

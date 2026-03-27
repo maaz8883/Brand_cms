@@ -14,4 +14,14 @@ class Brand extends Model
         'slug',
         'description',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function services()
+    {
+        return $this->hasMany(BrandService::class);
+    }
 }

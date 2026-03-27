@@ -35,12 +35,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.min.js"></script>
 
 <script> function validate(){var e=$("input[name='phone']").intlTelInput("getNumber");iso=$("input[name='phone']").intlTelInput("getSelectedCountryData").iso2;var t=intlTelInputUtils.getExampleNumber(iso,0,0);""==e&&(e=t);var o=intlTelInputUtils.formatNumber(e,iso,intlTelInputUtils.numberFormat.NATIONAL),n=intlTelInputUtils.isValidNumber(e,iso),a=intlTelInputUtils.getValidationError(e,iso);console.log(e),console.log(o),console.log(intlTelInputUtils.formatNumber(e,iso,intlTelInputUtils.numberFormat.INTERNATIONAL)),console.log(intlTelInputUtils.formatNumber(e,iso,intlTelInputUtils.numberFormat.E164)),console.log(intlTelInputUtils.formatNumber(e,iso,intlTelInputUtils.numberFormat.RFC3966)),console.log(n),console.log(a)}$("input[name='phone']").intlTelInput({geoIpLookup:function(e){$.get("https://ipinfo.io",function(){},"jsonp").always(function(t){e(t&&t.country?t.country:"")})},initialCountry:"auto",separateDialCode:!0}),$("input[name='phone']").on("countrychange",function(e){$(this).val("");var t=$(this).intlTelInput("getSelectedCountryData"),o=t.dialCode,n=intlTelInputUtils.getExampleNumber(t.iso2,0,0);console.log("placeholder > "+n),n=intlTelInputUtils.formatNumber(n,t.iso2,2),console.log("placeholder > "+n),n=n.replace("+"+o+" ",""),console.log("placeholder > "+n),mask=n.replace(/[0-9+]/gi,"0"),$("input[name='phone']").mask(mask,{placeholder:n})}),$("input[name='phone']").on("input",function(){/^1/.test(this.value)&&(this.value=this.value.replace(/^1/,""))});</script>
-<?php 
-// Get minified output (minifier already applied by ob_start callback)
+<?php
 $output = ob_get_flush();
-
-// Save to cache
-file_put_contents($cachefile, $output);
+if (!empty($cachefile)) {
+	file_put_contents($cachefile, $output);
+}
 ?>
 </body>
 
