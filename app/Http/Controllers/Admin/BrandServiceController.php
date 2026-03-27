@@ -270,7 +270,20 @@ class BrandServiceController extends Controller
             }
         }
 
-        if ($request->hasFile('portfolio_images')) {
+        if ($request->boolean('remove_portfolio_images')) {
+            if ($request->hasFile('portfolio_images')) {
+                $images = [];
+                foreach ($request->file('portfolio_images') as $file) {
+                    if ($file && $file->isValid()) {
+                        $path = $file->store($dir . '/portfolio', 'public');
+                        $images[] = Storage::url($path);
+                    }
+                }
+                data_set($content, 'portfolio.images', $images);
+            } else {
+                data_set($content, 'portfolio.images', []);
+            }
+        } elseif ($request->hasFile('portfolio_images')) {
             $images = data_get($content, 'portfolio.images', []) ?: [];
             foreach ($request->file('portfolio_images') as $file) {
                 if ($file && $file->isValid()) {
@@ -279,6 +292,29 @@ class BrandServiceController extends Controller
                 }
             }
             data_set($content, 'portfolio.images', $images);
+        }
+
+        $singleRemovals = [
+            ['remove_hero_background', 'file_hero_background', 'hero.background_image'],
+            ['remove_mid_cta_background', 'file_mid_cta_background', 'mid_cta.background_image'],
+            ['remove_platform_side_image', 'file_platform_side', 'platform_section.side_image'],
+            ['remove_secondary_image', 'file_secondary_image', 'secondary_section.image'],
+            ['remove_process_center_logo', 'file_process_center_logo', 'process.center_logo'],
+        ];
+        foreach ($singleRemovals as [$flag, $fileKey, $dotPath]) {
+            if ($request->boolean($flag) && ! $request->hasFile($fileKey)) {
+                data_set($content, $dotPath, '');
+            }
+        }
+        foreach ([0, 1, 2] as $i) {
+            if ($request->boolean('remove_tab_image_'.$i) && ! $request->hasFile('file_tab_image_'.$i)) {
+                data_set($content, 'service_tabs.tabs.'.$i.'.image', '');
+            }
+        }
+        foreach (range(0, 7) as $i) {
+            if ($request->boolean('remove_success_item_'.$i) && ! $request->hasFile('file_success_item_'.$i)) {
+                data_set($content, 'success_features.items.'.$i.'.image', '');
+            }
         }
     }
 }

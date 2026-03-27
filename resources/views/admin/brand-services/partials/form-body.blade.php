@@ -59,9 +59,20 @@
             <div class="accordion-body row g-3">
                 <div class="col-12">
                     <label class="form-label">Background image</label>
+                    @php $heroBgUrl = data_get($c, 'hero.background_image'); @endphp
+                    @if($heroBgUrl)
+                        <input type="hidden" name="content[hero][background_image]" value="{{ $heroBgUrl }}">
+                    @endif
                     <input type="file" name="file_hero_background" class="form-control" accept="image/*">
-                    @if($url = data_get($c, 'hero.background_image'))
-                        <small class="text-muted">Current: <a href="{{ $url }}" target="_blank">view</a></small>
+                    @if($heroBgUrl)
+                        <div class="mt-2">
+                            <small class="text-muted d-block">Current: <a href="{{ $heroBgUrl }}" target="_blank">view</a></small>
+                            <input type="hidden" name="remove_hero_background" value="0">
+                            <div class="form-check mt-2 mb-0">
+                                <input class="form-check-input" type="checkbox" name="remove_hero_background" id="remove_hero_background" value="1" @checked(old('remove_hero_background') == '1')>
+                                <label class="form-check-label" for="remove_hero_background">Remove current image</label>
+                            </div>
+                        </div>
                     @endif
                 </div>
                 <div class="col-md-6"><label class="form-label">Heading (line 1)</label><input type="text" class="form-control" name="content[hero][heading]" value="{{ data_get($c, 'hero.heading') }}"></div>
@@ -152,9 +163,20 @@
                             <div class="col-12"><label class="form-label small">Description</label><textarea class="form-control" name="content[service_tabs][tabs][{{ $t }}][description]" rows="3">{{ data_get($c, "service_tabs.tabs.$t.description") }}</textarea></div>
                             <div class="col-md-6">
                                 <label class="form-label small">Side image</label>
+                                @php $tabImgUrl = data_get($c, "service_tabs.tabs.$t.image"); @endphp
+                                @if($tabImgUrl)
+                                    <input type="hidden" name="content[service_tabs][tabs][{{ $t }}][image]" value="{{ $tabImgUrl }}">
+                                @endif
                                 <input type="file" name="file_tab_image_{{ $t }}" class="form-control" accept="image/*">
-                                @if($u = data_get($c, "service_tabs.tabs.$t.image"))
-                                    <small class="text-muted">Current: <a href="{{ $u }}" target="_blank">view</a></small>
+                                @if($tabImgUrl)
+                                    <div class="mt-1">
+                                        <small class="text-muted">Current: <a href="{{ $tabImgUrl }}" target="_blank">view</a></small>
+                                        <input type="hidden" name="remove_tab_image_{{ $t }}" value="0">
+                                        <div class="form-check mt-1 mb-0">
+                                            <input class="form-check-input" type="checkbox" name="remove_tab_image_{{ $t }}" id="remove_tab_image_{{ $t }}" value="1" @checked(old('remove_tab_image_'.$t) == '1')>
+                                            <label class="form-check-label small" for="remove_tab_image_{{ $t }}">Remove image</label>
+                                        </div>
+                                    </div>
                                 @endif
                             </div>
                             <div class="col-md-3"><label class="form-label small">Button label</label><input type="text" class="form-control" name="content[service_tabs][tabs][{{ $t }}][button_label]" value="{{ data_get($c, "service_tabs.tabs.$t.button_label") }}"></div>
@@ -178,9 +200,20 @@
             <div class="accordion-body row g-3">
                 <div class="col-12">
                     <label class="form-label">Background image</label>
+                    @php $midCtaBgUrl = data_get($c, 'mid_cta.background_image'); @endphp
+                    @if($midCtaBgUrl)
+                        <input type="hidden" name="content[mid_cta][background_image]" value="{{ $midCtaBgUrl }}">
+                    @endif
                     <input type="file" name="file_mid_cta_background" class="form-control" accept="image/*">
-                    @if($url = data_get($c, 'mid_cta.background_image'))
-                        <small class="text-muted">Current: <a href="{{ $url }}" target="_blank">view</a></small>
+                    @if($midCtaBgUrl)
+                        <div class="mt-2">
+                            <small class="text-muted d-block">Current: <a href="{{ $midCtaBgUrl }}" target="_blank">view</a></small>
+                            <input type="hidden" name="remove_mid_cta_background" value="0">
+                            <div class="form-check mt-2 mb-0">
+                                <input class="form-check-input" type="checkbox" name="remove_mid_cta_background" id="remove_mid_cta_background" value="1" @checked(old('remove_mid_cta_background') == '1')>
+                                <label class="form-check-label" for="remove_mid_cta_background">Remove current image</label>
+                            </div>
+                        </div>
                     @endif
                 </div>
                 <div class="col-md-6"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[mid_cta][heading]" value="{{ data_get($c, 'mid_cta.heading') }}"></div>
@@ -223,9 +256,18 @@
                 @for($s = 0; $s < 8; $s++)
                     <div class="col-md-6 border-top pt-2">
                         <strong>Item {{ $s + 1 }}</strong>
+                        @php $succImgUrl = data_get($c, "success_features.items.$s.image"); @endphp
+                        @if($succImgUrl)
+                            <input type="hidden" name="content[success_features][items][{{ $s }}][image]" value="{{ $succImgUrl }}">
+                        @endif
                         <input type="file" name="file_success_item_{{ $s }}" class="form-control form-control-sm my-1" accept="image/*">
-                        @if($su = data_get($c, "success_features.items.$s.image"))
-                            <small class="text-muted d-block">Current: <a href="{{ $su }}" target="_blank">view</a></small>
+                        @if($succImgUrl)
+                            <small class="text-muted d-block">Current: <a href="{{ $succImgUrl }}" target="_blank">view</a></small>
+                            <input type="hidden" name="remove_success_item_{{ $s }}" value="0">
+                            <div class="form-check mt-1 mb-2">
+                                <input class="form-check-input" type="checkbox" name="remove_success_item_{{ $s }}" id="remove_success_item_{{ $s }}" value="1" @checked(old('remove_success_item_'.$s) == '1')>
+                                <label class="form-check-label small" for="remove_success_item_{{ $s }}">Remove image</label>
+                            </div>
                         @endif
                         <input type="text" class="form-control form-control-sm mb-1" placeholder="Title" name="content[success_features][items][{{ $s }}][title]" value="{{ data_get($c, "success_features.items.$s.title") }}">
                         <textarea class="form-control form-control-sm" name="content[success_features][items][{{ $s }}][description]" rows="2" placeholder="Description">{{ data_get($c, "success_features.items.$s.description") }}</textarea>
@@ -246,9 +288,20 @@
                 <div class="col-12"><label class="form-label">Paragraph 2</label><textarea class="form-control" name="content[platform_section][paragraphs][1]" rows="2">{{ data_get($c, 'platform_section.paragraphs.1') }}</textarea></div>
                 <div class="col-md-6">
                     <label class="form-label">Side image</label>
+                    @php $platSideUrl = data_get($c, 'platform_section.side_image'); @endphp
+                    @if($platSideUrl)
+                        <input type="hidden" name="content[platform_section][side_image]" value="{{ $platSideUrl }}">
+                    @endif
                     <input type="file" name="file_platform_side" class="form-control" accept="image/*">
-                    @if($pu = data_get($c, 'platform_section.side_image'))
-                        <small class="text-muted">Current: <a href="{{ $pu }}" target="_blank">view</a></small>
+                    @if($platSideUrl)
+                        <div class="mt-2">
+                            <small class="text-muted d-block">Current: <a href="{{ $platSideUrl }}" target="_blank">view</a></small>
+                            <input type="hidden" name="remove_platform_side_image" value="0">
+                            <div class="form-check mt-2 mb-0">
+                                <input class="form-check-input" type="checkbox" name="remove_platform_side_image" id="remove_platform_side_image" value="1" @checked(old('remove_platform_side_image') == '1')>
+                                <label class="form-check-label" for="remove_platform_side_image">Remove current image</label>
+                            </div>
+                        </div>
                     @endif
                 </div>
                 <div class="col-md-3"><label class="form-label">Button label</label><input type="text" class="form-control" name="content[platform_section][button_label]" value="{{ data_get($c, 'platform_section.button_label') }}"></div>
@@ -271,9 +324,20 @@
             <div class="accordion-body row g-3">
                 <div class="col-md-5">
                     <label class="form-label">Left image</label>
+                    @php $secImgUrl = data_get($c, 'secondary_section.image'); @endphp
+                    @if($secImgUrl)
+                        <input type="hidden" name="content[secondary_section][image]" value="{{ $secImgUrl }}">
+                    @endif
                     <input type="file" name="file_secondary_image" class="form-control" accept="image/*">
-                    @if($si = data_get($c, 'secondary_section.image'))
-                        <small class="text-muted">Current: <a href="{{ $si }}" target="_blank">view</a></small>
+                    @if($secImgUrl)
+                        <div class="mt-2">
+                            <small class="text-muted d-block">Current: <a href="{{ $secImgUrl }}" target="_blank">view</a></small>
+                            <input type="hidden" name="remove_secondary_image" value="0">
+                            <div class="form-check mt-2 mb-0">
+                                <input class="form-check-input" type="checkbox" name="remove_secondary_image" id="remove_secondary_image" value="1" @checked(old('remove_secondary_image') == '1')>
+                                <label class="form-check-label" for="remove_secondary_image">Remove current image</label>
+                            </div>
+                        </div>
                     @endif
                 </div>
                 <div class="col-md-7"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[secondary_section][heading]" value="{{ data_get($c, 'secondary_section.heading') }}"></div>
@@ -294,9 +358,20 @@
                 <div class="col-12"><label class="form-label">Section description</label><textarea class="form-control" name="content[process][description]" rows="2">{{ data_get($c, 'process.description') }}</textarea></div>
                 <div class="col-md-4">
                     <label class="form-label">Center logo</label>
+                    @php $procLogoUrl = data_get($c, 'process.center_logo'); @endphp
+                    @if($procLogoUrl)
+                        <input type="hidden" name="content[process][center_logo]" value="{{ $procLogoUrl }}">
+                    @endif
                     <input type="file" name="file_process_center_logo" class="form-control" accept="image/*">
-                    @if($cl = data_get($c, 'process.center_logo'))
-                        <small class="text-muted">Current: <a href="{{ $cl }}" target="_blank">view</a></small>
+                    @if($procLogoUrl)
+                        <div class="mt-2">
+                            <small class="text-muted d-block">Current: <a href="{{ $procLogoUrl }}" target="_blank">view</a></small>
+                            <input type="hidden" name="remove_process_center_logo" value="0">
+                            <div class="form-check mt-2 mb-0">
+                                <input class="form-check-input" type="checkbox" name="remove_process_center_logo" id="remove_process_center_logo" value="1" @checked(old('remove_process_center_logo') == '1')>
+                                <label class="form-check-label" for="remove_process_center_logo">Remove current image</label>
+                            </div>
+                        </div>
                     @endif
                 </div>
                 @for($st = 0; $st < 4; $st++)
@@ -323,12 +398,22 @@
                     <input type="file" name="portfolio_images[]" class="form-control" accept="image/*" multiple>
                     @php $pimgs = data_get($c, 'portfolio.images', []) @endphp
                     @if(!empty($pimgs))
-                        <p class="small mt-2 mb-0">Existing images (URLs stay in JSON):</p>
+                        @foreach($pimgs as $pix => $pi)
+                            @if($pi)
+                                <input type="hidden" name="content[portfolio][images][{{ $pix }}]" value="{{ $pi }}">
+                            @endif
+                        @endforeach
+                        <p class="small mt-2 mb-0">Existing images:</p>
                         <ul class="small">
                             @foreach($pimgs as $pi)
                                 <li><a href="{{ $pi }}" target="_blank">{{ Str::limit($pi, 60) }}</a></li>
                             @endforeach
                         </ul>
+                        <input type="hidden" name="remove_portfolio_images" value="0">
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" name="remove_portfolio_images" id="remove_portfolio_images" value="1" @checked(old('remove_portfolio_images') == '1')>
+                            <label class="form-check-label" for="remove_portfolio_images">Remove all existing portfolio images</label>
+                        </div>
                     @endif
                 </div>
             </div>
