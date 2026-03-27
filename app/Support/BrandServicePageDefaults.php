@@ -25,6 +25,17 @@ class BrandServicePageDefaults
             'featured_in' => [
                 'logos' => [],
             ],
+            'sub_service_areas' => [
+                'enabled' => false,
+                'state_name' => '',
+                'state_abbr' => '',
+                'service_label' => '',
+                'headline' => '',
+                'headline_template' => '{state}! Are you ready? Because Our {service} in {abbr} are',
+                'intro' => 'Now we are providing exceptional services all across {state} including,',
+                'outro' => 'and beyond.',
+                'link_child_pages' => false,
+            ],
             'intro' => [
                 'heading' => 'Explore Comprehensive Book Publishing Services Here',
                 'description' => 'Every author and every book has different publishing needs. Some books sell better in hard cover and some books have high demand in ebook format. Our team of book publishers are experienced in all formats of book publishing, whether it\'s self-publishing, traditional publishing, or digital publishing, we\'ve got you covered.',
@@ -199,6 +210,10 @@ class BrandServicePageDefaults
     public static function stripLayoutOnlyKeys(array $content): array
     {
         unset($content['navigation'], $content['footer_cta']);
+
+        if (isset($content['sub_service_areas']) && is_array($content['sub_service_areas'])) {
+            unset($content['sub_service_areas']['city_source'], $content['sub_service_areas']['cities_list']);
+        }
 
         return $content;
     }

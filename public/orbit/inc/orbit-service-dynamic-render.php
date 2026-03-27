@@ -15,6 +15,59 @@ function orbit_child_href(array $service, array $child): string
 	return rtrim((string) $base_url, '/') . '/' . implode('/', array_filter($trail));
 }
 
+function orbit_sub_service_apply_vars(string $text, string $state, string $abbr, string $serviceLabel): string
+{
+	return str_replace(
+		['{state}', '{abbr}', '{service}'],
+		[$state, $abbr, $serviceLabel],
+		$text
+	);
+}
+
+function orbit_sub_service_areas_block_enabled(array $ssa): bool
+{
+	$v = $ssa['enabled'] ?? false;
+
+	return $v === true || $v === 1 || $v === '1';
+}
+
+function orbit_sub_service_areas_link_enabled(array $ssa): bool
+{
+	$v = $ssa['link_child_pages'] ?? false;
+
+	return $v === true || $v === 1 || $v === '1';
+}
+
+/**
+ * City names come from API child services only (CMS sub-services under this page).
+ *
+ * @return array<int, string> HTML fragments for each city (bold or linked).
+ */
+function orbit_sub_service_city_html_parts(array $service, array $ssa): array
+{
+	$link = orbit_sub_service_areas_link_enabled($ssa);
+	$parts = [];
+	foreach ($service['children'] ?? [] as $ch) {
+		if (empty($ch['slug'])) {
+			continue;
+		}
+		$name = trim((string) ($ch['title'] ?? $ch['slug']));
+		if ($name === '') {
+			continue;
+		}
+		$inner = orbit_e($name);
+		if ($link) {
+			$href = orbit_child_href($service, $ch);
+			$inner = '<a class="orbit-sub-service-areas__city-link text-reset text-decoration-none fw-bold" href="' . orbit_e($href) . '">' . $inner . '</a>';
+		} else {
+			$inner = '<strong class="fw-bold">' . $inner . '</strong>';
+		}
+		$parts[] = $inner;
+	}
+
+	return $parts;
+}
+
 /**
  * @param  array{brand:array,service:array}  $payload
  */
@@ -51,20 +104,34 @@ function orbit_render_dynamic_service(array $payload): void
 <?php include __DIR__ . '/platform.php'; ?>
 
 <?php
-	if (! empty($service['children']) && is_array($service['children'])) {
+	$ssa = isset($c['sub_service_areas']) && is_array($c['sub_service_areas']) ? $c['sub_service_areas'] : [];
+	$cityParts = orbit_sub_service_city_html_parts($service, $ssa);
+	$stateName = trim((string) ($ssa['state_name'] ?? ''));
+	$showSsaBlock = orbit_sub_service_areas_block_enabled($ssa) && $stateName !== '' && $cityParts !== [];
+
+	if ($showSsaBlock) {
+		$abbr = trim((string) ($ssa['state_abbr'] ?? ''));
+		$svcLabel = trim((string) ($ssa['service_label'] ?? ''));
+		if ($svcLabel === '') {
+			$svcLabel = (string) ($service['title'] ?? '');
+		}
+		$headlineCustom = trim((string) ($ssa['headline'] ?? ''));
+		if ($headlineCustom !== '') {
+			$headlineText = orbit_sub_service_apply_vars($headlineCustom, $stateName, $abbr, $svcLabel);
+		} else {
+			$tpl = (string) ($ssa['headline_template'] ?? '{state}! Are you ready? Because Our {service} in {abbr} are');
+			$headlineText = orbit_sub_service_apply_vars($tpl, $stateName, $abbr, $svcLabel);
+		}
+		$introTpl = (string) ($ssa['intro'] ?? 'Now we are providing exceptional services all across {state} including,');
+		$introText = orbit_sub_service_apply_vars($introTpl, $stateName, $abbr, $svcLabel);
+		$outro = trim((string) ($ssa['outro'] ?? 'and beyond.'));
+		$citiesHtml = implode(', ', $cityParts);
 		?>
-<section class="py-3 bg-light border-bottom">
+<section class="orbit-sub-service-areas py-5">
 	<div class="container-lg">
-		<p class="small text-muted mb-2">Sub-service areas</p>
-		<div class="d-flex flex-wrap gap-2 justify-content-center">
-			<?php foreach ($service['children'] as $ch) {
-				if (empty($ch['slug'])) {
-					continue;
-				}
-				$href = orbit_child_href($service, $ch);
-				?>
-			<a class="btn btn-outline-secondary btn-sm" href="<?= orbit_e($href); ?>"><?= orbit_e($ch['title'] ?? $ch['slug']); ?></a>
-			<?php } ?>
+		<div class="orbit-sub-service-areas__inner text-center mx-auto">
+			<h2 class="f-40 clr-1 fw-700 mb-3"><?= orbit_e($headlineText); ?></h2>
+			<p class="f-18 fw-500 mb-0 orbit-sub-service-areas__copy"><?= orbit_e($introText); ?> <?= $citiesHtml; ?> <?= orbit_e($outro); ?></p>
 		</div>
 	</div>
 </section>

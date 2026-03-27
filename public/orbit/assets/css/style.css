@@ -877,3 +877,17 @@ button.btn-close {
 .orbit-location-section .orbit-state-pill.btn:focus {
     color: rgba(var(--light-color), 1) !important;
 }
+
+/* Dynamic service page — sub-service areas (state + bold cities) */
+.orbit-sub-service-areas {
+    background: #fff;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.orbit-sub-service-areas__inner {
+    max-width: 58rem;
+}
+
+.orbit-sub-service-areas__copy .orbit-sub-service-areas__city-link:hover {
+    text-decoration: underline !important;
+}

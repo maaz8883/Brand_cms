@@ -94,9 +94,40 @@
         </div>
     </div>
 
+    {{-- Sub-service areas (state headline + cities) --}}
+    <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secSubAreas">3. Sub-service areas</button></h2>
+        <div id="secSubAreas" class="accordion-collapse collapse" data-bs-parent="#svcSections">
+            <div class="accordion-body row g-3">
+                <p class="text-muted small col-12">City names are loaded automatically from <strong>sub-service pages</strong> (children) under this service in the CMS — not typed here. Edit only the heading, intro, and closing text below. Placeholders: <code>{state}</code>, <code>{abbr}</code>, <code>{service}</code>.</p>
+                <div class="col-12">
+                    <input type="hidden" name="content[sub_service_areas][enabled]" value="0">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="content[sub_service_areas][enabled]" id="ssa_enabled" value="1" @checked(old('content.sub_service_areas.enabled', data_get($c, 'sub_service_areas.enabled') ? '1' : '0') == '1')>
+                        <label class="form-check-label" for="ssa_enabled">Show sub-service areas section (headline + cities). Off = section hidden.</label>
+                    </div>
+                </div>
+                <div class="col-md-4"><label class="form-label">State name</label><input type="text" class="form-control" name="content[sub_service_areas][state_name]" placeholder="Texas" value="{{ old('content.sub_service_areas.state_name', data_get($c, 'sub_service_areas.state_name')) }}"></div>
+                <div class="col-md-4"><label class="form-label">State abbreviation</label><input type="text" class="form-control" name="content[sub_service_areas][state_abbr]" placeholder="TX" value="{{ old('content.sub_service_areas.state_abbr', data_get($c, 'sub_service_areas.state_abbr')) }}"></div>
+                <div class="col-md-4"><label class="form-label">Service label (optional)</label><input type="text" class="form-control" name="content[sub_service_areas][service_label]" placeholder="Empty = this page title" value="{{ old('content.sub_service_areas.service_label', data_get($c, 'sub_service_areas.service_label')) }}"></div>
+                <div class="col-12"><label class="form-label">Headline (optional override)</label><input type="text" class="form-control" name="content[sub_service_areas][headline]" placeholder="Leave empty to use template below" value="{{ old('content.sub_service_areas.headline', data_get($c, 'sub_service_areas.headline')) }}"></div>
+                <div class="col-12"><label class="form-label">Headline template</label><input type="text" class="form-control" name="content[sub_service_areas][headline_template]" value="{{ old('content.sub_service_areas.headline_template', data_get($c, 'sub_service_areas.headline_template')) }}"></div>
+                <div class="col-12"><label class="form-label">Intro (before city list)</label><textarea class="form-control" name="content[sub_service_areas][intro]" rows="2">{{ old('content.sub_service_areas.intro', data_get($c, 'sub_service_areas.intro')) }}</textarea></div>
+                <div class="col-md-8"><label class="form-label">Closing phrase</label><input type="text" class="form-control" name="content[sub_service_areas][outro]" value="{{ old('content.sub_service_areas.outro', data_get($c, 'sub_service_areas.outro')) }}"></div>
+                <div class="col-md-4 d-flex align-items-end pb-1">
+                    <input type="hidden" name="content[sub_service_areas][link_child_pages]" value="0">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="content[sub_service_areas][link_child_pages]" id="ssa_links" value="1" @checked(old('content.sub_service_areas.link_child_pages', data_get($c, 'sub_service_areas.link_child_pages') ? '1' : '0') == '1')>
+                        <label class="form-check-label" for="ssa_links">Link cities to sub-pages</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- Intro --}}
     <div class="accordion-item">
-        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secIntro">3. Intro</button></h2>
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secIntro">4. Intro</button></h2>
         <div id="secIntro" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-12"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[intro][heading]" value="{{ data_get($c, 'intro.heading') }}"></div>
@@ -107,7 +138,7 @@
 
     {{-- Service tabs --}}
     <div class="accordion-item">
-        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secTabs">4. Service tabs (3)</button></h2>
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secTabs">5. Service tabs (3)</button></h2>
         <div id="secTabs" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body">
                 @for($t = 0; $t < 3; $t++)
@@ -142,7 +173,7 @@
 
     {{-- Mid CTA --}}
     <div class="accordion-item">
-        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secMid">5. Mid-page CTA banner</button></h2>
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secMid">6. Mid-page CTA banner</button></h2>
         <div id="secMid" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-12">
@@ -163,7 +194,7 @@
 
     {{-- Why choose --}}
     <div class="accordion-item">
-        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secWhy">6. Why choose us</button></h2>
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secWhy">7. Why choose us</button></h2>
         <div id="secWhy" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-md-6"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[why_choose][heading]" value="{{ data_get($c, 'why_choose.heading') }}"></div>
@@ -183,7 +214,7 @@
 
     {{-- Success band --}}
     <div class="accordion-item">
-        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secSucc">7. Everything you need (icons row)</button></h2>
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secSucc">8. Everything you need (icons row)</button></h2>
         <div id="secSucc" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-md-4"><label class="form-label">Heading (strong)</label><input type="text" class="form-control" name="content[success_features][heading_strong]" value="{{ data_get($c, 'success_features.heading_strong') }}"></div>
@@ -206,7 +237,7 @@
 
     {{-- Platform section --}}
     <div class="accordion-item">
-        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secPlat">8. Platform integration</button></h2>
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secPlat">9. Platform integration</button></h2>
         <div id="secPlat" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-md-6"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[platform_section][heading]" value="{{ data_get($c, 'platform_section.heading') }}"></div>
@@ -235,7 +266,7 @@
 
     {{-- Secondary --}}
     <div class="accordion-item">
-        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secSec">9. Secondary section</button></h2>
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secSec">10. Secondary section</button></h2>
         <div id="secSec" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-md-5">
@@ -256,7 +287,7 @@
 
     {{-- Process --}}
     <div class="accordion-item">
-        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secProc">10. 4-step process</button></h2>
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secProc">11. 4-step process</button></h2>
         <div id="secProc" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-12"><label class="form-label">Section heading</label><input type="text" class="form-control" name="content[process][heading]" value="{{ data_get($c, 'process.heading') }}"></div>
@@ -282,7 +313,7 @@
 
     {{-- Portfolio --}}
     <div class="accordion-item">
-        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secPort">11. Portfolio</button></h2>
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secPort">12. Portfolio</button></h2>
         <div id="secPort" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-12"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[portfolio][heading]" value="{{ data_get($c, 'portfolio.heading') }}"></div>
@@ -306,7 +337,7 @@
 
     {{-- Testimonials --}}
     <div class="accordion-item">
-        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secTest">12. Testimonials</button></h2>
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secTest">13. Testimonials</button></h2>
         <div id="secTest" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-md-4"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[testimonials][heading]" value="{{ data_get($c, 'testimonials.heading') }}"></div>
