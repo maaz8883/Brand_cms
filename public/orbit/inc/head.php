@@ -7,11 +7,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<?php
+	$pageSlug = isset($page) ? preg_replace('/\.php$/', '', (string) $page) : '';
 	$uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';
 	$uri_segments = explode('/', $uri_path);
 	$seg1 = $uri_segments[1] ?? '';
 	$script = '';
-	if ($seg1 == "index.php" || $seg1 == "") {
+	if ($pageSlug === 'location') {
+		$class = 'location-page';
+		$title = 'Locations | Orbit Book Publishers';
+		$discription = 'Explore where Orbit Book Publishers serves authors across the United States. Find book publishing and marketing support in your state.';
+		$robots = 'NOINDEX, NOFOLLOW';
+		$script = '';
+	} elseif ($seg1 == "index.php" || $seg1 == "") {
 		$class = "home";
 		$title = "Orbit book publishers | Providing Book Services to Authors";
 		$discription = "Orbit Book Publishers provides book writing, book publishing, book marketing services to all authors, whether you’re a new author or an experienced one. Call Us ";

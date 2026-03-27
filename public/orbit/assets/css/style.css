@@ -830,3 +830,24 @@ button.btn-close {
 .main-head {
     color: #fff;
 }
+
+/* Location page — “We are in your hometown now!” state grid */
+.orbit-location-section {
+    background: #fff;
+    padding: 3rem 0 4.5rem;
+}
+
+.orbit-location-section .orbit-location-head {
+    text-align: center;
+    max-width: 52rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.orbit-location-section .orbit-state-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(8.75rem, 1fr));
+    gap: 0.65rem 0.65rem;
+    margin-top: 2.25rem;
+}
+
