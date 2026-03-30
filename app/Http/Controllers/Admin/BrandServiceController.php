@@ -94,6 +94,8 @@ class BrandServiceController extends Controller
             BrandServicePageDefaults::all(),
             $request->input('content', [])
         );
+        $this->syncFeaturedLogosFromRequest($request, $content);
+        $this->syncPlatformRowLogosFromRequest($request, $content);
         $content = BrandServicePageDefaults::stripLayoutOnlyKeys($content);
 
         $validated['content'] = $content;
@@ -168,6 +170,8 @@ class BrandServiceController extends Controller
             $service->content ?? []
         );
         $content = BrandServicePageDefaults::merge($base, $request->input('content', []));
+        $this->syncFeaturedLogosFromRequest($request, $content);
+        $this->syncPlatformRowLogosFromRequest($request, $content);
         $content = BrandServicePageDefaults::stripLayoutOnlyKeys($content);
 
         $service->fill($validated);
@@ -270,6 +274,48 @@ class BrandServiceController extends Controller
             }
         }
 
+        $featFiles = $request->file('file_featured_logo');
+        if (is_array($featFiles)) {
+            foreach ($featFiles as $idx => $file) {
+                if ($file && $file->isValid()) {
+                    $path = $file->store($dir.'/featured-in', 'public');
+                    data_set($content, 'featured_in.logos.'.$idx, Storage::url($path));
+                }
+            }
+        }
+
+        $featLogos = data_get($content, 'featured_in.logos', []);
+        if (is_array($featLogos)) {
+            foreach (array_keys($featLogos) as $idx) {
+                if ($request->boolean('remove_featured_logo.'.$idx) && ! $request->hasFile('file_featured_logo.'.$idx)) {
+                    unset($featLogos[$idx]);
+                }
+            }
+            $featLogos = array_values(array_filter($featLogos, static fn ($u) => $u !== null && $u !== '' && trim((string) $u) !== ''));
+            data_set($content, 'featured_in.logos', $featLogos);
+        }
+
+        $platRowFiles = $request->file('file_platform_row_logo');
+        if (is_array($platRowFiles)) {
+            foreach ($platRowFiles as $idx => $file) {
+                if ($file && $file->isValid()) {
+                    $path = $file->store($dir.'/platform-row', 'public');
+                    data_set($content, 'platform_logos_row.logos.'.$idx, Storage::url($path));
+                }
+            }
+        }
+
+        $platRowLogos = data_get($content, 'platform_logos_row.logos', []);
+        if (is_array($platRowLogos)) {
+            foreach (array_keys($platRowLogos) as $idx) {
+                if ($request->boolean('remove_platform_row_logo.'.$idx) && ! $request->hasFile('file_platform_row_logo.'.$idx)) {
+                    unset($platRowLogos[$idx]);
+                }
+            }
+            $platRowLogos = array_values(array_filter($platRowLogos, static fn ($u) => $u !== null && $u !== '' && trim((string) $u) !== ''));
+            data_set($content, 'platform_logos_row.logos', $platRowLogos);
+        }
+
         if ($request->boolean('remove_portfolio_images')) {
             if ($request->hasFile('portfolio_images')) {
                 $images = [];
@@ -316,5 +362,29 @@ class BrandServiceController extends Controller
                 data_set($content, 'success_features.items.'.$i.'.image', '');
             }
         }
+    }
+
+    /**
+     * Replace merged logos with raw POST so removed rows disappear (deep merge would keep stale indices).
+     */
+    private function syncFeaturedLogosFromRequest(Request $request, array &$content): void
+    {
+        $raw = data_get($request->input('content'), 'featured_in.logos');
+        if (! is_array($raw)) {
+            return;
+        }
+        data_set($content, 'featured_in.logos', $raw);
+    }
+
+    /**
+     * Replace merged platform row logos with raw POST so removed rows disappear (deep merge would keep stale indices).
+     */
+    private function syncPlatformRowLogosFromRequest(Request $request, array &$content): void
+    {
+        $raw = data_get($request->input('content'), 'platform_logos_row.logos');
+        if (! is_array($raw)) {
+            return;
+        }
+        data_set($content, 'platform_logos_row.logos', $raw);
     }
 }

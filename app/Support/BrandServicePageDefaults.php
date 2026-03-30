@@ -15,23 +15,15 @@ class BrandServicePageDefaults
                 'heading' => 'Get Professional Self-Publishing Services and',
                 'heading_highlight' => 'Start Your Book Publishing Process!',
                 'description' => 'Our team of expert book publishers are ready to help you turn your manuscript into a published book. Your publishing journey begins here with professional book publishing services.',
-                'free_quote_label' => 'Free Quote',
-                'chat_label' => 'Chat Now',
-                'chat_url' => '#',
-                'phone' => '',
-                'form_book_placeholder' => 'Book Name',
-                'form_submit_label' => 'Submit',
             ],
             'featured_in' => [
+                'use_default_logos' => true,
                 'logos' => [],
             ],
             'sub_service_areas' => [
                 'enabled' => false,
                 'state_name' => '',
-                'state_abbr' => '',
-                'service_label' => '',
                 'headline' => '',
-                'headline_template' => '{state}! Are you ready? Because Our {service} in {abbr} are',
                 'intro' => 'Now we are providing exceptional services all across {state} including,',
                 'outro' => 'and beyond.',
                 'link_child_pages' => false,
@@ -147,6 +139,7 @@ class BrandServicePageDefaults
                 'phone' => '',
             ],
             'platform_logos_row' => [
+                'use_default_platform_logos' => true,
                 'logos' => [],
             ],
             'secondary_section' => [
@@ -212,7 +205,28 @@ class BrandServicePageDefaults
         unset($content['navigation'], $content['footer_cta']);
 
         if (isset($content['sub_service_areas']) && is_array($content['sub_service_areas'])) {
-            unset($content['sub_service_areas']['city_source'], $content['sub_service_areas']['cities_list']);
+            foreach ([
+                'city_source',
+                'cities_list',
+                'state_abbr',
+                'service_label',
+                'headline_template',
+            ] as $ssaKey) {
+                unset($content['sub_service_areas'][$ssaKey]);
+            }
+        }
+
+        if (isset($content['hero']) && is_array($content['hero'])) {
+            foreach ([
+                'chat_url',
+                'phone',
+                'free_quote_label',
+                'chat_label',
+                'form_book_placeholder',
+                'form_submit_label',
+            ] as $heroKey) {
+                unset($content['hero'][$heroKey]);
+            }
         }
 
         return $content;

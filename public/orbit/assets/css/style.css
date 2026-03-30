@@ -523,6 +523,16 @@ button.btn-close {
     object-position: center
 }
 
+/* Featured-in slider: don’t show logos until loaded (avoids broken-image flash) */
+.platforms .slider .platform img {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.platforms .slider .platform img.orbit-logo-loaded {
+    opacity: 1;
+}
+
 .bg-box {
     height: 300px;
     position: relative;

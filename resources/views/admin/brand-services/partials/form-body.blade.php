@@ -78,28 +78,55 @@
                 <div class="col-md-6"><label class="form-label">Heading (line 1)</label><input type="text" class="form-control" name="content[hero][heading]" value="{{ data_get($c, 'hero.heading') }}"></div>
                 <div class="col-md-6"><label class="form-label">Heading highlight</label><input type="text" class="form-control" name="content[hero][heading_highlight]" value="{{ data_get($c, 'hero.heading_highlight') }}"></div>
                 <div class="col-12"><label class="form-label">Description</label><textarea class="form-control" name="content[hero][description]" rows="3">{{ data_get($c, 'hero.description') }}</textarea></div>
-                <div class="col-md-4"><label class="form-label">Phone</label><input type="text" class="form-control" name="content[hero][phone]" value="{{ data_get($c, 'hero.phone') }}"></div>
-                <div class="col-md-4"><label class="form-label">Free quote label</label><input type="text" class="form-control" name="content[hero][free_quote_label]" value="{{ data_get($c, 'hero.free_quote_label') }}"></div>
-                <div class="col-md-4"><label class="form-label">Chat label</label><input type="text" class="form-control" name="content[hero][chat_label]" value="{{ data_get($c, 'hero.chat_label') }}"></div>
-                <div class="col-md-6"><label class="form-label">Chat URL</label><input type="text" class="form-control" name="content[hero][chat_url]" value="{{ data_get($c, 'hero.chat_url') }}"></div>
-                <div class="col-md-3"><label class="form-label">Form book placeholder</label><input type="text" class="form-control" name="content[hero][form_book_placeholder]" value="{{ data_get($c, 'hero.form_book_placeholder') }}"></div>
-                <div class="col-md-3"><label class="form-label">Form submit label</label><input type="text" class="form-control" name="content[hero][form_submit_label]" value="{{ data_get($c, 'hero.form_submit_label') }}"></div>
             </div>
         </div>
     </div>
 
     {{-- Featured in --}}
+    @php
+        $featLogos = old('content.featured_in.logos', data_get($c, 'featured_in.logos', []));
+        if (! is_array($featLogos)) {
+            $featLogos = [];
+        }
+        $featUseDefault = old('content.featured_in.use_default_logos', data_get($c, 'featured_in.use_default_logos', true));
+        $featUseDefaultOn = $featUseDefault === true || $featUseDefault === 1 || $featUseDefault === '1';
+        $featKeys = array_map('intval', array_keys($featLogos));
+        $featNextKey = $featKeys === [] ? 0 : max($featKeys) + 1;
+    @endphp
     <div class="accordion-item">
         <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secFeat">2. As featured in (logos)</button></h2>
         <div id="secFeat" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body">
-                <p class="text-muted small">Image URLs or paths (stored as text). Upload files via Media elsewhere or paste <code>/storage/...</code> URLs.</p>
-                <div class="row g-2">
-                    @for($i = 0; $i < 12; $i++)
-                        <div class="col-md-6 col-lg-4">
-                            <input type="text" class="form-control form-control-sm" name="content[featured_in][logos][{{ $i }}]" placeholder="Logo {{ $i + 1 }}" value="{{ data_get($c, "featured_in.logos.$i") }}">
-                        </div>
-                    @endfor
+                <input type="hidden" name="content[featured_in][use_default_logos]" value="0">
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" name="content[featured_in][use_default_logos]" id="feat_use_default" value="1" @checked($featUseDefaultOn)>
+                    <label class="form-check-label" for="feat_use_default">Use theme default logos (static slider from <code>assets/img/feature/*.webp</code> on the site)</label>
+                </div>
+                <div id="feat-custom-logos-wrap" class="border rounded p-3 bg-light" style="{{ $featUseDefaultOn ? 'display:none' : '' }}">
+                    <p class="text-muted small mb-2">Add or remove rows as needed. Upload a file or paste an image URL per logo.</p>
+                    <button type="button" class="btn btn-outline-primary btn-sm mb-3" id="feat-add-logo-row"><i class="bi bi-plus-lg"></i> Add logo</button>
+                    <div id="feat-logo-rows" class="vstack gap-2">
+                        @foreach($featLogos as $idx => $featUrl)
+                            @php $idx = (int) $idx; @endphp
+                            <div class="border rounded p-3 bg-white feat-logo-row" data-feat-idx="{{ $idx }}">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="small fw-semibold text-muted">Logo {{ $loop->iteration }}</span>
+                                    <button type="button" class="btn btn-sm btn-outline-danger feat-remove-logo-row">Remove row</button>
+                                </div>
+                                <input type="file" name="file_featured_logo[{{ $idx }}]" class="form-control form-control-sm mb-2" accept="image/*">
+                                @if($featUrl)
+                                    <small class="text-muted d-block mb-2">Current: <a href="{{ $featUrl }}" target="_blank">view</a></small>
+                                    <input type="hidden" name="remove_featured_logo[{{ $idx }}]" value="0">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" name="remove_featured_logo[{{ $idx }}]" id="remove_featured_logo_{{ $idx }}" value="1" @checked(old('remove_featured_logo.'.$idx) == '1')>
+                                        <label class="form-check-label small" for="remove_featured_logo_{{ $idx }}">Remove image</label>
+                                    </div>
+                                @endif
+                                <label class="form-label small text-muted mb-0">Or paste URL</label>
+                                <input type="text" class="form-control form-control-sm" name="content[featured_in][logos][{{ $idx }}]" placeholder="https://… or /storage/…" value="{{ $featUrl }}">
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,7 +137,7 @@
         <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secSubAreas">3. Sub-service areas</button></h2>
         <div id="secSubAreas" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
-                <p class="text-muted small col-12">City names are loaded automatically from <strong>sub-service pages</strong> (children) under this service in the CMS — not typed here. Edit only the heading, intro, and closing text below. Placeholders: <code>{state}</code>, <code>{abbr}</code>, <code>{service}</code>.</p>
+                <p class="text-muted small col-12">City names come from <strong>child service pages</strong> under this service — not typed here. Set the state and optional copy below. In text fields you can use <code>{state}</code> and <code>{service}</code> (service = this page title). <code>{abbr}</code> is still replaced if present in old copy (defaults to the state name).</p>
                 <div class="col-12">
                     <input type="hidden" name="content[sub_service_areas][enabled]" value="0">
                     <div class="form-check">
@@ -118,11 +145,8 @@
                         <label class="form-check-label" for="ssa_enabled">Show sub-service areas section (headline + cities). Off = section hidden.</label>
                     </div>
                 </div>
-                <div class="col-md-4"><label class="form-label">State name</label><input type="text" class="form-control" name="content[sub_service_areas][state_name]" placeholder="Texas" value="{{ old('content.sub_service_areas.state_name', data_get($c, 'sub_service_areas.state_name')) }}"></div>
-                <div class="col-md-4"><label class="form-label">State abbreviation</label><input type="text" class="form-control" name="content[sub_service_areas][state_abbr]" placeholder="TX" value="{{ old('content.sub_service_areas.state_abbr', data_get($c, 'sub_service_areas.state_abbr')) }}"></div>
-                <div class="col-md-4"><label class="form-label">Service label (optional)</label><input type="text" class="form-control" name="content[sub_service_areas][service_label]" placeholder="Empty = this page title" value="{{ old('content.sub_service_areas.service_label', data_get($c, 'sub_service_areas.service_label')) }}"></div>
-                <div class="col-12"><label class="form-label">Headline (optional override)</label><input type="text" class="form-control" name="content[sub_service_areas][headline]" placeholder="Leave empty to use template below" value="{{ old('content.sub_service_areas.headline', data_get($c, 'sub_service_areas.headline')) }}"></div>
-                <div class="col-12"><label class="form-label">Headline template</label><input type="text" class="form-control" name="content[sub_service_areas][headline_template]" value="{{ old('content.sub_service_areas.headline_template', data_get($c, 'sub_service_areas.headline_template')) }}"></div>
+                <div class="col-md-6"><label class="form-label">State name</label><input type="text" class="form-control" name="content[sub_service_areas][state_name]" placeholder="e.g. Texas" value="{{ old('content.sub_service_areas.state_name', data_get($c, 'sub_service_areas.state_name')) }}"></div>
+                <div class="col-12"><label class="form-label">Headline</label><input type="text" class="form-control" name="content[sub_service_areas][headline]" placeholder="Leave empty for the built-in default" value="{{ old('content.sub_service_areas.headline', data_get($c, 'sub_service_areas.headline')) }}"></div>
                 <div class="col-12"><label class="form-label">Intro (before city list)</label><textarea class="form-control" name="content[sub_service_areas][intro]" rows="2">{{ old('content.sub_service_areas.intro', data_get($c, 'sub_service_areas.intro')) }}</textarea></div>
                 <div class="col-md-8"><label class="form-label">Closing phrase</label><input type="text" class="form-control" name="content[sub_service_areas][outro]" value="{{ old('content.sub_service_areas.outro', data_get($c, 'sub_service_areas.outro')) }}"></div>
                 <div class="col-md-4 d-flex align-items-end pb-1">
@@ -277,6 +301,16 @@
         </div>
     </div>
 
+    @php
+        $platRowLogos = old('content.platform_logos_row.logos', data_get($c, 'platform_logos_row.logos', []));
+        if (! is_array($platRowLogos)) {
+            $platRowLogos = [];
+        }
+        $platRowUseDefault = old('content.platform_logos_row.use_default_platform_logos', data_get($c, 'platform_logos_row.use_default_platform_logos', true));
+        $platRowUseDefaultOn = $platRowUseDefault === true || $platRowUseDefault === 1 || $platRowUseDefault === '1';
+        $platRowKeys = array_map('intval', array_keys($platRowLogos));
+        $platRowNextKey = $platRowKeys === [] ? 0 : max($platRowKeys) + 1;
+    @endphp
     {{-- Platform section --}}
     <div class="accordion-item">
         <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secPlat">9. Platform integration</button></h2>
@@ -306,11 +340,38 @@
                 </div>
                 <div class="col-md-3"><label class="form-label">Button label</label><input type="text" class="form-control" name="content[platform_section][button_label]" value="{{ data_get($c, 'platform_section.button_label') }}"></div>
                 <div class="col-md-3"><label class="form-label">Phone</label><input type="text" class="form-control" name="content[platform_section][phone]" value="{{ data_get($c, 'platform_section.phone') }}"></div>
-                <div class="col-12"><label class="form-label">Platform logos (row)</label>
-                    <div class="row g-2">
-                        @for($p = 0; $p < 12; $p++)
-                            <div class="col-md-4"><input type="text" class="form-control form-control-sm" name="content[platform_logos_row][logos][{{ $p }}]" placeholder="Logo {{ $p + 1 }}" value="{{ data_get($c, "platform_logos_row.logos.$p") }}"></div>
-                        @endfor
+                <div class="col-12">
+                    <label class="form-label">Platform logos (row)</label>
+                    <input type="hidden" name="content[platform_logos_row][use_default_platform_logos]" value="0">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" name="content[platform_logos_row][use_default_platform_logos]" id="plat_row_use_default" value="1" @checked($platRowUseDefaultOn)>
+                        <label class="form-check-label" for="plat_row_use_default">Use theme default platform logos (static slider from <code>assets/img/platforms/*.webp</code>)</label>
+                    </div>
+                    <div id="plat-row-custom-logos-wrap" class="border rounded p-3 bg-light" style="{{ $platRowUseDefaultOn ? 'display:none' : '' }}">
+                        <p class="text-muted small mb-2">Same as “As featured in”: add or remove rows; upload or paste URL per logo.</p>
+                        <button type="button" class="btn btn-outline-primary btn-sm mb-3" id="plat-row-add-logo"><i class="bi bi-plus-lg"></i> Add logo</button>
+                        <div id="plat-row-logo-rows" class="vstack gap-2">
+                            @foreach($platRowLogos as $idx => $platUrl)
+                                @php $idx = (int) $idx; @endphp
+                                <div class="border rounded p-3 bg-white plat-row-logo-row" data-plat-row-idx="{{ $idx }}">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="small fw-semibold text-muted">Logo {{ $loop->iteration }}</span>
+                                        <button type="button" class="btn btn-sm btn-outline-danger plat-row-remove-logo">Remove row</button>
+                                    </div>
+                                    <input type="file" name="file_platform_row_logo[{{ $idx }}]" class="form-control form-control-sm mb-2" accept="image/*">
+                                    @if($platUrl)
+                                        <small class="text-muted d-block mb-2">Current: <a href="{{ $platUrl }}" target="_blank">view</a></small>
+                                        <input type="hidden" name="remove_platform_row_logo[{{ $idx }}]" value="0">
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" name="remove_platform_row_logo[{{ $idx }}]" id="remove_platform_row_logo_{{ $idx }}" value="1" @checked(old('remove_platform_row_logo.'.$idx) == '1')>
+                                            <label class="form-check-label small" for="remove_platform_row_logo_{{ $idx }}">Remove image</label>
+                                        </div>
+                                    @endif
+                                    <label class="form-label small text-muted mb-0">Or paste URL</label>
+                                    <input type="text" class="form-control form-control-sm" name="content[platform_logos_row][logos][{{ $idx }}]" placeholder="https://… or /storage/…" value="{{ $platUrl }}">
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -438,6 +499,88 @@
         </div>
     </div>
 </div>
+
+<script>
+(function () {
+    var wrap = document.getElementById('feat-custom-logos-wrap');
+    var rows = document.getElementById('feat-logo-rows');
+    var addBtn = document.getElementById('feat-add-logo-row');
+    var defCb = document.getElementById('feat_use_default');
+    var nextKey = {{ (int) $featNextKey }};
+
+    function rowHtml(i) {
+        return '<div class="border rounded p-3 bg-white feat-logo-row" data-feat-idx="' + i + '">' +
+            '<div class="d-flex justify-content-between align-items-center mb-2">' +
+            '<span class="small fw-semibold text-muted">Logo</span>' +
+            '<button type="button" class="btn btn-sm btn-outline-danger feat-remove-logo-row">Remove row</button></div>' +
+            '<input type="file" name="file_featured_logo[' + i + ']" class="form-control form-control-sm mb-2" accept="image/*">' +
+            '<label class="form-label small text-muted mb-0">Or paste URL</label>' +
+            '<input type="text" class="form-control form-control-sm" name="content[featured_in][logos][' + i + ']" placeholder="https://…">' +
+            '</div>';
+    }
+
+    if (addBtn && rows) {
+        addBtn.addEventListener('click', function () {
+            rows.insertAdjacentHTML('beforeend', rowHtml(nextKey));
+            nextKey += 1;
+        });
+    }
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('feat-remove-logo-row')) {
+            e.preventDefault();
+            var row = e.target.closest('.feat-logo-row');
+            if (row) {
+                row.remove();
+            }
+        }
+    });
+    if (defCb && wrap) {
+        defCb.addEventListener('change', function () {
+            wrap.style.display = this.checked ? 'none' : 'block';
+        });
+    }
+})();
+
+(function () {
+    var wrap = document.getElementById('plat-row-custom-logos-wrap');
+    var rows = document.getElementById('plat-row-logo-rows');
+    var addBtn = document.getElementById('plat-row-add-logo');
+    var defCb = document.getElementById('plat_row_use_default');
+    var nextKey = {{ (int) $platRowNextKey }};
+
+    function rowHtml(i) {
+        return '<div class="border rounded p-3 bg-white plat-row-logo-row" data-plat-row-idx="' + i + '">' +
+            '<div class="d-flex justify-content-between align-items-center mb-2">' +
+            '<span class="small fw-semibold text-muted">Logo</span>' +
+            '<button type="button" class="btn btn-sm btn-outline-danger plat-row-remove-logo">Remove row</button></div>' +
+            '<input type="file" name="file_platform_row_logo[' + i + ']" class="form-control form-control-sm mb-2" accept="image/*">' +
+            '<label class="form-label small text-muted mb-0">Or paste URL</label>' +
+            '<input type="text" class="form-control form-control-sm" name="content[platform_logos_row][logos][' + i + ']" placeholder="https://…">' +
+            '</div>';
+    }
+
+    if (addBtn && rows) {
+        addBtn.addEventListener('click', function () {
+            rows.insertAdjacentHTML('beforeend', rowHtml(nextKey));
+            nextKey += 1;
+        });
+    }
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('plat-row-remove-logo')) {
+            e.preventDefault();
+            var row = e.target.closest('.plat-row-logo-row');
+            if (row) {
+                row.remove();
+            }
+        }
+    });
+    if (defCb && wrap) {
+        defCb.addEventListener('change', function () {
+            wrap.style.display = this.checked ? 'none' : 'block';
+        });
+    }
+})();
+</script>
 
 <div class="d-flex gap-2 mb-5">
     <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-save"></i> Save service page</button>

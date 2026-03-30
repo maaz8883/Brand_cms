@@ -101,7 +101,7 @@ function orbit_render_dynamic_service(array $payload): void
 		</div>
 	</div>
 </section>
-<?php include __DIR__ . '/platform.php'; ?>
+<?php include __DIR__ . '/orbit-featured-logos.php'; ?>
 
 <?php
 	$ssa = isset($c['sub_service_areas']) && is_array($c['sub_service_areas']) ? $c['sub_service_areas'] : [];
@@ -111,15 +111,18 @@ function orbit_render_dynamic_service(array $payload): void
 
 	if ($showSsaBlock) {
 		$abbr = trim((string) ($ssa['state_abbr'] ?? ''));
-		$svcLabel = trim((string) ($ssa['service_label'] ?? ''));
-		if ($svcLabel === '') {
-			$svcLabel = (string) ($service['title'] ?? '');
+		if ($abbr === '') {
+			$abbr = $stateName;
 		}
+		$svcLabel = (string) ($service['title'] ?? '');
 		$headlineCustom = trim((string) ($ssa['headline'] ?? ''));
 		if ($headlineCustom !== '') {
 			$headlineText = orbit_sub_service_apply_vars($headlineCustom, $stateName, $abbr, $svcLabel);
 		} else {
-			$tpl = (string) ($ssa['headline_template'] ?? '{state}! Are you ready? Because Our {service} in {abbr} are');
+			$tpl = trim((string) ($ssa['headline_template'] ?? ''));
+			if ($tpl === '') {
+				$tpl = '{state}! Are you ready? Because Our {service} is here for you.';
+			}
 			$headlineText = orbit_sub_service_apply_vars($tpl, $stateName, $abbr, $svcLabel);
 		}
 		$introTpl = (string) ($ssa['intro'] ?? 'Now we are providing exceptional services all across {state} including,');
@@ -341,7 +344,7 @@ function orbit_render_dynamic_service(array $payload): void
 	</div>
 </section>
 
-<?php include __DIR__ . '/platform2.php'; ?>
+<?php include __DIR__ . '/orbit-platform-logos-row.php'; ?>
 
 <?php
 	$sec = $c['secondary_section'] ?? [];
@@ -443,20 +446,74 @@ function orbit_render_dynamic_service(array $payload): void
 	if (! is_array($portImgs)) {
 		$portImgs = [];
 	}
-	if ($portImgs !== [] || ($port['heading'] ?? '') !== '') {
-		?>
-<section class="py-5">
-	<div class="container-lg text-center">
-		<h2 class="f-40 clr-1 fw-700"> <?= orbit_e($port['heading'] ?? ''); ?></h2>
-		<p class="f-18 fw-500"> <?= orbit_e($port['description'] ?? ''); ?></p>
-		<div class="row row-cols-2 row-cols-md-4 g-3 mt-3">
-			<?php foreach ($portImgs as $img) {
-				$u = orbitMediaUrl((string) $img);
-				if ($u === '') {
-					continue;
+
+	$portImageUrls = [];
+	foreach ($portImgs as $img) {
+		$raw = trim((string) $img);
+		if ($raw === '') {
+			continue;
+		}
+		$u = '';
+		if (str_starts_with($raw, 'http://') || str_starts_with($raw, 'https://')) {
+			$u = $raw;
+		} elseif (str_starts_with($raw, '/storage/') || str_starts_with($raw, 'storage/')) {
+			$u = orbitMediaUrl($raw);
+		} elseif (str_starts_with($raw, '/assets/') || str_starts_with($raw, 'assets/')) {
+			$u = ltrim($raw, '/');
+		} elseif (preg_match('#^/?[^/\\\\]+$#', $raw) === 1) {
+			// Legacy values like "book1" or "book1.webp" should resolve to local default assets.
+			$fileOnly = ltrim($raw, '/\\');
+			$candidates = [];
+			$candidates[] = 'assets/img/portfolio/' . $fileOnly;
+			if (! preg_match('/\.[A-Za-z0-9]+$/', $fileOnly)) {
+				$candidates[] = 'assets/img/portfolio/' . $fileOnly . '.webp';
+			}
+			foreach ($candidates as $candidate) {
+				$candidateFs = __DIR__ . '/../' . $candidate;
+				if (is_file($candidateFs)) {
+					$u = $candidate;
+					break;
 				}
+			}
+		} else {
+			$u = orbitMediaUrl($raw);
+		}
+		if ($u !== '') {
+			$portImageUrls[] = $u;
+		}
+	}
+
+	$useDefaultPortfolioImages = $portImageUrls === [];
+	if ($useDefaultPortfolioImages) {
+		$defaultDir = 'assets/img/portfolio/';
+		$defaultImgs = glob($defaultDir . '*.webp') ?: [];
+		foreach ($defaultImgs as $img) {
+			$portImageUrls[] = (string) $img;
+		}
+	}
+
+	if ($portImageUrls !== [] || ($port['heading'] ?? '') !== '') {
+		?>
+<section class="pt-5 pb-md-4 portfolio">
+	<div class="container-xxl">
+		<div class="row text-center justify-content-center">
+			<div class="col-md-10">
+				<h2 class="f-40 clr-1 fw-600"><?= orbit_e((string) ($port['heading'] ?? '')); ?></h2>
+				<p class="f-20 fw-500"><?= orbit_e((string) ($port['description'] ?? '')); ?></p>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid pb-5 pt-3">
+		<div class="portfolio-slider">
+			<?php foreach ($portImageUrls as $imgUrl) {
+				$pathPart = parse_url($imgUrl, PHP_URL_PATH) ?: $imgUrl;
+				$title = pathinfo(basename((string) $pathPart), PATHINFO_FILENAME);
 				?>
-			<div class="col"><img class="img-fluid lozad rounded" data-src="<?= orbit_e($u); ?>" alt="Portfolio"></div>
+			<div class="item">
+				<div class="gallery">
+					<img data-lazy="<?= orbit_e((string) $imgUrl); ?>" alt="<?= orbit_e((string) $title); ?> by <?= orbit_e((string) ($bname ?? '')); ?>"/>
+				</div>
+			</div>
 			<?php } ?>
 		</div>
 	</div>
