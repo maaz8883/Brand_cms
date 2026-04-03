@@ -13,7 +13,7 @@ class BlogApiController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::with(['user', 'category'])->latest()->get();
+        $blogs = Blog::with(['user', 'brand'])->latest()->get();
         $blogs = $blogs->map(function ($blog) {
             return $this->formatBlogResponse($blog);
         });
@@ -26,7 +26,7 @@ class BlogApiController extends Controller
 
     public function show($slug)
     {
-        $blog = Blog::with(['user', 'category'])
+        $blog = Blog::with(['user', 'brand'])
             ->where('slug_en', $slug)
             ->first();
         
@@ -50,6 +50,7 @@ class BlogApiController extends Controller
             'content' => 'required|string',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:draft,published',
+            'brand_id' => 'nullable|exists:brands,id',
         ]);
 
         if ($validator->fails()) {
@@ -66,6 +67,7 @@ class BlogApiController extends Controller
             'content_en' => $data['content'],
             'status' => $data['status'],
             'user_id' => auth()->id() ?? 1,
+            'brand_id' => $data['brand_id'] ?? null,
         ];
 
         if ($request->hasFile('featured_image')) {
@@ -73,7 +75,7 @@ class BlogApiController extends Controller
         }
 
         $blog = Blog::create($payload);
-        $blog->load('user');
+        $blog->load(['user', 'brand']);
 
         return response()->json([
             'success' => true,
@@ -98,6 +100,7 @@ class BlogApiController extends Controller
             'content' => 'required|string',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:draft,published',
+            'brand_id' => 'nullable|exists:brands,id',
         ]);
 
         if ($validator->fails()) {
@@ -114,6 +117,9 @@ class BlogApiController extends Controller
             'content_en' => $data['content'],
             'status' => $data['status'],
         ];
+        if (array_key_exists('brand_id', $data)) {
+            $payload['brand_id'] = $data['brand_id'];
+        }
 
         if ($request->hasFile('featured_image')) {
             if ($blog->featured_image) {
@@ -123,7 +129,7 @@ class BlogApiController extends Controller
         }
 
         $blog->update($payload);
-        $blog->load('user');
+        $blog->load(['user', 'brand']);
 
         return response()->json([
             'success' => true,
@@ -151,7 +157,7 @@ class BlogApiController extends Controller
             'featured_image' => $featured,
             'status' => $blog->status,
             'author' => $blog->author,
-            'category_id' => $blog->category_id,
+            'brand_id' => $blog->brand_id,
             'user_id' => $blog->user_id,
             'created_at' => $blog->created_at?->toIso8601String(),
             'updated_at' => $blog->updated_at?->toIso8601String(),
@@ -159,10 +165,10 @@ class BlogApiController extends Controller
                 'id' => $blog->user->id,
                 'name' => $blog->user->name,
             ] : null,
-            'category' => $blog->relationLoaded('category') && $blog->category ? [
-                'id' => $blog->category->id,
-                'name_en' => $blog->category->name_en,
-                'name_de' => $blog->category->name_de,
+            'brand' => $blog->relationLoaded('brand') && $blog->brand ? [
+                'id' => $blog->brand->id,
+                'name' => $blog->brand->name,
+                'slug' => $blog->brand->slug,
             ] : null,
         ];
     }

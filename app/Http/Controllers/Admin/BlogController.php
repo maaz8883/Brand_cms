@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use App\Models\Category;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -17,14 +17,15 @@ class BlogController extends Controller
 
     public function index()
     {
-        $blogs = Blog::with(['user', 'category'])->latest()->paginate(10);
+        $blogs = Blog::with(['user', 'brand'])->latest()->paginate(10);
         return view('admin.blogs.index', compact('blogs'));
     }
 
     public function create()
     {
-        $categories = Category::all();
-        return view('admin.blogs.create', compact('categories'));
+        $brands = Brand::orderBy('name')->get();
+
+        return view('admin.blogs.create', compact('brands'));
     }
 
     public function store(Request $request)
@@ -34,7 +35,7 @@ class BlogController extends Controller
             'content' => 'required|string',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:draft,published',
-            'category_id' => 'nullable|exists:categories,id',
+            'brand_id' => 'nullable|exists:brands,id',
             'author' => 'nullable|string|max:255',
             'short_description' => 'nullable|string',
         ]);
@@ -45,7 +46,7 @@ class BlogController extends Controller
             'content_en' => $validated['content'],
             'short_description_en' => $validated['short_description'] ?? null,
             'status' => $validated['status'],
-            'category_id' => $validated['category_id'] ?? null,
+            'brand_id' => $validated['brand_id'] ?? null,
             'author' => $validated['author'] ?? null,
             'user_id' => auth()->id(),
         ];
@@ -61,13 +62,16 @@ class BlogController extends Controller
 
     public function show(Blog $blog)
     {
+        $blog->load('brand');
+
         return view('admin.blogs.show', compact('blog'));
     }
 
     public function edit(Blog $blog)
     {
-        $categories = Category::all();
-        return view('admin.blogs.edit', compact('blog', 'categories'));
+        $brands = Brand::orderBy('name')->get();
+
+        return view('admin.blogs.edit', compact('blog', 'brands'));
     }
 
     public function update(Request $request, Blog $blog)
@@ -77,7 +81,7 @@ class BlogController extends Controller
             'content' => 'required|string',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:draft,published',
-            'category_id' => 'nullable|exists:categories,id',
+            'brand_id' => 'nullable|exists:brands,id',
             'author' => 'nullable|string|max:255',
             'short_description' => 'nullable|string',
         ]);
@@ -88,7 +92,7 @@ class BlogController extends Controller
             'content_en' => $validated['content'],
             'short_description_en' => $validated['short_description'] ?? null,
             'status' => $validated['status'],
-            'category_id' => $validated['category_id'] ?? null,
+            'brand_id' => $validated['brand_id'] ?? null,
             'author' => $validated['author'] ?? null,
         ];
 

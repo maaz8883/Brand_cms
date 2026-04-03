@@ -42,6 +42,8 @@ class BrandController extends Controller
 
     public function show(Brand $brand)
     {
+        $brand->load('blogs');
+
         return view('admin.brands.show', compact('brand'));
     }
 

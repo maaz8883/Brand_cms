@@ -24,8 +24,8 @@
                     <span class="badge bg-{{ $blog->status === 'published' ? 'success' : 'warning' }}">
                         {{ ucfirst($blog->status) }}
                     </span>
-                    @if($blog->category)
-                        <span class="badge bg-info ms-2">{{ $blog->category->name_en ?? $blog->category->name_de }}</span>
+                    @if($blog->brand)
+                        <span class="badge bg-info ms-2">{{ $blog->brand->name }}</span>
                     @endif
                 </div>
                 <div class="text-muted">

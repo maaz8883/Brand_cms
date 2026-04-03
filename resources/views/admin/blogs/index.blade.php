@@ -19,7 +19,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Title</th>
-                        <th>Category</th>
+                        <th>Brand</th>
                         <th>Author</th>
                         <th>Status</th>
                         <th>Created</th>
@@ -32,8 +32,8 @@
                             <td>{{ $blog->id }}</td>
                             <td><strong>{{ $blog->title_en }}</strong></td>
                             <td>
-                                @if($blog->category)
-                                    <span class="badge bg-info">{{ $blog->category->name_en ?? $blog->category->name_de }}</span>
+                                @if($blog->brand)
+                                    <span class="badge bg-info">{{ $blog->brand->name }}</span>
                                 @else
                                     <span class="text-muted">-</span>
                                 @endif

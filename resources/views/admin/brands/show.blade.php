@@ -36,6 +36,40 @@
         <div>
             <strong>Updated:</strong> {{ $brand->updated_at->format('M d, Y H:i') }}
         </div>
+
+        <div class="mt-4">
+            <h5>Blogs for this brand ({{ $brand->blogs->count() }})</h5>
+            @if($brand->blogs->isNotEmpty())
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($brand->blogs as $blog)
+                                <tr>
+                                    <td>
+                                        <a href="{{ route('admin.blogs.show', $blog) }}">{{ $blog->title_en }}</a>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-{{ $blog->status === 'published' ? 'success' : 'warning' }}">
+                                            {{ ucfirst($blog->status) }}
+                                        </span>
+                                    </td>
+                                    <td>{{ $blog->created_at->format('M d, Y') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <p class="text-muted mb-0">No blogs linked to this brand yet.</p>
+            @endif
+        </div>
     </div>
 </div>
 @endsection

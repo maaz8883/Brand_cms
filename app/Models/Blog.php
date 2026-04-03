@@ -16,7 +16,7 @@ class Blog extends Model
         'featured_image',
         'status',
         'user_id',
-        'category_id',
+        'brand_id',
         'author',
         'short_description_en',
     ];
@@ -46,8 +46,8 @@ class Blog extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function category()
+    public function brand()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Brand::class);
     }
 }

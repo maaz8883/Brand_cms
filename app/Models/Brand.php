@@ -24,4 +24,9 @@ class Brand extends Model
     {
         return $this->hasMany(BrandService::class);
     }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class)->latest();
+    }
 }

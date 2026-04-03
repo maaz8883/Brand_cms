@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\BrandServiceController;
-use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProfileController;
 
 Route::get('/', function () {
@@ -53,17 +52,6 @@ Route::prefix('admin')->group(function () {
         Route::get('brands/{brand}/services/{service}/children', [BrandServiceController::class, 'children'])
             ->name('admin.brands.services.children');
 
-        // Categories Routes
-        Route::resource('categories', CategoryController::class)->names([
-            'index' => 'admin.categories.index',
-            'create' => 'admin.categories.create',
-            'store' => 'admin.categories.store',
-            'show' => 'admin.categories.show',
-            'edit' => 'admin.categories.edit',
-            'update' => 'admin.categories.update',
-            'destroy' => 'admin.categories.destroy',
-        ]);
-        
         Route::resource('blogs', BlogController::class)->names([
             'index' => 'admin.blogs.index',
             'create' => 'admin.blogs.create',

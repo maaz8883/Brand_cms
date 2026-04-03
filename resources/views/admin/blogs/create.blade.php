@@ -36,16 +36,16 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="category_id" class="form-label">Category</label>
-                        <select class="form-select @error('category_id') is-invalid @enderror" id="category_id" name="category_id">
-                            <option value="">Select Category</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name_en }} @if($category->name_de) / {{ $category->name_de }} @endif
+                        <label for="brand_id" class="form-label">Brand</label>
+                        <select class="form-select @error('brand_id') is-invalid @enderror" id="brand_id" name="brand_id">
+                            <option value="">Select brand</option>
+                            @foreach($brands as $brand)
+                                <option value="{{ $brand->id }}" {{ old('brand_id') == $brand->id ? 'selected' : '' }}>
+                                    {{ $brand->name }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('category_id')
+                        @error('brand_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
