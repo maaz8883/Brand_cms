@@ -26,6 +26,10 @@ RewriteRule ^ https://orbitbookpublishers.com%{REQUEST_URI} [R=301,L,NE]
 RewriteCond %{THE_REQUEST} \s/+index\.php(?:/([^\s?]*))? [NC]
 RewriteRule ^index\.php/?(.*)$ https://orbitbookpublishers.com/$1 [R=301,L,NE]
 
+# SEO: sitemap + robots
+RewriteRule ^sitemap\.xml$ sitemap.php [L,QSA]
+RewriteRule ^robots\.txt$ robots.php [L,QSA]
+
 # Front-controller rewrite for Orbit dynamic/static service URLs
 # Keep REQUEST_URI intact (do not rewrite to index.php/$1)
 RewriteCond %{REQUEST_FILENAME} !-f
