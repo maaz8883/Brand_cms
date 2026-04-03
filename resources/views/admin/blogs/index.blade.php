@@ -21,7 +21,6 @@
                         <th>Title</th>
                         <th>Category</th>
                         <th>Author</th>
-                        <th>Language</th>
                         <th>Status</th>
                         <th>Created</th>
                         <th>Actions</th>
@@ -31,12 +30,7 @@
                     @forelse($blogs as $blog)
                         <tr>
                             <td>{{ $blog->id }}</td>
-                            <td>
-                                <strong>{{ $blog->title_en ?? $blog->title_de }}</strong>
-                                @if($blog->title_de && $blog->title_en)
-                                    <br><small class="text-muted">{{ $blog->title_de }}</small>
-                                @endif
-                            </td>
+                            <td><strong>{{ $blog->title_en }}</strong></td>
                             <td>
                                 @if($blog->category)
                                     <span class="badge bg-info">{{ $blog->category->name_en ?? $blog->category->name_de }}</span>
@@ -45,12 +39,6 @@
                                 @endif
                             </td>
                             <td>{{ $blog->author ?? $blog->user->name }}</td>
-                            <td>
-                                <span class="badge bg-info">EN</span>
-                                @if($blog->title_de || $blog->content_de)
-                                    <span class="badge bg-secondary ms-1">DE</span>
-                                @endif
-                            </td>
                             <td>
                                 <span class="badge bg-{{ $blog->status === 'published' ? 'success' : 'warning' }}">
                                     {{ ucfirst($blog->status) }}
@@ -75,7 +63,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center">No blogs found. <a href="{{ route('admin.blogs.create') }}">Create one!</a></td>
+                            <td colspan="7" class="text-center">No blogs found. <a href="{{ route('admin.blogs.create') }}">Create one!</a></td>
                         </tr>
                     @endforelse
                 </tbody>

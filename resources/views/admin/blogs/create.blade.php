@@ -8,93 +8,29 @@
     <div class="card-body">
         <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <!-- Title Fields -->
-            <div class="card mb-3">
-                <div class="card-header bg-light">
-                    <h6 class="mb-0"><i class="bi bi-translate"></i> Title</h6>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="title_en" class="form-label">Title (English) *</label>
-                                <input type="text" class="form-control @error('title_en') is-invalid @enderror" id="title_en" name="title_en" value="{{ old('title_en') }}" required>
-                                @error('title_en')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="title_de" class="form-label">Title (German / Deutsch)</label>
-                                <input type="text" class="form-control @error('title_de') is-invalid @enderror" id="title_de" name="title_de" value="{{ old('title_de') }}">
-                                @error('title_de')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title *</label>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required>
+                @error('title')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
-            <!-- Short Description Fields -->
-            <div class="card mb-3">
-                <div class="card-header bg-light">
-                    <h6 class="mb-0"><i class="bi bi-card-text"></i> Short Description</h6>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="short_description_en" class="form-label">Short Description (English)</label>
-                                <textarea class="form-control @error('short_description_en') is-invalid @enderror" id="short_description_en" name="short_description_en" rows="3" placeholder="Brief description in English">{{ old('short_description_en') }}</textarea>
-                                @error('short_description_en')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="short_description_de" class="form-label">Short Description (German / Deutsch)</label>
-                                <textarea class="form-control @error('short_description_de') is-invalid @enderror" id="short_description_de" name="short_description_de" rows="3" placeholder="Brief description in German">{{ old('short_description_de') }}</textarea>
-                                @error('short_description_de')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="mb-3">
+                <label for="short_description" class="form-label">Short description</label>
+                <textarea class="form-control @error('short_description') is-invalid @enderror" id="short_description" name="short_description" rows="3" placeholder="Brief summary for listings">{{ old('short_description') }}</textarea>
+                @error('short_description')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
-            <!-- Content Fields -->
-            <div class="card mb-3">
-                <div class="card-header bg-light">
-                    <h6 class="mb-0"><i class="bi bi-file-text"></i> Content</h6>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="content_en" class="form-label">Content (English) *</label>
-                                <div id="editor_en" class="quill-editor-host"></div>
-                                <input type="hidden" id="content_en" name="content_en" value="{{ old('content_en') }}" required>
-                                @error('content_en')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="content_de" class="form-label">Content (German / Deutsch)</label>
-                                <div id="editor_de" class="quill-editor-host"></div>
-                                <input type="hidden" id="content_de" name="content_de" value="{{ old('content_de') }}">
-                                @error('content_de')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content *</label>
+                <div id="editor" class="quill-editor-host"></div>
+                <input type="hidden" id="content" name="content" value="{{ old('content') }}" required>
+                @error('content')
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="row">
@@ -152,15 +88,10 @@
     </div>
 </div>
 
-<!-- Quill.js CSS -->
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
-<!-- Quill.js JS -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
 <script>
-    // Initialize Quill editor for English
-    var quill_en = new Quill('#editor_en', {
+    var quill = new Quill('#editor', {
         theme: 'snow',
         modules: {
             toolbar: [
@@ -174,50 +105,19 @@
                 ['clean']
             ]
         },
-        placeholder: 'Write your blog content in English...'
+        placeholder: 'Write your blog content...'
     });
 
-    // Initialize Quill editor for German
-    var quill_de = new Quill('#editor_de', {
-        theme: 'snow',
-        modules: {
-            toolbar: [
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ 'color': [] }, { 'background': [] }],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                [{ 'align': [] }],
-                ['link', 'image', 'video'],
-                ['blockquote', 'code-block'],
-                ['clean']
-            ]
-        },
-        placeholder: 'Write your blog content in German...'
-    });
-
-    // Set initial content if exists
-    @if(old('content_en'))
-        quill_en.root.innerHTML = {!! json_encode(old('content_en', '')) !!};
+    @if(old('content'))
+        quill.root.innerHTML = {!! json_encode(old('content', '')) !!};
     @endif
 
-    @if(old('content_de'))
-        quill_de.root.innerHTML = {!! json_encode(old('content_de', '')) !!};
-    @endif
-
-    // Update hidden inputs on text change
-    quill_en.on('text-change', function() {
-        document.getElementById('content_en').value = quill_en.root.innerHTML;
+    quill.on('text-change', function() {
+        document.getElementById('content').value = quill.root.innerHTML;
     });
 
-    quill_de.on('text-change', function() {
-        document.getElementById('content_de').value = quill_de.root.innerHTML;
-    });
-
-    // Also update on form submit
-    document.querySelector('form').addEventListener('submit', function(e) {
-        document.getElementById('content_en').value = quill_en.root.innerHTML;
-        document.getElementById('content_de').value = quill_de.root.innerHTML;
+    document.querySelector('form').addEventListener('submit', function() {
+        document.getElementById('content').value = quill.root.innerHTML;
     });
 </script>
-
 @endsection

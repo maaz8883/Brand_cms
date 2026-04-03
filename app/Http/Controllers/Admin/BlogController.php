@@ -30,29 +30,31 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title_en' => 'required|string|max:255',
-            'title_de' => 'nullable|string|max:255',
-            'content_en' => 'required|string',
-            'content_de' => 'nullable|string',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:draft,published',
             'category_id' => 'nullable|exists:categories,id',
             'author' => 'nullable|string|max:255',
-            'short_description_en' => 'nullable|string',
-            'short_description_de' => 'nullable|string',
+            'short_description' => 'nullable|string',
         ]);
 
-        $validated['slug_en'] = Str::slug($validated['title_en']);
-        if (!empty($validated['title_de'])) {
-            $validated['slug_de'] = Str::slug($validated['title_de']);
-        }
-        $validated['user_id'] = auth()->id();
+        $data = [
+            'title_en' => $validated['title'],
+            'slug_en' => Str::slug($validated['title']),
+            'content_en' => $validated['content'],
+            'short_description_en' => $validated['short_description'] ?? null,
+            'status' => $validated['status'],
+            'category_id' => $validated['category_id'] ?? null,
+            'author' => $validated['author'] ?? null,
+            'user_id' => auth()->id(),
+        ];
 
         if ($request->hasFile('featured_image')) {
-            $validated['featured_image'] = $request->file('featured_image')->store('blogs', 'public');
+            $data['featured_image'] = $request->file('featured_image')->store('blogs', 'public');
         }
 
-        Blog::create($validated);
+        Blog::create($data);
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog created successfully!');
     }
@@ -71,31 +73,33 @@ class BlogController extends Controller
     public function update(Request $request, Blog $blog)
     {
         $validated = $request->validate([
-            'title_en' => 'required|string|max:255',
-            'title_de' => 'nullable|string|max:255',
-            'content_en' => 'required|string',
-            'content_de' => 'nullable|string',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
             'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:draft,published',
             'category_id' => 'nullable|exists:categories,id',
             'author' => 'nullable|string|max:255',
-            'short_description_en' => 'nullable|string',
-            'short_description_de' => 'nullable|string',
+            'short_description' => 'nullable|string',
         ]);
 
-        $validated['slug_en'] = Str::slug($validated['title_en']);
-        if (!empty($validated['title_de'])) {
-            $validated['slug_de'] = Str::slug($validated['title_de']);
-        }
+        $data = [
+            'title_en' => $validated['title'],
+            'slug_en' => Str::slug($validated['title']),
+            'content_en' => $validated['content'],
+            'short_description_en' => $validated['short_description'] ?? null,
+            'status' => $validated['status'],
+            'category_id' => $validated['category_id'] ?? null,
+            'author' => $validated['author'] ?? null,
+        ];
 
         if ($request->hasFile('featured_image')) {
             if ($blog->featured_image) {
                 \Storage::disk('public')->delete($blog->featured_image);
             }
-            $validated['featured_image'] = $request->file('featured_image')->store('blogs', 'public');
+            $data['featured_image'] = $request->file('featured_image')->store('blogs', 'public');
         }
 
-        $blog->update($validated);
+        $blog->update($data);
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog updated successfully!');
     }

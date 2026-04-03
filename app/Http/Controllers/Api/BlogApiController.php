@@ -28,7 +28,6 @@ class BlogApiController extends Controller
     {
         $blog = Blog::with(['user', 'category'])
             ->where('slug_en', $slug)
-            ->orWhere('slug_de', $slug)
             ->first();
         
         if (!$blog) {
@@ -61,14 +60,19 @@ class BlogApiController extends Controller
         }
 
         $data = $validator->validated();
-        $data['slug'] = Str::slug($data['title']);
-        $data['user_id'] = auth()->id() ?? 1;
+        $payload = [
+            'title_en' => $data['title'],
+            'slug_en' => Str::slug($data['title']),
+            'content_en' => $data['content'],
+            'status' => $data['status'],
+            'user_id' => auth()->id() ?? 1,
+        ];
 
         if ($request->hasFile('featured_image')) {
-            $data['featured_image'] = $request->file('featured_image')->store('blogs', 'public');
+            $payload['featured_image'] = $request->file('featured_image')->store('blogs', 'public');
         }
 
-        $blog = Blog::create($data);
+        $blog = Blog::create($payload);
         $blog->load('user');
 
         return response()->json([
@@ -104,16 +108,21 @@ class BlogApiController extends Controller
         }
 
         $data = $validator->validated();
-        $data['slug'] = Str::slug($data['title']);
+        $payload = [
+            'title_en' => $data['title'],
+            'slug_en' => Str::slug($data['title']),
+            'content_en' => $data['content'],
+            'status' => $data['status'],
+        ];
 
         if ($request->hasFile('featured_image')) {
             if ($blog->featured_image) {
                 \Storage::disk('public')->delete($blog->featured_image);
             }
-            $data['featured_image'] = $request->file('featured_image')->store('blogs', 'public');
+            $payload['featured_image'] = $request->file('featured_image')->store('blogs', 'public');
         }
 
-        $blog->update($data);
+        $blog->update($payload);
         $blog->load('user');
 
         return response()->json([
@@ -126,20 +135,36 @@ class BlogApiController extends Controller
     /**
      * Format blog response with full URL for featured_image
      */
-    private function formatBlogResponse($blog)
+    private function formatBlogResponse(Blog $blog): array
     {
-        $blogArray = $blog->toArray();
-        
-        // Convert featured_image path to full URL
-        if (!empty($blogArray['featured_image'])) {
-            $blogArray['featured_image'] = Storage::url($blogArray['featured_image']);
-            // Get full URL with domain
-            $blogArray['featured_image'] = url($blogArray['featured_image']);
-        } else {
-            $blogArray['featured_image'] = null;
+        $featured = null;
+        if (! empty($blog->featured_image)) {
+            $featured = url(Storage::url($blog->featured_image));
         }
-        
-        return $blogArray;
+
+        return [
+            'id' => $blog->id,
+            'title' => $blog->title_en,
+            'slug' => $blog->slug_en,
+            'content' => $blog->content_en,
+            'short_description' => $blog->short_description_en,
+            'featured_image' => $featured,
+            'status' => $blog->status,
+            'author' => $blog->author,
+            'category_id' => $blog->category_id,
+            'user_id' => $blog->user_id,
+            'created_at' => $blog->created_at?->toIso8601String(),
+            'updated_at' => $blog->updated_at?->toIso8601String(),
+            'user' => $blog->relationLoaded('user') && $blog->user ? [
+                'id' => $blog->user->id,
+                'name' => $blog->user->name,
+            ] : null,
+            'category' => $blog->relationLoaded('category') && $blog->category ? [
+                'id' => $blog->category->id,
+                'name_en' => $blog->category->name_en,
+                'name_de' => $blog->category->name_de,
+            ] : null,
+        ];
     }
 
     public function destroy($id)

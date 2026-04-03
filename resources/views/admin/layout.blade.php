@@ -21,7 +21,7 @@
                     <i class="bi bi-speedometer2"></i> <span>Dashboard</span>
                 </a>
             </li>
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}" href="{{ route('admin.blogs.index') }}">
                             <i class="bi bi-journal-text"></i> <span>Blogs</span>
                         </a>
@@ -30,7 +30,7 @@
                         <a class="nav-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
                             <i class="bi bi-tags"></i> <span>Categories</span>
                         </a>
-                    </li> -->
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.brands.*') ? 'active' : '' }}" href="{{ route('admin.brands.index') }}">
                             <i class="bi bi-award"></i> <span>Brands</span>

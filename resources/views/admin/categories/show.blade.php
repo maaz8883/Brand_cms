@@ -66,7 +66,6 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Status</th>
-                                <th>Language</th>
                                 <th>Created</th>
                             </tr>
                         </thead>
@@ -74,18 +73,12 @@
                             @foreach($category->blogs as $blog)
                                 <tr>
                                     <td>
-                                        <a href="{{ route('admin.blogs.show', $blog) }}">{{ $blog->title_en ?? $blog->title_de }}</a>
+                                        <a href="{{ route('admin.blogs.show', $blog) }}">{{ $blog->title_en }}</a>
                                     </td>
                                     <td>
                                         <span class="badge bg-{{ $blog->status === 'published' ? 'success' : 'warning' }}">
                                             {{ ucfirst($blog->status) }}
                                         </span>
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-info">EN</span>
-                                        @if($blog->title_de || $blog->content_de)
-                                            <span class="badge bg-secondary ms-1">DE</span>
-                                        @endif
                                     </td>
                                     <td>{{ $blog->created_at->format('M d, Y') }}</td>
                                 </tr>

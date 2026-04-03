@@ -11,39 +11,34 @@ class Blog extends Model
 
     protected $fillable = [
         'title_en',
-        'title_de',
         'slug_en',
-        'slug_de',
         'content_en',
-        'content_de',
         'featured_image',
         'status',
         'user_id',
         'category_id',
         'author',
         'short_description_en',
-        'short_description_de',
     ];
-    
-    // Accessors for backward compatibility
-    public function getTitleAttribute()
+
+    public function getTitleAttribute(): ?string
     {
-        return $this->title_en ?? $this->title_de;
+        return $this->attributes['title_en'] ?? null;
     }
-    
-    public function getContentAttribute()
+
+    public function getContentAttribute(): ?string
     {
-        return $this->content_en ?? $this->content_de;
+        return $this->attributes['content_en'] ?? null;
     }
-    
-    public function getShortDescriptionAttribute()
+
+    public function getShortDescriptionAttribute(): ?string
     {
-        return $this->short_description_en ?? $this->short_description_de;
+        return $this->attributes['short_description_en'] ?? null;
     }
-    
-    public function getSlugAttribute()
+
+    public function getSlugAttribute(): ?string
     {
-        return $this->slug_en ?? $this->slug_de;
+        return $this->attributes['slug_en'] ?? null;
     }
 
     public function user()
