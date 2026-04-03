@@ -16,13 +16,21 @@ RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
 
 
 RewriteEngine On
+
+# Canonical redirects first
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://orbitbookpublishers.com%{REQUEST_URI} [R=301,L,NE]
+
+# Remove explicit index.php from URLs
+RewriteCond %{THE_REQUEST} \s/+index\.php(?:/([^\s?]*))? [NC]
+RewriteRule ^index\.php/?(.*)$ https://orbitbookpublishers.com/$1 [R=301,L,NE]
+
+# Front-controller rewrite for Orbit dynamic/static service URLs
+# Keep REQUEST_URI intact (do not rewrite to index.php/$1)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php/$1 [L]
-RewriteCond %{HTTPS} !=on
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ https://%1%{REQUEST_URI} [R=301,QSA,NC,L]
+RewriteRule ^ index.php [L,QSA]
 Options -Indexes
  
 # Compress HTML, CSS, JavaScript, Text, XML and fonts

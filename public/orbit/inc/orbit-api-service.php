@@ -139,22 +139,32 @@ function orbitMediaUrl(?string $path): string
 }
 
 /**
- * Path after /orbit/ from REQUEST_URI, e.g. "texas" or "texas/houston" (no leading slash).
- * Uses first "/orbit/" in path so nested URLs work with /public/orbit/... prefixes.
+ * Service path from REQUEST_URI, e.g. "texas" or "texas/houston" (no leading slash).
+ * Works for both "/orbit/texas" and root-style "/texas" deployments.
  */
 function orbit_request_service_path_from_uri(): ?string
 {
 	$path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '';
 	$path = str_replace('\\', '/', $path);
+	$rest = $path;
 	$lower = strtolower($path);
 	$needle = '/orbit/';
 	$pos = strpos($lower, $needle);
-	if ($pos === false) {
-		return null;
+	if ($pos !== false) {
+		$rest = substr($path, $pos + strlen($needle));
+	} else {
+		$scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? ''));
+		$scriptDir = trim($scriptDir, '/');
+		if ($scriptDir !== '' && stripos($lower, '/' . strtolower($scriptDir) . '/') === 0) {
+			$rest = substr($path, strlen('/' . $scriptDir . '/'));
+		} else {
+			$rest = ltrim($path, '/');
+		}
 	}
-	$rest = substr($path, $pos + strlen($needle));
 	if (stripos($rest, 'index.php/') === 0) {
 		$rest = substr($rest, strlen('index.php/'));
+	} elseif (strcasecmp($rest, 'index.php') === 0) {
+		$rest = '';
 	}
 	$rest = trim($rest, '/');
 	$rest = preg_replace('#\.php$#i', '', $rest);
