@@ -3,6 +3,10 @@
 @section('title', 'Blogs')
 @section('page-title', 'Blogs Management')
 
+@push('styles')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css">
+@endpush
+
 @section('content')
 <div class="d-flex justify-content-between mb-3">
     <h3>All Blogs</h3>
@@ -14,64 +18,51 @@
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table id="blogs-table" class="table table-striped table-hover w-100">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Title</th>
                         <th>Brand</th>
-                        <th>Author</th>
-                        <th>Status</th>
+                        <th>Slug</th>
                         <th>Created</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @forelse($blogs as $blog)
-                        <tr>
-                            <td>{{ $blog->id }}</td>
-                            <td><strong>{{ $blog->title_en }}</strong></td>
-                            <td>
-                                @if($blog->brand)
-                                    <span class="badge bg-info">{{ $blog->brand->name }}</span>
-                                @else
-                                    <span class="text-muted">-</span>
-                                @endif
-                            </td>
-                            <td>{{ $blog->author ?? $blog->user->name }}</td>
-                            <td>
-                                <span class="badge bg-{{ $blog->status === 'published' ? 'success' : 'warning' }}">
-                                    {{ ucfirst($blog->status) }}
-                                </span>
-                            </td>
-                            <td>{{ $blog->created_at->format('M d, Y') }}</td>
-                            <td>
-                                <a href="{{ route('admin.blogs.show', $blog) }}" class="btn btn-sm btn-info">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                                <a href="{{ route('admin.blogs.edit', $blog) }}" class="btn btn-sm btn-warning">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <form action="{{ route('admin.blogs.destroy', $blog) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="7" class="text-center">No blogs found. <a href="{{ route('admin.blogs.create') }}">Create one!</a></td>
-                        </tr>
-                    @endforelse
-                </tbody>
             </table>
-        </div>
-        <div class="mt-3">
-            {{ $blogs->links() }}
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(function () {
+        $('#blogs-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route('admin.blogs.index') }}',
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'title', name: 'title' },
+                { data: 'brand', name: 'brand' },
+                { data: 'slug', name: 'slug' },
+                { data: 'created_at', name: 'created_at' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false }
+            ],
+            order: [[0, 'desc']],
+            pageLength: 10,
+            lengthMenu: [10, 25, 50, 100],
+            columnDefs: [
+                { targets: [3, 5], className: 'text-nowrap' }
+            ],
+            language: {
+                emptyTable: 'No blogs found.'
+            }
+        });
+    });
+</script>
 @endsection

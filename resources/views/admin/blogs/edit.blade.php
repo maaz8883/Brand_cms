@@ -11,16 +11,40 @@
             @method('PUT')
             <div class="mb-3">
                 <label for="title" class="form-label">Title *</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $blog->title_en) }}" required>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $blog->title) }}" required>
                 @error('title')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="mb-3">
-                <label for="short_description" class="form-label">Short description</label>
-                <textarea class="form-control @error('short_description') is-invalid @enderror" id="short_description" name="short_description" rows="3" placeholder="Brief summary for listings">{{ old('short_description', $blog->short_description_en) }}</textarea>
-                @error('short_description')
+                <label for="meta_title" class="form-label">Meta Title</label>
+                <input type="text" class="form-control @error('meta_title') is-invalid @enderror" id="meta_title" name="meta_title" value="{{ old('meta_title', $blog->meta_title) }}">
+                @error('meta_title')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="meta_description" class="form-label">Meta Description</label>
+                <textarea class="form-control @error('meta_description') is-invalid @enderror" id="meta_description" name="meta_description" rows="3">{{ old('meta_description', $blog->meta_description) }}</textarea>
+                @error('meta_description')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="slug" class="form-label">Slug</label>
+                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" value="{{ old('slug', $blog->slug) }}">
+                @error('slug')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="keywords" class="form-label">Keywords</label>
+                <input type="text" class="form-control @error('keywords') is-invalid @enderror" id="keywords" name="keywords" value="{{ old('keywords', $blog->keywords) }}">
+                @error('keywords')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
@@ -28,60 +52,29 @@
             <div class="mb-3">
                 <label for="content" class="form-label">Content *</label>
                 <div id="editor" class="quill-editor-host"></div>
-                <input type="hidden" id="content" name="content" value="{{ old('content', $blog->content_en) }}" required>
+                <input type="hidden" id="content" name="content" value="{{ old('content', $blog->content) }}" required>
                 @error('content')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="brand_id" class="form-label">Brand</label>
-                        <select class="form-select @error('brand_id') is-invalid @enderror" id="brand_id" name="brand_id">
-                            <option value="">Select brand</option>
-                            @foreach($brands as $brand)
-                                <option value="{{ $brand->id }}" {{ old('brand_id', $blog->brand_id) == $brand->id ? 'selected' : '' }}>
-                                    {{ $brand->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('brand_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="author" class="form-label">Author</label>
-                        <input type="text" class="form-control @error('author') is-invalid @enderror" id="author" name="author" value="{{ old('author', $blog->author) }}" placeholder="Author name">
-                        @error('author')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
             <div class="mb-3">
-                <label for="featured_image" class="form-label">Featured Image</label>
-                @if($blog->featured_image)
-                    <div class="mb-2">
-                        <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="Featured Image" class="img-thumbnail featured-image-thumb">
-                    </div>
-                @endif
-                <input type="file" class="form-control @error('featured_image') is-invalid @enderror" id="featured_image" name="featured_image" accept="image/*">
-                @error('featured_image')
+                <label for="brand" class="form-label">Brand</label>
+                <input type="text" class="form-control @error('brand') is-invalid @enderror" id="brand" name="brand" value="{{ old('brand', $blog->brand) }}">
+                @error('brand')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="mb-3">
-                <label for="status" class="form-label">Status *</label>
-                <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
-                    <option value="draft" {{ old('status', $blog->status) === 'draft' ? 'selected' : '' }}>Draft</option>
-                    <option value="published" {{ old('status', $blog->status) === 'published' ? 'selected' : '' }}>Published</option>
-                </select>
-                @error('status')
+                <label for="image" class="form-label">Image</label>
+                @if($blog->image)
+                    <div class="mb-2">
+                        <small class="text-muted">Current: {{ $blog->image }}</small>
+                    </div>
+                @endif
+                <input type="text" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image', $blog->image) }}">
+                @error('image')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
@@ -117,7 +110,7 @@
     @if(old('content'))
         quill.root.innerHTML = {!! json_encode(old('content')) !!};
     @else
-        quill.root.innerHTML = {!! json_encode($blog->content_en ?? '') !!};
+        quill.root.innerHTML = {!! json_encode($blog->content ?? '') !!};
     @endif
 
     quill.on('text-change', function() {

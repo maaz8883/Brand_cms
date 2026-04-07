@@ -4,6 +4,10 @@
 @section('page-title', 'Brands')
 @section('page-icon', 'award')
 
+@push('styles')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css">
+@endpush
+
 @section('content')
 <div class="d-flex justify-content-between mb-3">
     <h3>All Brands</h3>
@@ -15,7 +19,7 @@
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table id="brands-table" class="table table-striped table-hover w-100">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -26,44 +30,40 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @forelse($brands as $brand)
-                        <tr>
-                            <td>{{ $brand->id }}</td>
-                            <td><strong>{{ $brand->name }}</strong></td>
-                            <td>{{ $brand->slug }}</td>
-                            <td>{{ Str::limit($brand->description ?? '', 40) }}</td>
-                            <td>{{ $brand->created_at->format('M d, Y') }}</td>
-                            <td>
-                                <a href="{{ route('admin.brands.services.index', $brand) }}" class="btn btn-sm btn-primary" title="Service pages">
-                                    <i class="bi bi-journal-richtext"></i>
-                                </a>
-                                <a href="{{ route('admin.brands.show', $brand) }}" class="btn btn-sm btn-info">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                                <a href="{{ route('admin.brands.edit', $brand) }}" class="btn btn-sm btn-warning">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <form action="{{ route('admin.brands.destroy', $brand) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this brand?')">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="text-center">No brands yet. <a href="{{ route('admin.brands.create') }}">Create one</a>.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
             </table>
-        </div>
-        <div class="mt-3">
-            {{ $brands->links() }}
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(function () {
+        $('#brands-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route('admin.brands.index') }}',
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'name', name: 'name' },
+                { data: 'slug', name: 'slug' },
+                { data: 'description', name: 'description' },
+                { data: 'created_at', name: 'created_at' },
+                { data: 'actions', name: 'actions', orderable: false, searchable: false }
+            ],
+            order: [[0, 'desc']],
+            pageLength: 10,
+            lengthMenu: [10, 25, 50, 100],
+            columnDefs: [
+                { targets: [2, 5], className: 'text-nowrap' }
+            ],
+            language: {
+                emptyTable: 'No brands found.'
+            }
+        });
+    });
+</script>
 @endsection

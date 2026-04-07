@@ -10,6 +10,14 @@ class Blog extends Model
     use HasFactory;
 
     protected $fillable = [
+        'title',
+        'meta_title',
+        'meta_description',
+        'slug',
+        'keywords',
+        'content',
+        'brand',
+        'image',
         'title_en',
         'slug_en',
         'content_en',
@@ -23,12 +31,12 @@ class Blog extends Model
 
     public function getTitleAttribute(): ?string
     {
-        return $this->attributes['title_en'] ?? null;
+        return $this->attributes['title'] ?? ($this->attributes['title_en'] ?? null);
     }
 
     public function getContentAttribute(): ?string
     {
-        return $this->attributes['content_en'] ?? null;
+        return $this->attributes['content'] ?? ($this->attributes['content_en'] ?? null);
     }
 
     public function getShortDescriptionAttribute(): ?string
@@ -38,7 +46,7 @@ class Blog extends Model
 
     public function getSlugAttribute(): ?string
     {
-        return $this->attributes['slug_en'] ?? null;
+        return $this->attributes['slug'] ?? ($this->attributes['slug_en'] ?? null);
     }
 
     public function user()
