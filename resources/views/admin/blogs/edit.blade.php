@@ -3,6 +3,12 @@
 @section('title', 'Edit Blog')
 @section('page-title', 'Edit Blog')
 
+@push('styles')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JeremyFagis/dropify/dist/css/dropify.min.css">
+@endpush
+
 @section('content')
 <div class="card">
     <div class="card-body">
@@ -59,23 +65,47 @@
             </div>
 
             <div class="mb-3">
-                <label for="brand" class="form-label">Brand</label>
-                <input type="text" class="form-control @error('brand') is-invalid @enderror" id="brand" name="brand" value="{{ old('brand', $blog->brand) }}">
-                @error('brand')
+                <label for="brand_id" class="form-label">Brand</label>
+                <select class="form-select @error('brand_id') is-invalid @enderror" id="brand_id" name="brand_id">
+                    <option value="">Select Brand</option>
+                    @foreach($brands as $brand)
+                        <option value="{{ $brand->id }}" @selected((string) old('brand_id', $blog->brand_id) === (string) $brand->id)>
+                            {{ $brand->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('brand_id')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
-                @if($blog->image)
-                    <div class="mb-2">
-                        <small class="text-muted">Current: {{ $blog->image }}</small>
-                    </div>
-                @endif
-                <input type="text" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{ old('image', $blog->image) }}">
+                @php
+                    $existingImage = old('image') ?: $blog->image;
+                    $existingImageUrl = null;
+                    if (!empty($existingImage)) {
+                        if (\Illuminate\Support\Str::startsWith($existingImage, ['http://', 'https://'])) {
+                            $existingImageUrl = $existingImage;
+                        } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists('blogs/' . $existingImage)) {
+                            $existingImageUrl = asset('storage/blogs/' . $existingImage);
+                        } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists($existingImage)) {
+                            $existingImageUrl = asset('storage/' . $existingImage);
+                        } else {
+                            $existingImageUrl = asset($existingImage);
+                        }
+                    }
+                @endphp
+                <input
+                    type="file"
+                    class="dropify @error('image') is-invalid @enderror"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                    @if($existingImageUrl) data-default-file="{{ $existingImageUrl }}" @endif
+                >
                 @error('image')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -88,8 +118,21 @@
 </div>
 
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/JeremyFagis/dropify/dist/js/dropify.min.js"></script>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script>
+    $(function () {
+        $('#brand_id').select2({
+            theme: 'bootstrap-5',
+            placeholder: 'Select Brand',
+            allowClear: true
+        });
+
+        $('.dropify').dropify();
+    });
+
     var quill = new Quill('#editor', {
         theme: 'snow',
         modules: {

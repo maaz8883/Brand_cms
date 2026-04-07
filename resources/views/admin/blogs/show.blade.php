@@ -46,8 +46,23 @@
         @endif
 
         @if($blog->image)
+            @php
+                $imageUrl = null;
+                if (\Illuminate\Support\Str::startsWith($blog->image, ['http://', 'https://'])) {
+                    $imageUrl = $blog->image;
+                } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists('blogs/' . $blog->image)) {
+                    $imageUrl = asset('storage/blogs/' . $blog->image);
+                } elseif (\Illuminate\Support\Facades\Storage::disk('public')->exists($blog->image)) {
+                    $imageUrl = asset('storage/' . $blog->image);
+                } else {
+                    $imageUrl = asset($blog->image);
+                }
+            @endphp
             <div class="mb-3">
-                <strong>Image:</strong> {{ $blog->image }}
+                <strong>Image:</strong>
+                <div class="mt-2">
+                    <img src="{{ $imageUrl }}" alt="{{ $blog->title }}" class="img-fluid rounded" style="max-height: 320px;">
+                </div>
             </div>
         @endif
 

@@ -65,7 +65,7 @@ class BrandController extends Controller
                     <a href="' . route('admin.brands.edit', $brand) . '" class="btn btn-sm btn-warning" title="Edit">
                         <i class="bi bi-pencil"></i>
                     </a>
-                    <form action="' . route('admin.brands.destroy', $brand) . '" method="POST" class="d-inline" onsubmit="return confirm(\'Delete this brand?\')">
+                    <form action="' . route('admin.brands.destroy', $brand) . '" method="POST" class="d-inline js-admin-delete-form" data-swal-title="' . e('Delete brand?') . '" data-swal-text="' . e('This action cannot be undone.') . '">
                         ' . csrf_field() . '
                         ' . method_field('DELETE') . '
                         <button type="submit" class="btn btn-sm btn-danger" title="Delete">

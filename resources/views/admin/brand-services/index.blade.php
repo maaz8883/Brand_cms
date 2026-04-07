@@ -61,7 +61,7 @@
                                 <a href="{{ route('admin.brands.services.edit', [$brand, $service]) }}" class="btn btn-sm btn-warning">
                                     <i class="bi bi-pencil"></i> Edit
                                 </a>
-                                <form action="{{ route('admin.brands.services.destroy', [$brand, $service]) }}" method="POST" class="d-inline" onsubmit="return confirm('Delete this service page and all nested sub-services?');">
+                                <form action="{{ route('admin.brands.services.destroy', [$brand, $service]) }}" method="POST" class="d-inline js-admin-delete-form" data-swal-title="Delete service page?" data-swal-text="This will remove the service page and all nested sub-services.">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
