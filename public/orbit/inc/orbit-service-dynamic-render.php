@@ -6,6 +6,20 @@ function orbit_e(string $s): string
 	return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
 }
 
+/** Rich text from CMS (Quill); strips unsafe tags, allows basic formatting. */
+function orbit_safe_html(string $html): string
+{
+	$html = trim($html);
+	if ($html === '') {
+		return '';
+	}
+	$allowed = '<p><br><strong><b><em><i><u><s><strike><h1><h2><h3><h4><ol><ul><li><a><span><div>';
+	$out = strip_tags($html, $allowed);
+	$out = preg_replace('/\s*on\w+\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $out) ?? $out;
+
+	return $out;
+}
+
 function orbit_child_href(array $service, array $child): string
 {
 	global $base_url;
@@ -92,7 +106,7 @@ function orbit_render_dynamic_service(array $payload): void
 			<div class="row justify-content-center text-center py-5">
 				<div class="col-xxl-8 col-lg-9 col-md-11 col-12 pt-lg-5 ">
 					<h1 class="f-55 c fw-700 mt-4 clr-1"><?= orbit_e($hero['heading'] ?? ''); ?> <span class="bg-2 clr-l"><?= orbit_e($hero['heading_highlight'] ?? ''); ?></span></h1>
-					<p class="fw-600"><?= orbit_e($hero['description'] ?? ''); ?></p>
+					<div class="fw-600 orbit-rich-text"><?= orbit_safe_html((string) ($hero['description'] ?? '')); ?></div>
 				</div>
 				<div class="col-lg-11 col-xl-10 col-12 pt-4">
 					<?php include __DIR__ . '/inner-form.php'; ?>
@@ -153,7 +167,7 @@ function orbit_render_dynamic_service(array $payload): void
 			<div class="row text-center">
 				<div class="col-12">
 					<h2 class="f-40 clr-1 fw-700"><?= orbit_e($intro['heading'] ?? ''); ?></h2>
-					<p class="f-18 fw-500"><?= orbit_e($intro['description'] ?? ''); ?></p>
+					<div class="f-18 fw-500 orbit-rich-text"><?= orbit_safe_html((string) ($intro['description'] ?? '')); ?></div>
 				</div>
 			</div>
 			<div class="col-12 ">
@@ -190,7 +204,7 @@ function orbit_render_dynamic_service(array $payload): void
 					<?php if (! empty($tab['title_suffix'])) { ?>
 					<p class="f-20 fw-600"><?= orbit_e($tab['title_suffix']); ?></p>
 					<?php } ?>
-					<p><?= orbit_e($tab['description'] ?? ''); ?></p>
+					<div class="orbit-rich-text"><?= orbit_safe_html((string) ($tab['description'] ?? '')); ?></div>
 					<?php if ($checklist !== []) { ?>
 					<ul class="c-list list-unstyled row row-cols-2">
 						<?php foreach ($checklist as $item) {
@@ -246,7 +260,7 @@ function orbit_render_dynamic_service(array $payload): void
 		<div class="row">
 			<div class="col-12">
 				<h2 class="f-40 clr-1 fw-700"><?= orbit_e($why['heading'] ?? ''); ?> <span class="clr-l bg-2"><?= orbit_e($why['heading_highlight'] ?? ''); ?></span></h2>
-				<p class="f-20 my-4"><?= orbit_e($why['description'] ?? ''); ?></p>
+				<div class="f-20 my-4 orbit-rich-text"><?= orbit_safe_html((string) ($why['description'] ?? '')); ?></div>
 			</div>
 		</div>
 		<div class="row row-cols-lg-4 row-cols-md-3 row-cols-2 justify-content-center">
@@ -259,7 +273,7 @@ function orbit_render_dynamic_service(array $payload): void
 				<div class="box lozad pt-4 px-4 pb-5" data-background-image="assets/img/box-bg.webp">
 					<div class="top-tape"></div>
 					<h3 class="f-24 clr-2 fw-600"><?= orbit_e($card['title'] ?? ''); ?></h3>
-					<p><?= orbit_e($card['description'] ?? ''); ?></p>
+					<div class="orbit-rich-text"><?= orbit_safe_html((string) ($card['description'] ?? '')); ?></div>
 				</div>
 			</div>
 			<?php } ?>
@@ -326,7 +340,7 @@ function orbit_render_dynamic_service(array $payload): void
 						continue;
 					}
 					?>
-				<p><?= orbit_e((string) $p); ?></p>
+				<div class="orbit-rich-text"><?= orbit_safe_html((string) $p); ?></div>
 				<?php } ?>
 				<div class="row ">
 					<div class="col-lg-4 col-md-6 col-9"><button class="w-100 mb-3" data-bs-toggle="modal" data-bs-target="#quote"><?= orbit_e($plat['button_label'] ?? 'Get Started'); ?></button></div>
@@ -364,7 +378,7 @@ function orbit_render_dynamic_service(array $payload): void
 			</div>
 			<div class="col-md-7 mt-4 mt-md-0 text-center text-md-start ">
 				<h3 class=" f-40 clr-1 fw-700 mb-3"><?= orbit_e($sec['heading'] ?? ''); ?> <span class="bg-2 clr-l"><?= orbit_e($sec['heading_highlight'] ?? ''); ?></span></h3>
-				<p><?= orbit_e($sec['description'] ?? ''); ?></p>
+				<div class="orbit-rich-text"><?= orbit_safe_html((string) ($sec['description'] ?? '')); ?></div>
 				<div class="row ">
 					<div class="col-lg-4 col-md-5 col-9">
 						<button class="w-100 mb-3" data-bs-toggle="modal" data-bs-target="#quote"><?= orbit_e($sec['button_label'] ?? 'Get Started'); ?></button>
@@ -391,7 +405,7 @@ function orbit_render_dynamic_service(array $payload): void
 		<div class="row justify-content-center">
 			<div class="col-lg-10 text-center">
 				<h2 class="f-40 clr-1 fw-700"><?= orbit_e($proc['heading'] ?? ''); ?></h2>
-				<p class="f-20 fw-500"><?= orbit_e($proc['description'] ?? ''); ?></p>
+				<div class="f-20 fw-500 orbit-rich-text"><?= orbit_safe_html((string) ($proc['description'] ?? '')); ?></div>
 			</div>
 		</div>
 		<div class="row align-items-center text-center text-auto">
@@ -406,7 +420,7 @@ function orbit_render_dynamic_service(array $payload): void
 					<div class="col-md-12 col-6 ">
 						<span class="heading f-40 fw-700 clr-1 d-block"><?= orbit_e($st['number'] ?? ''); ?></span>
 						<h3 class="f-20 clr-2 fw-600"><?= orbit_e($st['title'] ?? ''); ?></h3>
-						<p class="f-20 fw-500"><?= orbit_e($st['description'] ?? ''); ?></p>
+						<div class="f-20 fw-500 orbit-rich-text"><?= orbit_safe_html((string) ($st['description'] ?? '')); ?></div>
 					</div>
 					<?php } ?>
 				</div>
@@ -431,7 +445,7 @@ function orbit_render_dynamic_service(array $payload): void
 					<div class="col-md-12 col-6">
 						<span class="heading f-40 fw-700 clr-1 <?= $mt; ?> d-block"><?= orbit_e($st['number'] ?? ''); ?></span>
 						<h3 class="f-20 clr-2 fw-600"><?= orbit_e($st['title'] ?? ''); ?></h3>
-						<p class="f-20 fw-500"><?= orbit_e($st['description'] ?? ''); ?></p>
+						<div class="f-20 fw-500 orbit-rich-text"><?= orbit_safe_html((string) ($st['description'] ?? '')); ?></div>
 					</div>
 					<?php } ?>
 				</div>
@@ -499,7 +513,7 @@ function orbit_render_dynamic_service(array $payload): void
 		<div class="row text-center justify-content-center">
 			<div class="col-md-10">
 				<h2 class="f-40 clr-1 fw-600"><?= orbit_e((string) ($port['heading'] ?? '')); ?></h2>
-				<p class="f-20 fw-500"><?= orbit_e((string) ($port['description'] ?? '')); ?></p>
+				<div class="f-20 fw-500 orbit-rich-text"><?= orbit_safe_html((string) ($port['description'] ?? '')); ?></div>
 			</div>
 		</div>
 	</div>
@@ -533,7 +547,7 @@ function orbit_render_dynamic_service(array $payload): void
 		<div class="row justify-content-center">
 			<div class="col-lg-3 text-center text-lg-start">
 				<h2 class="f-60 bdr-bfr clr-l position-relative lh-1 d-inline-block "><?= orbit_e($test['heading'] ?? ''); ?></h2>
-				<p class="pt-2 pt-sm-0"><?= orbit_e($test['sidebar_text'] ?? ''); ?></p>
+				<div class="pt-2 pt-sm-0 orbit-rich-text"><?= orbit_safe_html((string) ($test['sidebar_text'] ?? '')); ?></div>
 			</div>
 			<div class="col-lg-9">
 				<div class="reviews-silder">
@@ -542,14 +556,14 @@ function orbit_render_dynamic_service(array $payload): void
 							continue;
 						}
 						$quote = (string) ($t['quote'] ?? '');
-						if ($quote === '') {
+						if (trim($quote) === '') {
 							continue;
 						}
 						?>
 					<div class="item p-3 h-auto">
 						<div class="box p-3 h-100 d-flex flex-column justify-content-between">
-							<div>
-								<p><?= orbit_e($quote); ?></p>
+							<div class="orbit-rich-text">
+								<?= orbit_safe_html($quote); ?>
 							</div>
 							<span class="f-18 heading clr-l"><?= orbit_e($t['author'] ?? ''); ?></span>
 						</div>
@@ -620,8 +634,8 @@ function orbit_render_dynamic_service(array $payload): void
 							</button>
 						</h2>
 						<div id="<?= orbit_e($collapseId); ?>" class="accordion-collapse collapse<?= $isFirst ? ' show' : ''; ?>" aria-labelledby="<?= orbit_e($headingId); ?>" data-bs-parent="#<?= orbit_e($faqAccId); ?>">
-							<div class="accordion-body">
-								<?= nl2br(orbit_e($faqRow['answer'])); ?>
+							<div class="accordion-body orbit-rich-text">
+								<?= orbit_safe_html((string) ($faqRow['answer'] ?? '')); ?>
 							</div>
 						</div>
 					</div>
@@ -668,7 +682,7 @@ function orbit_render_dynamic_service(array $payload): void
     <div class="container pt-sm-5">
         <div class="text-center">
             <h2 class="f-48 fw-700"><?= orbit_e($finalHeading); ?></h2>
-            <p class="f-20 "><?= orbit_e($finalDescription); ?></p>
+            <div class="f-20 orbit-rich-text"><?= orbit_safe_html($finalDescription); ?></div>
             <button class="btn-1" data-bs-toggle="modal" data-bs-target="#quote">
                 <?= orbit_e($finalButton); ?>
             </button>

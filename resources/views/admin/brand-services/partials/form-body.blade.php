@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-md-6"><label class="form-label">Heading (line 1)</label><input type="text" class="form-control" name="content[hero][heading]" value="{{ data_get($c, 'hero.heading') }}"></div>
                 <div class="col-md-6"><label class="form-label">Heading highlight</label><input type="text" class="form-control" name="content[hero][heading_highlight]" value="{{ data_get($c, 'hero.heading_highlight') }}"></div>
-                <div class="col-12"><label class="form-label">Description</label><textarea class="form-control" name="content[hero][description]" rows="3">{{ data_get($c, 'hero.description') }}</textarea></div>
+                <div class="col-12"><label class="form-label">Description</label><textarea class="form-control js-quill-description" name="content[hero][description]" rows="3">{{ data_get($c, 'hero.description') }}</textarea></div>
             </div>
         </div>
     </div>
@@ -187,7 +187,7 @@
         <div id="secIntro" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-12"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[intro][heading]" value="{{ data_get($c, 'intro.heading') }}"></div>
-                <div class="col-12"><label class="form-label">Description</label><textarea class="form-control" name="content[intro][description]" rows="4">{{ data_get($c, 'intro.description') }}</textarea></div>
+                <div class="col-12"><label class="form-label">Description</label><textarea class="form-control js-quill-description" name="content[intro][description]" rows="4">{{ data_get($c, 'intro.description') }}</textarea></div>
             </div>
         </div>
     </div>
@@ -205,7 +205,7 @@
                             <div class="col-md-4"><label class="form-label small">Heading part 1</label><input type="text" class="form-control" name="content[service_tabs][tabs][{{ $t }}][title]" value="{{ data_get($c, "service_tabs.tabs.$t.title") }}"></div>
                             <div class="col-md-4"><label class="form-label small">Highlight</label><input type="text" class="form-control" name="content[service_tabs][tabs][{{ $t }}][title_highlight]" value="{{ data_get($c, "service_tabs.tabs.$t.title_highlight") }}"></div>
                             <div class="col-md-4"><label class="form-label small">Suffix</label><input type="text" class="form-control" name="content[service_tabs][tabs][{{ $t }}][title_suffix]" value="{{ data_get($c, "service_tabs.tabs.$t.title_suffix") }}"></div>
-                            <div class="col-12"><label class="form-label small">Description</label><textarea class="form-control" name="content[service_tabs][tabs][{{ $t }}][description]" rows="3">{{ data_get($c, "service_tabs.tabs.$t.description") }}</textarea></div>
+                            <div class="col-12"><label class="form-label small">Description</label><textarea class="form-control js-quill-description" name="content[service_tabs][tabs][{{ $t }}][description]" rows="3">{{ data_get($c, "service_tabs.tabs.$t.description") }}</textarea></div>
                             <div class="col-md-6">
                                 <label class="form-label small">Side image</label>
                                 @php $tabImgUrl = data_get($c, "service_tabs.tabs.$t.image"); @endphp
@@ -277,13 +277,13 @@
             <div class="accordion-body row g-3">
                 <div class="col-md-6"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[why_choose][heading]" value="{{ data_get($c, 'why_choose.heading') }}"></div>
                 <div class="col-md-6"><label class="form-label">Heading highlight</label><input type="text" class="form-control" name="content[why_choose][heading_highlight]" value="{{ data_get($c, 'why_choose.heading_highlight') }}"></div>
-                <div class="col-12"><label class="form-label">Intro</label><textarea class="form-control" name="content[why_choose][description]" rows="3">{{ data_get($c, 'why_choose.description') }}</textarea></div>
+                <div class="col-12"><label class="form-label">Intro</label><textarea class="form-control js-quill-description" name="content[why_choose][description]" rows="3">{{ data_get($c, 'why_choose.description') }}</textarea></div>
                 @for($w = 0; $w < 4; $w++)
                     <div class="col-md-6">
                         <label class="form-label">Card {{ $w + 1 }} title</label>
                         <input type="text" class="form-control mb-1" name="content[why_choose][cards][{{ $w }}][title]" value="{{ data_get($c, "why_choose.cards.$w.title") }}">
                         <label class="form-label small">Description</label>
-                        <textarea class="form-control" name="content[why_choose][cards][{{ $w }}][description]" rows="2">{{ data_get($c, "why_choose.cards.$w.description") }}</textarea>
+                        <textarea class="form-control js-quill-description" name="content[why_choose][cards][{{ $w }}][description]" rows="2">{{ data_get($c, "why_choose.cards.$w.description") }}</textarea>
                     </div>
                 @endfor
             </div>
@@ -315,7 +315,7 @@
                             </div>
                         @endif
                         <input type="text" class="form-control form-control-sm mb-1" placeholder="Title" name="content[success_features][items][{{ $s }}][title]" value="{{ data_get($c, "success_features.items.$s.title") }}">
-                        <textarea class="form-control form-control-sm" name="content[success_features][items][{{ $s }}][description]" rows="2" placeholder="Description">{{ data_get($c, "success_features.items.$s.description") }}</textarea>
+                        <textarea class="form-control form-control-sm js-quill-description" name="content[success_features][items][{{ $s }}][description]" rows="2" placeholder="Description">{{ data_get($c, "success_features.items.$s.description") }}</textarea>
                     </div>
                 @endfor
             </div>
@@ -339,8 +339,8 @@
             <div class="accordion-body row g-3">
                 <div class="col-md-6"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[platform_section][heading]" value="{{ data_get($c, 'platform_section.heading') }}"></div>
                 <div class="col-md-6"><label class="form-label">Heading highlight</label><input type="text" class="form-control" name="content[platform_section][heading_highlight]" value="{{ data_get($c, 'platform_section.heading_highlight') }}"></div>
-                <div class="col-12"><label class="form-label">Paragraph 1</label><textarea class="form-control" name="content[platform_section][paragraphs][0]" rows="2">{{ data_get($c, 'platform_section.paragraphs.0') }}</textarea></div>
-                <div class="col-12"><label class="form-label">Paragraph 2</label><textarea class="form-control" name="content[platform_section][paragraphs][1]" rows="2">{{ data_get($c, 'platform_section.paragraphs.1') }}</textarea></div>
+                <div class="col-12"><label class="form-label">Paragraph 1</label><textarea class="form-control js-quill-description" name="content[platform_section][paragraphs][0]" rows="2">{{ data_get($c, 'platform_section.paragraphs.0') }}</textarea></div>
+                <div class="col-12"><label class="form-label">Paragraph 2</label><textarea class="form-control js-quill-description" name="content[platform_section][paragraphs][1]" rows="2">{{ data_get($c, 'platform_section.paragraphs.1') }}</textarea></div>
                 <div class="col-md-6">
                     <label class="form-label">Side image</label>
                     @php $platSideUrl = data_get($c, 'platform_section.side_image'); @endphp
@@ -424,7 +424,7 @@
                 </div>
                 <div class="col-md-7"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[secondary_section][heading]" value="{{ data_get($c, 'secondary_section.heading') }}"></div>
                 <div class="col-md-7"><label class="form-label">Heading highlight</label><input type="text" class="form-control" name="content[secondary_section][heading_highlight]" value="{{ data_get($c, 'secondary_section.heading_highlight') }}"></div>
-                <div class="col-12"><label class="form-label">Description</label><textarea class="form-control" name="content[secondary_section][description]" rows="3">{{ data_get($c, 'secondary_section.description') }}</textarea></div>
+                <div class="col-12"><label class="form-label">Description</label><textarea class="form-control js-quill-description" name="content[secondary_section][description]" rows="3">{{ data_get($c, 'secondary_section.description') }}</textarea></div>
                 <div class="col-md-4"><label class="form-label">Button label</label><input type="text" class="form-control" name="content[secondary_section][button_label]" value="{{ data_get($c, 'secondary_section.button_label') }}"></div>
                 <div class="col-md-4"><label class="form-label">Phone</label><input type="text" class="form-control" name="content[secondary_section][phone]" value="{{ data_get($c, 'secondary_section.phone') }}"></div>
             </div>
@@ -437,7 +437,7 @@
         <div id="secProc" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-12"><label class="form-label">Section heading</label><input type="text" class="form-control" name="content[process][heading]" value="{{ data_get($c, 'process.heading') }}"></div>
-                <div class="col-12"><label class="form-label">Section description</label><textarea class="form-control" name="content[process][description]" rows="2">{{ data_get($c, 'process.description') }}</textarea></div>
+                <div class="col-12"><label class="form-label">Section description</label><textarea class="form-control js-quill-description" name="content[process][description]" rows="2">{{ data_get($c, 'process.description') }}</textarea></div>
                 <div class="col-md-4">
                     <label class="form-label">Center logo</label>
                     @php $procLogoUrl = data_get($c, 'process.center_logo'); @endphp
@@ -461,7 +461,7 @@
                         <strong>Step {{ $st + 1 }}</strong>
                         <input type="text" class="form-control form-control-sm my-1" placeholder="Number" name="content[process][steps][{{ $st }}][number]" value="{{ data_get($c, "process.steps.$st.number") }}">
                         <input type="text" class="form-control form-control-sm my-1" placeholder="Title" name="content[process][steps][{{ $st }}][title]" value="{{ data_get($c, "process.steps.$st.title") }}">
-                        <textarea class="form-control form-control-sm" name="content[process][steps][{{ $st }}][description]" rows="2" placeholder="Description">{{ data_get($c, "process.steps.$st.description") }}</textarea>
+                        <textarea class="form-control form-control-sm js-quill-description" name="content[process][steps][{{ $st }}][description]" rows="2" placeholder="Description">{{ data_get($c, "process.steps.$st.description") }}</textarea>
                     </div>
                 @endfor
             </div>
@@ -474,7 +474,7 @@
         <div id="secPort" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-12"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[portfolio][heading]" value="{{ data_get($c, 'portfolio.heading') }}"></div>
-                <div class="col-12"><label class="form-label">Description</label><textarea class="form-control" name="content[portfolio][description]" rows="2">{{ data_get($c, 'portfolio.description') }}</textarea></div>
+                <div class="col-12"><label class="form-label">Description</label><textarea class="form-control js-quill-description" name="content[portfolio][description]" rows="2">{{ data_get($c, 'portfolio.description') }}</textarea></div>
                 <div class="col-12">
                     <label class="form-label">Add portfolio images (append)</label>
                     <input type="file" name="portfolio_images[]" class="form-control" accept="image/*" multiple>
@@ -508,11 +508,11 @@
         <div id="secTest" class="accordion-collapse collapse" data-bs-parent="#svcSections">
             <div class="accordion-body row g-3">
                 <div class="col-md-4"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[testimonials][heading]" value="{{ data_get($c, 'testimonials.heading') }}"></div>
-                <div class="col-md-8"><label class="form-label">Sidebar text</label><textarea class="form-control" name="content[testimonials][sidebar_text]" rows="2">{{ data_get($c, 'testimonials.sidebar_text') }}</textarea></div>
+                <div class="col-md-8"><label class="form-label">Sidebar text</label><textarea class="form-control js-quill-description" name="content[testimonials][sidebar_text]" rows="2">{{ data_get($c, 'testimonials.sidebar_text') }}</textarea></div>
                 @for($ti = 0; $ti < 6; $ti++)
                     <div class="col-md-6">
                         <label class="form-label">Review {{ $ti + 1 }}</label>
-                        <textarea class="form-control mb-1" name="content[testimonials][items][{{ $ti }}][quote]" rows="3" placeholder="Quote">{{ data_get($c, "testimonials.items.$ti.quote") }}</textarea>
+                        <textarea class="form-control mb-1 js-quill-description" name="content[testimonials][items][{{ $ti }}][quote]" rows="3" placeholder="Quote">{{ data_get($c, "testimonials.items.$ti.quote") }}</textarea>
                         <input type="text" class="form-control" placeholder="Author name" name="content[testimonials][items][{{ $ti }}][author]" value="{{ data_get($c, "testimonials.items.$ti.author") }}">
                     </div>
                 @endfor
@@ -573,7 +573,7 @@
                                         <button type="button" class="btn btn-sm btn-outline-danger faq-remove-row">Remove</button>
                                     </div>
                                     <input type="text" class="form-control form-control-sm my-1 faq-question" placeholder="Question" name="content[faq][items][{{ $fi }}][question]" value="{{ (string) ($faq['question'] ?? '') }}">
-                                    <textarea class="form-control form-control-sm faq-answer" name="content[faq][items][{{ $fi }}][answer]" rows="3" placeholder="Answer">{{ (string) ($faq['answer'] ?? '') }}</textarea>
+                                    <textarea class="form-control form-control-sm faq-answer js-quill-description" name="content[faq][items][{{ $fi }}][answer]" rows="3" placeholder="Answer">{{ (string) ($faq['answer'] ?? '') }}</textarea>
                                 </div>
                             </div>
                         @endforeach
@@ -595,7 +595,7 @@
                 </div>
                 <div class="col-12">
                     <label class="form-label">Description</label>
-                    <textarea class="form-control" name="content[final_cta][description]" rows="3">{{ data_get($c, 'final_cta.description') }}</textarea>
+                    <textarea class="form-control js-quill-description" name="content[final_cta][description]" rows="3">{{ data_get($c, 'final_cta.description') }}</textarea>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Button label</label>
@@ -719,7 +719,7 @@
             '<button type="button" class="btn btn-sm btn-outline-danger faq-remove-row">Remove</button>' +
             '</div>' +
             '<input type="text" class="form-control form-control-sm my-1 faq-question" placeholder="Question" name="content[faq][items][' + i + '][question]">' +
-            '<textarea class="form-control form-control-sm faq-answer" name="content[faq][items][' + i + '][answer]" rows="3" placeholder="Answer"></textarea>' +
+            '<textarea class="form-control form-control-sm faq-answer js-quill-description" name="content[faq][items][' + i + '][answer]" rows="3" placeholder="Answer"></textarea>' +
             '</div>' +
             '</div>';
     }
@@ -739,6 +739,9 @@
             rows.insertAdjacentHTML('beforeend', faqRowHtml(nextKey));
             nextKey += 1;
             relabelFaqRows();
+            if (typeof window.initBrandServiceQuills === 'function') {
+                window.initBrandServiceQuills();
+            }
         });
     }
 
@@ -756,6 +759,93 @@
     relabelFaqRows();
 })();
 </script>
+
+@push('styles')
+<link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+<style>
+.brand-service-form .ql-toolbar.ql-snow { border-radius: 0.375rem 0.375rem 0 0; border-color: #dee2e6; }
+.brand-service-form .ql-container.ql-snow { border-radius: 0 0 0.375rem 0.375rem; border-color: #dee2e6; font-size: 0.95rem; }
+.brand-service-form .ql-editor { min-height: 120px; }
+.brand-service-form textarea.js-quill-description { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
+</style>
+@endpush
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+<script>
+(function () {
+    function syncQuillToTextarea(ta) {
+        if (ta._quill) {
+            ta.value = ta._quill.root.innerHTML;
+        }
+    }
+    function initBrandServiceQuills() {
+        if (typeof Quill === 'undefined') {
+            return;
+        }
+        document.querySelectorAll('textarea.js-quill-description:not([data-quill-ready])').forEach(function (ta) {
+            ta.setAttribute('data-quill-ready', '1');
+            var wrap = document.createElement('div');
+            wrap.className = 'quill-wrap mb-2';
+            ta.parentNode.insertBefore(wrap, ta);
+            var ed = document.createElement('div');
+            ed.className = 'quill-editor-box';
+            wrap.appendChild(ed);
+            var quill = new Quill(ed, {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ header: [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ list: 'ordered' }, { list: 'bullet' }],
+                        [{ align: [] }],
+                        ['link', 'clean']
+                    ]
+                }
+            });
+            var html = (ta.value || '').trim();
+            if (html) {
+                quill.clipboard.dangerouslyPasteHTML(html);
+            }
+            quill.on('text-change', function () {
+                ta.value = quill.root.innerHTML;
+            });
+            ta._quill = quill;
+        });
+    }
+    function bindFormSubmit() {
+        var form = document.querySelector('form.brand-service-form');
+        if (!form || form._quillSubmitBound) {
+            return;
+        }
+        form._quillSubmitBound = true;
+        form.addEventListener('submit', function () {
+            form.querySelectorAll('textarea.js-quill-description').forEach(syncQuillToTextarea);
+        });
+    }
+    function bindAccordionResize() {
+        document.querySelectorAll('#svcSections .accordion-collapse').forEach(function (panel) {
+            panel.addEventListener('shown.bs.collapse', function () {
+                this.querySelectorAll('.ql-editor').forEach(function (el) {
+                    el.style.minHeight = '120px';
+                });
+            });
+        });
+    }
+    function boot() {
+        initBrandServiceQuills();
+        bindFormSubmit();
+        bindAccordionResize();
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', boot);
+    } else {
+        boot();
+    }
+    window.initBrandServiceQuills = initBrandServiceQuills;
+})();
+</script>
+@endpush
 
 <div class="d-flex gap-2 mb-5">
     <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-save"></i> Save service page</button>
