@@ -250,6 +250,7 @@ class BrandServiceController extends Controller
             'file_secondary_image' => 'secondary_section.image',
             'file_process_center_logo' => 'process.center_logo',
             'file_faq_side_image' => 'faq.side_image',
+            'file_final_cta_support_image' => 'final_cta.support_image',
         ];
 
         foreach ($map as $fileKey => $dotPath) {
@@ -348,6 +349,7 @@ class BrandServiceController extends Controller
             ['remove_secondary_image', 'file_secondary_image', 'secondary_section.image'],
             ['remove_process_center_logo', 'file_process_center_logo', 'process.center_logo'],
             ['remove_faq_side_image', 'file_faq_side_image', 'faq.side_image'],
+            ['remove_final_cta_support_image', 'file_final_cta_support_image', 'final_cta.support_image'],
         ];
         foreach ($singleRemovals as [$flag, $fileKey, $dotPath]) {
             if ($request->boolean($flag) && ! $request->hasFile($fileKey)) {

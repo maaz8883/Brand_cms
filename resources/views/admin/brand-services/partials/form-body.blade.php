@@ -561,6 +561,47 @@
             </div>
         </div>
     </div>
+
+    {{-- Final CTA --}}
+    <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secFinalCta">15. Final CTA (support block)</button></h2>
+        <div id="secFinalCta" class="accordion-collapse collapse" data-bs-parent="#svcSections">
+            <div class="accordion-body row g-3">
+                <div class="col-12">
+                    <label class="form-label">Heading</label>
+                    <input type="text" class="form-control" name="content[final_cta][heading]" value="{{ data_get($c, 'final_cta.heading') }}">
+                    <small class="text-muted">Use <code>{brand}</code> placeholder to auto insert brand name.</small>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" name="content[final_cta][description]" rows="3">{{ data_get($c, 'final_cta.description') }}</textarea>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Button label</label>
+                    <input type="text" class="form-control" name="content[final_cta][button_label]" value="{{ data_get($c, 'final_cta.button_label') }}">
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label">Support image</label>
+                    @php $finalCtaSupportUrl = data_get($c, 'final_cta.support_image'); @endphp
+                    @if($finalCtaSupportUrl)
+                        <input type="hidden" name="content[final_cta][support_image]" value="{{ $finalCtaSupportUrl }}">
+                    @endif
+                    <input type="file" name="file_final_cta_support_image" class="form-control" accept="image/*">
+                    @if($finalCtaSupportUrl)
+                        <div class="mt-2">
+                            <small class="text-muted d-block">Current: <a href="{{ $finalCtaSupportUrl }}" target="_blank">view</a></small>
+                            <input type="hidden" name="remove_final_cta_support_image" value="0">
+                            <div class="form-check mt-2 mb-0">
+                                <input class="form-check-input" type="checkbox" name="remove_final_cta_support_image" id="remove_final_cta_support_image" value="1" @checked(old('remove_final_cta_support_image') == '1')>
+                                <label class="form-check-label" for="remove_final_cta_support_image">Remove current image</label>
+                            </div>
+                        </div>
+                    @endif
+                    <small class="text-muted d-block mt-1">If empty, default support image from theme will be used.</small>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>

@@ -201,6 +201,12 @@ class BrandServicePageDefaults
                     ],
                 ],
             ],
+            'final_cta' => [
+                'heading' => 'Start Your Publishing Journey with {brand}',
+                'description' => 'Ready to turn your idea into a published book? Get guidance through writing, editing, publishing, and marketing with a process designed to be simple, efficient, and results-driven.',
+                'button_label' => 'Get Started',
+                'support_image' => '',
+            ],
         ];
     }
 

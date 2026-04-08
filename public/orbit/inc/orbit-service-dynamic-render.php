@@ -639,5 +639,47 @@ function orbit_render_dynamic_service(array $payload): void
 		<?php
 	}
 
-	include __DIR__ . '/package.php';
+	
+	$finalCta = $c['final_cta'] ?? [];
+	if (! is_array($finalCta)) {
+		$finalCta = [];
+	}
+	$finalHeadingTpl = trim((string) ($finalCta['heading'] ?? ''));
+	if ($finalHeadingTpl === '') {
+		$finalHeadingTpl = 'Start Your Publishing Journey with {brand}';
+	}
+	$finalHeading = str_replace('{brand}', (string) ($bname ?? ''), $finalHeadingTpl);
+	$finalDescription = trim((string) ($finalCta['description'] ?? ''));
+	if ($finalDescription === '') {
+		$finalDescription = 'Ready to turn your idea into a published book? Get guidance through writing, editing, publishing, and marketing with a process designed to be simple, efficient, and results-driven.';
+	}
+	$finalButton = trim((string) ($finalCta['button_label'] ?? ''));
+	if ($finalButton === '') {
+		$finalButton = 'Get Started';
+	}
+	$finalSupportRaw = trim((string) ($finalCta['support_image'] ?? ''));
+	$finalSupportImg = $finalSupportRaw !== '' ? orbitMediaUrl($finalSupportRaw) : '';
+	if ($finalSupportImg === '') {
+		$finalSupportImg = 'assets/img/testi-img.webp';
+	}
+	?>
+
+<section class="pt-5">
+    <div class="container pt-sm-5">
+        <div class="text-center">
+            <h2 class="f-48 fw-700"><?= orbit_e($finalHeading); ?></h2>
+            <p class="f-20 "><?= orbit_e($finalDescription); ?></p>
+            <button class="btn-1" data-bs-toggle="modal" data-bs-target="#quote">
+                <?= orbit_e($finalButton); ?>
+            </button>
+            <div class="pt-5">
+                <img alt="<?= orbit_e((string) ($bname ?? '')); ?> customer support" class="lozad support" data-src="<?= orbit_e($finalSupportImg); ?>">
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php
+	
 }
+?>
