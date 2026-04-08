@@ -118,11 +118,11 @@ if (!empty($components[1]) && $components[1] === 'index.php' && isset($component
 								<?= $add ?></span>
 							<ul class="list-unstyled d-flex justify-content-start">
 								<li class="me-3 ms-0">
-									<a href="https://www.facebook.com/macleanspublishers/" aria-label="Like and follow Macleans Publisher's facbook page"
+									<a href="https://www.facebook.com/orbitbookpublishers1/" aria-label="Like and follow <?php echo $bname?>'s facbook page"
 										target="_blank"><span class="icon-fb"></span></a>
 								</li>
 								<li class="ms-0">
-									<a href="https://www.instagram.com/macleanspublishersofficial/" aria-label="Follow Book <?php echo $bname?>'s on Instagram"
+									<a href="https://www.instagram.com/orbitbookpublishers/" aria-label="Follow Book <?php echo $bname?>'s on Instagram"
 										target="_blank"><span class="icon-insta"></span></a>
 								</li>
 							</ul>

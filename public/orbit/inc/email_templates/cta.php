@@ -55,13 +55,13 @@ table.container590 {
         .bg-1{
             background:#dd6e4280;
         }
-        .bg-2{
+        .bg-g-2{
             background:#19727880;
         }
         .bg-3{
             background:#dd6e4280;
         }
-        .bg-1,.bg-2,.bg-3{
+        .bg-1,.bg-g-2,.bg-3{
             color: #fff;
         }
         @media only screen and (max-width: 640px) {
@@ -247,6 +247,54 @@ table.container590 {
                                                 </th>
                                                 <td style="background:#19727880; padding:10px 5px" colspan="2">
                                                     '.$_POST['country'].'
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background:#dd6e4280; padding:10px 5px">
+                                                First Source User Visited:
+                                                </th>
+                                                <td style="background:#19727880; padding:10px 5px" colspan="2">
+                                                    '.$_POST['first_source'].'
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background:#dd6e4280; padding:10px 5px">
+                                                First Medium User Visited:
+                                                </th>
+                                                <td style="background:#19727880; padding:10px 5px" colspan="2">
+                                                    '.$_POST['first_medium'].'
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background:#dd6e4280; padding:10px 5px">
+                                                First Camping User Visited:
+                                                </th>
+                                                <td style="background:#19727880; padding:10px 5px" colspan="2">
+                                                    '.$_POST['first_campaign'].'
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background:#dd6e4280; padding:10px 5px">
+                                                Last Source User Visited:
+                                                </th>
+                                                <td style="background:#19727880; padding:10px 5px" colspan="2">
+                                                    '.$_POST['last_source'].'
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background:#dd6e4280; padding:10px 5px">
+                                                Last Medium User Visited:
+                                                </th>
+                                                <td style="background:#19727880; padding:10px 5px" colspan="2">
+                                                    '.$_POST['last_medium'].'
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="background:#dd6e4280; padding:10px 5px">
+                                                Last Camping User Visited:
+                                                </th>
+                                                <td style="background:#19727880; padding:10px 5px" colspan="2">
+                                                    '.date('Y-m-d H:m:s').'
                                                 </td>
                                             </tr>
                                         </table>

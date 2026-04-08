@@ -2,9 +2,9 @@
 		<div class="container-xl">
 			<div class="row text-center text-md-start align-items-center">
 				<div class="col-lg-7 col-md-8  pt-5 pb-4">
-					<h2 class="f-40 fw-700 clr-2">Publish Your Book On Renowned Platforms With our <span class="bg-2 clr-l">Professional Book Publishing Services</span>
+					<h2 class="f-40 fw-700 clr-2">Publish Your Book with Professional <span class="bg-2 clr-l">Book Publishers</span> on Renowned Platforms
 					</h2>
-					<p>Publishing a book is not a stressful process but it definitely feels like it. At Orbit Book Publishers, we offer end-to-end book publishing services. Whether you're going for self-publishing or want guidance through traditional routes, our team handles everything from book formatting and ISBN registration to distribution and platform setup. We ensure every book meets the highest industry standards and follows all the guidelines, so your book is ready for global release and ready to impress.</p>
+					<p>Publishing your book doesn’t have to feel overwhelming. We provide complete support from formatting and ISBN registration to distribution across major platforms. Whether you are exploring self-publishing or looking for a book publisher for hire, the process is designed to be simple, efficient, and aligned with industry standards.</p>
 					<div class="row ">
 						<div class="col-lg-4 col-md-6 col-9"><button class="w-100 mb-3" data-bs-toggle="modal"
 								data-bs-target="#quote">Get Started</button></div>

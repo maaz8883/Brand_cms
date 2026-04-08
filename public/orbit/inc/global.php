@@ -1,4 +1,19 @@
 <?php
+// Load environment variables from .env file
+$envFile = __DIR__ . '/../.env';
+if (file_exists($envFile)) {
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos($line, '=') !== false && strpos($line, '#') !== 0) {
+            list($key, $value) = explode('=', $line, 2);
+            $key = trim($key);
+            $value = trim($value, " \"'");
+            putenv("$key=$value");
+            $_ENV[$key] = $value;
+        }
+    }
+}
+
 // $cacheDir = __DIR__ . '/cache/';
 // if (!is_dir($cacheDir)) {
 //     mkdir($cacheDir, 0755, true);
@@ -30,7 +45,7 @@ function minifier($code) {
 
 
 $reporting = false;
-if ($reporting) {
+if ($reporting) { 
 	ini_set('display_errors', '1');
 	ini_set('display_startup_errors', '1');
 	error_reporting(E_ALL);
@@ -69,30 +84,78 @@ $test_email = null;
 // 	return $code;
 // }
 
-$http_referer = $_SERVER['HTTP_REFERER'] ?? '';
-if ($http_referer !== '' && false !== stripos($http_referer, "https://www.bing.com/")) {
-    $lead_source = "Bing PPC";
-} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://bing.com/")) {
-    $lead_source = "Bing PPC";
-} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://www.bing.com/aclk")) {
-    $lead_source = "Bing PPC";
-} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://bing.com/aclk")) {
-    $lead_source = "Bing PPC";
-} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://www.googleadservices.com/")) {
-    $lead_source = "Google PPC";
-} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://googleadservices.com/")) {
-    $lead_source = "Google PPC";
-} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://www.googleadservices.com/pagead/")) {
-    $lead_source = "Google PPC";
-} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://googleadservices.com/pagead/")) {
-    $lead_source = "Google PPC";
-} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://www.googleadservices.com/pagead/aclk")) {
-    $lead_source = "Google PPC";
-} elseif ($http_referer !== '' && false !== stripos($http_referer, "https://googleadservices.com/pagead/aclk")) {
-    $lead_source = "Google PPC";
-} else {
-    $lead_source = "Organic";
+session_start();
+
+function detect_source() {
+
+    // Default
+    $source = "Direct";
+    $medium = "";
+    $campaign = "";
+
+    // Google Ads
+    if (isset($_GET['gclid'])) {
+        $source = "Google";
+        $medium = "PPC";
+    }
+
+    // Microsoft Ads
+    elseif (isset($_GET['msclkid'])) {
+        $source = "Bing";
+        $medium = "PPC";
+    }
+
+    // UTM parameters
+    elseif (isset($_GET['utm_source'])) {
+        $source = $_GET['utm_source'] ?? "";
+        $medium = $_GET['utm_medium'] ?? "";
+        $campaign = $_GET['utm_campaign'] ?? "";
+    }
+
+    // Referrer fallback
+    elseif (!empty($_SERVER['HTTP_REFERER'])) {
+
+        $ref = strtolower($_SERVER['HTTP_REFERER']);
+
+        if (strpos($ref, 'google.') !== false) {
+            $source = "Google";
+            $medium = "Organic";
+        }
+        elseif (strpos($ref, 'bing.') !== false) {
+            $source = "Bing";
+            $medium = "Organic";
+        }
+        elseif (strpos($ref, 'facebook.') !== false || strpos($ref, 'fb.') !== false) {
+            $source = "Facebook";
+            $medium = "Social";
+        }
+        else {
+            $source = "Referral";
+        }
+    }
+
+    return [
+        'source' => $source,
+        'medium' => $medium,
+        'campaign' => $campaign
+    ];
 }
+
+// Detect current visit
+$current = detect_source();
+
+// FIRST TOUCH
+if (!isset($_SESSION['first_touch'])) {
+    $_SESSION['first_touch'] = $current;
+}
+
+// LAST TOUCH
+$_SESSION['last_touch'] = $current;
+
+// Cookies (30 days)
+setcookie('first_touch', json_encode($_SESSION['first_touch']), time()+2592000, "/");
+setcookie('last_touch', json_encode($_SESSION['last_touch']), time()+2592000, "/");
+
 $current_url = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $post_url = htmlspecialchars((isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . str_replace('index.php/', '', $_SERVER["PHP_SELF"]));
 
@@ -155,11 +218,11 @@ $prams = !empty($path_prams[1]) ? $path_prams[1] : '';
 $exampted_pages = array('thankyou.php', '404.php', 'enroll-now.php', 'logo.php', 'website.php', 'brief/seo.php', 'smm.php', 'create_link.php', 'link_details.php', 'paynow.php', 'charge.php', 'fail.php', 'confirm_payment.php', 'publishing-experts/index.php');
 $exampt_allfiles = array('create_payment.php', 'confirm_payment.php');
 $no = "+1 (754) 225-2490";
-$add = '300 Peachtree St NE Ste CS2, 30308, Atlanta, United States';
+$add = '800 Fairway Dr Ste 120, Deerfield Beach, FL 33441';
 $url = "https://orbitbookpublishers.com/";
 $bname = "Orbit Book Publishers";
 $date = date('d-m-y_h:i:s');
-$logo = 'https://orbitbookpublishers.com/assets/img/logo-black.png';
+$logo = 'https://orbitbookpublishers.com/assets/img/logo.png';
 
 // $title =  'Welcome To US Logo Designs';
 // $keywords =  '';
@@ -172,16 +235,20 @@ $error_sufex = "</p>";
 $smtp['host'] = 'mail.orbitbookpublishers.com';
 $smtp['username'] = 'info@orbitbookpublishers.com';
 //$smtp['password'] = 'qrkx gmkd nvxg htpv';
-$smtp['password'] = '!Computer@123';
+$smtp['password'] = getenv('SMTP_PASSWORD') ?: '';
 $smtp['port'] = '465';
 
-$from_email = "noreply@orbitbookpublishers.com";
+$from_email = "info@orbitbookpublishers.com";
 $from_name = $bname;
 
-$source = $_POST['source'] ?? 'organic';
+$source= $_SESSION['first_touch']['source'];
 // $lead_source = "Organic";
 // $source = "organic";
 $cta_email = "info@orbitbookpublishers.com";
+$cc_email = [
+    'muhammadusamastaffshaw@gmail.com',
+    'huzaifa.staffshaw1@gmail.com'
+];
 $cta_subject = "New $source Lead on $bname ";
 $cta_template = __DIR__ . "/email_templates/cta.php";
 $cta2_template = __DIR__ . "/email_templates/cta2.php";
@@ -214,9 +281,18 @@ $payment_recived_template = __DIR__ . "/email_templates/payment_recived.php";
 
 $activePage = basename($_SERVER['PHP_SELF'], ".php");
 
-require_once('geoplugin.class.php');
+function getUserIP() {
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        return $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+        return $_SERVER['REMOTE_ADDR'];
+    }
+}
+$ip = getUserIP();
+$ipInfo = @file_get_contents("http://ip-api.com/json/$ip");
+$ipData = json_decode($ipInfo, true);
 
-$geoplugin = new geoPlugin();
-$geoplugin->locate();
 
 $orbit_service_payload = null;

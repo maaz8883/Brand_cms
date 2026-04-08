@@ -1,14 +1,14 @@
 
 <section class=" main banner lozad bg position-relative z-3" data-background-image="assets/img/book-editing.webp">
 	<div class="overlay position-relative py-5 z-3">
-		<img class="lozad sub-ban-left" alt="Book Editing servcies by <?= $bname; ?>"
+		<img class="lozad sub-ban-left" alt="Book Marketing servcies by <?= $bname; ?>"
 			data-src="assets/img/editing-before.webp">
-		<!-- <img class="lozad sub-ban-right" alt="Book Editing servcies by <?= $bname; ?>" data-src="assets/img/editing-after.webp"> -->
+		<!-- <img class="lozad sub-ban-right" alt="Book Marketing servcies by <?= $bname; ?>" data-src="assets/img/editing-after.webp"> -->
 		<div class="container-lg py-md-5 py-4 ">
 			<div class="row justify-content-center text-center py-5">
 				<div class="col-xxl-8 col-lg-9 col-md-11 col-12 pt-lg-5 ">
-					<h1 class="f-55 c fw-700 mt-4 clr-1">Let Your Book Get Real Exposure with <span class="bg-2 clr-l">Our Book Marketing Services</span></h1>
-					<p class=" fw-600">Publishing your book is merely the beginning. Our professional book marketing services are crafted to get your book read, shared, and purchased. With Maclean's Publishers’ expert book marketers and promoters, you get your writing in front of the right people with our proven book marketing campaigns & strategies suitable for every author who wants to build a larger audience and reputation.</p>
+					<h1 class="f-55 c fw-700 mt-4 clr-1">Powerful <span class="bg-2 clr-l">Book Marketing Services</span>  That Get Your Story Noticed</h1>
+					<p class=" fw-600">Every great story deserves an audience. Our expert book promotion services are crafted to connect your book with readers who are actively searching for it. As a professional book marketing company, <?php echo $bname?> offers personalized campaigns led by experienced book marketing experts who understand the industry. If you're searching for reliable book promotion services for authors, we provide the tools, strategy, and support needed to turn your book into a success.</p>
 				</div>
 				<div class="col-lg-11 col-xl-10 col-12 pt-4">
 					<?php include('inc/inner-form.php');?>
@@ -24,8 +24,8 @@
 		<div class="container-lg">
 			<div class="row text-center">
 				<div class="col-12">
-					<h2 class="f-40 clr-1 fw-700">Don’t Let Your Book Be Just A Listing. Get Orbit Book Publishers Book Marketing Teams to Get Your Book to Readers</h2>
-					<p class="f-18 fw-500"> To succeed, there must be strategy and our book promoters know how to implement that. We help you build lasting visibility on channels, reader groups, and online stores. With campaign-driven execution and strategic audience targeting, we give your book the momentum it needs to thrive in a competitive market.</p>
+					<h2 class="f-40 clr-1 fw-700">A Trusted Book Marketing Company for Authors Who Aim Higher</h2>
+					<p class="f-18 fw-500"> At <?php echo $bname?>, we go beyond basic promotion; we build strategies that deliver results. As a reliable book marketing company, we specialize in creating tailored book marketing services that help authors grow their audience and increase visibility. Our team of experienced book marketing experts understands what it takes to stand out in today’s competitive market. From creative campaigns to targeted book promotion services, we focus on helping authors succeed with confidence. Whether you’re searching for affordable book marketing services or premium solutions, we provide the right balance of quality and value.</p>
 				</div>
 			</div>
 			<div class="col-12 ">
@@ -69,15 +69,14 @@
 			<div class="row justify-content-between align-items-center">
 				<div class="col-md-7 mt-4 mt-md-0 text-center text-md-start ">
 					<h3 class=" f-40 clr-2 fw-700 mb-3">Social Media  <span class="bg-2 clr-l"> Marketing</span></h3>
-					<p>Our social media marketing service helps authors build strong, engaging profiles on every platform. We develop custom strategies that attract the ideal readers to your book. From content planning to ad campaign management, we focus on building your brand. If you want to begin a campaign or organically build your audience, our team gets your presence seen in the crowded social media space.</p>
+					<p>Want to know how to promote your book on social media? We make it simple. Our book promotion services are designed to build your online presence and grow your audience organically. From content ideas to full ad campaigns, we help authors attract readers who care about their story. Let our book marketing experts put your book in front of the right people at the right time.</p>
 					<ul class="c-list list-unstyled row row-cols-2">
-						<li>Platform-Specific Strategy</li>
-                        <li>Follower Development Strategies</li>
-                        <li>Facebook & Instagram Campaigns</li>
-                        <li>Engagement-Based Posting</li>
-                        <li>Author Branding Solutions</li>
-                        <li>SMM Schedule Management</li>
-                        <li>Hashtag & Trend Utilization</li>
+						<li>Custom Platform Strategies</li>
+                        <li>Follower Growth Tactics</li>
+                        <li>Targeted Facebook & Instagram Ads</li>
+                        <li>Personal Author Branding</li>
+                        <li>Campaign Scheduling & Management</li>
+                        <li>Smart Hashtag & Trend Use</li>
 
 					</ul>
 					<div class="row ">
@@ -100,16 +99,14 @@
 			<div class="row justify-content-between align-items-center">
 				<div class="col-md-7 mt-4 mt-md-0 text-center text-md-start ">
 					<h3 class=" f-40 clr-2 fw-700 mb-3">Amazon  <span class="bg-2 clr-l"> Marketing</span></h3>
-					<p>Our Expert marketers excel in making every genre book more discoverable and sell more within Amazon's competitive landscape. From keyword optimization to ad campaign management, we make your book rank higher and show up on search results. We optimize your Author Central page and employ effective techniques to maximize visibility, encourage reviews, and turn browsers into buyers through strategic optimizations and promotion tools.</p>
+					<p>Amazon is crowded, but your book doesn’t have to get lost. Our ebook marketing services and book marketing experts help your book stand out with proven strategies. From optimizing your Author Central page and crafting persuasive descriptions to managing Amazon ads and targeting high-impact keywords, we ensure maximum visibility and increased sales. Our team also supports review generation and ranking strategies to turn browsers into buyers.</p>
 					<ul class="c-list list-unstyled row row-cols-2">
-						<li>Amazon Author Central Installation</li>
-                        <li>A+ Content Optimization</li>
-                        <li>Keyword Research Targeting</li>
-                        <li>Book Description Enhancements</li>
-                        <li>Amazon Ads Administration</li>
-                        <li>Category & Ranking Approaches</li>
-                        <li>Sales Funnel Optimization</li>
-                        <li>Review Generation Support</li>
+						<li>Author Central Setup & Optimization</li>
+                        <li>Eye-Catching A+ Content</li>
+                        <li>Smart Keyword Research</li>
+                        <li>Amazon Ads Management</li>
+                        <li>Ranking & Category Strategies</li>
+                        <li>Review Boosting Support</li>
 
 					</ul>
 					<div class="row ">
@@ -133,14 +130,12 @@
 				<div class="col-md-7 mt-4 mt-md-0 text-center text-md-start ">
 					<h3 class=" f-40 clr-2 fw-700 mb-3"> Search Engine <span class="bg-2 clr-l">  Optimization</span>
 					</h3>
-					<p>SEO is required for long-term book success. Our search engine optimization service raises your profile online so readers can find you through organic search. We optimize your author website, blog, and content for search engines using the most up-to-date strategies. These include keyword optimization, backlinking, technical site audits, and more. Our goal is to push search rankings up and send targeted traffic that converts, allowing you to become more visible in the digital space.</p>
+					<p>Visibility is everything. Our search engine optimization service ensures your book reaches readers actively searching for it. We combine book marketing service with SEO best practices, keyword research, content optimization, backlink strategies, and technical audits to put your book in front of the right audience. Every element, from blog posts to images, is optimized for search engines so you get more clicks, more engagement, and more readers. If you want to know how to promote your book online effectively, our SEO solutions are designed to drive traffic that converts.</p>
 					<ul class="c-list list-unstyled row row-cols-2">
-						<li>Keyword-Rich Blog Posts</li>
-                        <li>Metadata & On-Page SEO</li>
-                        <li>Backlink Building Strategies</li>
-                        <li>Mobile First Website Optimization</li>
+						<li>On-Page & Metadata SEO</li>
+                        <li>Backlinking & Competitor Research</li>
+                        <li>Mobile Optimization</li>
                         <li>Technical SEO Audits</li>
-                        <li>Competitor Keyword Research</li>
                         <li>Image & Alt Text Optimization</li>
                         <li>Performance Reporting</li>
 
@@ -166,16 +161,14 @@
 			<div class="row justify-content-between align-items-center">
 				<div class="col-md-7 mt-4 mt-md-0 text-center text-md-start ">
 					<h3 class=" f-40 clr-2 fw-700 mb-3"> Influencer <span class="bg-2 clr-l">  Marketing </span></h3>
-					<p>We match you with specialty influencers who will help provide your book with authentic visibility on blogs, YouTube, Instagram, TikTok, and beyond. Our influencer marketing campaign will get your book authentic exposure and influencer word-of-mouth marketing. We take care of the outreach, campaign creation, and performance monitoring. The result is more reviews, more buzz, and improved social proof from authentic voices in your space. It's a fresh way of building credibility and engaging highly active reader audiences.</p>
+					<p>Imagine your book featured by voices your audience already trusts. That’s exactly what our influencer marketing achieves. <?php echo $bname?>’ book promotion services pair your book with niche influencers across blogs, Instagram, TikTok, and YouTube. We handle the outreach, campaign management, and tracking so your story reaches the right readers, earns authentic reviews, and creates lasting buzz.</p>
 					<ul class="c-list list-unstyled row row-cols-2">
-						<li>Influencer Identification & Outreach</li>
-                        <li>Campaign Development & Application</li>
-                        <li>Niche-Specific Influencer Lists</li>
-                        <li>Review Coordination Sponsored</li>
-                        <li>Social Media Campaign Promotion</li>
-                        <li>Influencer Contests & Giveaways</li>
-                        <li>Contract Negotiation & Administration</li>
-                        <li>Performance Tracking & ROI Analysis</li>
+						<li>Finding the right niche influencers</li>
+                        <li>Crafting campaigns that get results</li>
+                        <li>Coordinating reviews & sponsored content</li>
+                        <li>Social media promotions & contests</li>
+                        <li>Handling contracts & communications</li>
+                        <li>Tracking performance & measuring ROI</li>
 
 					</ul>
 					<div class="row ">
@@ -199,16 +192,13 @@
 				<div class="col-md-7 mt-4 mt-md-0 text-center text-md-start ">
 					<h3 class=" f-40 clr-2 fw-700 mb-3"> Content   <span class="bg-2 clr-l">Marketing</span>
 					</h3>
-					<p> Our proven content marketing solution builds your credibility and connection with readers by way of well-thought-out, engaging content. From newsletter to blog posts, we help you tell your story beyond the book. Content builds trust, drives website traffic, and brings returning readers. We develop content calendars, optimize every piece for SEO, and distribute via the most appropriate channels. This is a continuous strategy to grow your brand and promote your books continuously.</p>
+					<p>Content is the backbone of a successful book marketing service. Our approach goes beyond the book, creating high-quality blogs, articles, and newsletters that build authority and capture attention. We plan, optimize, and distribute content strategically to drive traffic, engage readers, and support your sales campaigns. This is how smart authors discover how to promote their book effectively and consistently.</p>
 					<ul class="c-list list-unstyled row row-cols-2">
-						<li>Blogging & Writing Articles</li>
-                        <li>Reader-Oriented Narration</li>
-                        <li>Author Interviews & Highlights</li>
-                        <li>Creation of Newsletters</li>
-                        <li>Evergreen Content Creation</li>
-                        <li>Content Calendars & Planning</li>
-                        <li>Distribution via Strategic Channel</li>
-                        <li>Content Performance Measurement</li>
+						<li>Blogging & article writing for readers</li>
+                        <li>Evergreen content that keeps delivering</li>
+                        <li>Author interviews & highlights</li>
+                        <li>Newsletters & regular updates</li>
+                        <li>Strategic distribution & performance tracking</li>
 					</ul>
 					<div class="row ">
 						<div class="col-md-4 col-6"><button class="w-100 mb-3" data-bs-toggle="modal"
@@ -231,16 +221,16 @@
 				<div class="col-md-7 mt-4 mt-md-0 text-center text-md-start ">
 					<h3 class=" f-40 clr-2 fw-700 mb-3"> Book Launch  <span class="bg-2 clr-l"> Promotion</span>
 					</h3>
-					<p>A successful book launch establishes the momentum for the success of your book. We design end-to-end book launch campaigns that build buzz, build anticipation, and build momentum from day one. Our service encompasses strategic pre-launch planning, orchestrated promotion, and post-launch monitoring. We aim to drive early sales, gather reviews, and be seen in contested markets. Each campaign is designed to your book's objectives, launching it into the market with energy and influence.</p>
+					<p>A strong book launch is the foundation of long-term success. At <?php echo $bname?>, our book marketing services create end-to-end launch campaigns that generate excitement and momentum from day one. We combine strategic pre-launch planning, targeted book promotion services, and post-launch analysis to ensure your book reaches its audience effectively.</p>
 					<ul class="c-list list-unstyled row row-cols-2">
-						<li>Pre-Launch Strategy Planning</li>
-                        <li>Launch Day Email Campaigns</li>
-                        <li>Countdown Promotions</li>
-                        <li>Selective Reader Copy Distribution</li>
-                        <li>Press Release Writing & Promotion</li>
-                        <li>Review Coordination Request</li>
-                        <li>Virtual Event Planning</li>
-                        <li>Start Monitoring Performance</li>
+						<li>Strategic Pre-Launch Planning</li>
+                        <li>Email Campaigns for Launch Day</li>
+                        <li>Countdown Promotions </li>
+                        <li>Advance Copies for Select Readers</li>
+                        <li>Press Release Creation & Distribution</li>
+                        <li>Coordinating Reviews from Key Readers</li>
+                        <li>Virtual Launch Event Planning</li>
+                        <li>Tracking Performance & Impact</li>
 					</ul>
 					<div class="row ">
 						<div class="col-md-4 col-6"><button class="w-100 mb-3" data-bs-toggle="modal"
@@ -265,38 +255,38 @@
 	<div class="container-xl">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="f-40 clr-1 fw-700">Why Orbit Book Publishers is the <span class="clr-l bg-2">Author's Trusted Partner in Book Marketing & Promotion</span>
+				<h2 class="f-40 clr-1 fw-700">Why <span class="clr-l bg-2">Authors Love</span> Working With Us
 				</h2>
-				<p class="f-20 my-4">Orbit Book Publishers offers book marketing & promotion services that are personalized and holistic for effect. From strategy to launch, our professionals design personalized campaigns that create hype, build reader confidence, and maximize your book's visibility on platforms.</p>
+				<p class="f-20 my-4">Your book deserves more than just publication; it deserves recognition. Our team of book marketing experts crafts personalized campaigns that connect your story with readers worldwide. As a professional book marketing agency, we combine strategic planning, creative promotions, and data-driven insights to ensure your book reaches its full potential. </p>
 			</div>
 		</div>
 		<div class="row row-cols-lg-4 row-cols-md-3 row-cols-2 justify-content-center">
 			<div class="col mb-4">
 				<div class="box lozad pt-4 px-4 pb-5" data-background-image="assets/img/box-bg.webp">
 					<div class="top-tape"></div>
-					<h3 class="f-24 clr-2 fw-600">Strategic Planning</h3>
-					<p>We create a customized marketing plan for your book, aiming at your objectives, category, and audience. All campaigns begin with a strategy that makes deep connections with online and offline platforms.</p>
+					<h3 class="f-24 clr-2 fw-600">Dedicated Experts</h3>
+					<p>Our experienced team knows what works in today’s market. From ebook marketing services to online book promotion services, we handle every step of your book’s journey.</p>
 				</div>
 			</div>
 			<div class="col mb-4">
 				<div class="box lozad pt-4 px-4 pb-5" data-background-image="assets/img/box-bg.webp">
 					<div class="top-tape"></div>
-					<h3 class="f-24 clr-2 fw-600">Author Branding</h3>
-					<p>We put you in a position to be more than a writer. We help you build your author brand, voice, and online presence so that readers embrace your message and remember your name on the last page.</p>
+					<h3 class="f-24 clr-2 fw-600">Tailored Strategies</h3>
+					<p>No two books are alike, and neither are our marketing plans. We provide customized book promotion services for authors, designed around your goals and audience.</p>
 				</div>
 			</div>
 			<div class="col mb-4">
 				<div class="box lozad pt-4 px-4 pb-5" data-background-image="assets/img/box-bg.webp">
 					<div class="top-tape"></div>
-					<h3 class="f-24 clr-2 fw-600">Retail & Online Optimization</h3>
-					<p>From your Amazon author page to metadata and keywords, we raise your profile where readers are already looking. We work to boost discoverability and bring relevant traffic to your book.</p>
+					<h3 class="f-24 clr-2 fw-600">Proven Results</h3>
+					<p>Success is more than numbers; it’s visibility, engagement, and sales. Our book marketing service focuses on turning readers into fans.</p>
 				</div>
 			</div>
 			<div class="col mb-4">
 				<div class="box lozad pt-4 px-4 pb-5" data-background-image="assets/img/box-bg.webp">
 					<div class="top-tape"></div>
-					<h3 class="f-24 clr-2 fw-600">Publicity Campaigns</h3>
-					<p>Our team creates and organizes blogger, reviewer, and media outreach. Through the effective use of press releases and timely releases, we maximize visibility and increase the media profile of your book.</p>
+					<h3 class="f-24 clr-2 fw-600">Affordable & Effective</h3>
+					<p>Quality marketing doesn’t have to break the bank. Our affordable book marketing services give you maximum exposure while staying within your budget.</p>
 				</div>
 			</div>
 		</div>
@@ -308,9 +298,9 @@
 		<div class="container-xl">
 			<div class="row text-center text-md-start align-items-center">
 				<div class="col-lg-7 col-md-8  pt-5 pb-4">
-					<h2 class="f-40 fw-700 clr-2">Want Your Book in Front of the Right Readers?  <span class="bg-2 clr-l">Get Orbit Book Publishers Book Marketing Services & Start Your Journey!</span>
+					<h2 class="f-40 fw-700 clr-2">Make Your Book the Next  <span class="bg-2 clr-l">Big Hit!</span>
 					</h2>
-					<p>We don't leave readers looking for your book; we bring your book to where your readers already are. With focused marketing and data-driven marketing approaches, we assist authors in achieving traction, visibility, and sales. Begin now with a book marketing plan that works. Your readers are waiting.</p>
+					<p>Don’t let your book get lost in the crowd. With our result-driven book marketing service, we help authors increase sales, reach, and impact. As a trusted book marketing company, we offer strategic ebook marketing services and powerful book promotion services designed to deliver measurable results. Take action now, your readers are waiting!</p>
 					<div class="row ">
 						<div class="col-lg-4 col-md-6 col-9"><button class="w-100 mb-3" data-bs-toggle="modal"
 								data-bs-target="#quote">Get Started</button></div>
@@ -332,8 +322,8 @@
 						data-src="assets/img/book-marketing-2.webp"> </div>
 			</div>
 			<div class="col-md-7 mt-4 mt-md-0 text-center text-md-start ">
-				<h3 class=" f-40 clr-1 fw-700 mb-3"> Personalized Book Marketing & Promotion Designed <span class="bg-2 clr-l"> Specifically for You!</span></h3>
-				<p>No two books are the same, and neither are our book marketing campaigns. At Maclean's Publishers, every plan is customized to your distinct goals, whether that's establishing author brand awareness, collecting online reviews, or taking your first book tour. We collaborate with you to create pertinent, successful marketing that reflects your voice and your vision. Every campaign is hands-on, focused, and constructed to power your publishing goals with quantifiable results.</p>
+				<h3 class=" f-40 clr-1 fw-700 mb-3">Marketing Your Book Your Way!</h3>
+				<p>No cookie-cutter strategies here. At <?php echo $bname?>, our book marketing service is tailored to your book’s unique journey. Whether it’s boosting your author brand, gathering online buzz, or planning your first book tour, our book promotion services for authors are crafted just for you. With guidance from book marketing experts, every step is focused, practical, and aimed at achieving real, measurable results without breaking the bank.</p>
 
 				<div class="row ">
 					<div class="col-lg-4 col-md-5 col-9">
@@ -353,8 +343,8 @@
 	<div class="container-xl">
 		<div class="row justify-content-center">
 			<div class="col-lg-10 text-center">
-				<h2 class="f-40 clr-1 fw-700">Here’s the 4-Step Process of Orbit Book Publishers Book Marketing & Promotion Service</h2>
-				<p class="f-20 fw-500">Our process of marketing your book is simple, efficient, and value-oriented at every stage. We go ahead with precision, creativity, and transparency to make your book resonate with readers. Take a look at our process,</p>
+				<h2 class="f-40 clr-1 fw-700">Our Proven 4-Step Book Marketing Process</h2>
+				<p class="f-20 fw-500">Our proven 4-step book marketing process is designed to maximize visibility, engage readers, and drive real results. From strategy to execution, every step is tailored to your book’s success.</p>
 			</div>
 		</div>
 		<div class="row align-items-center text-center text-auto">
@@ -362,13 +352,13 @@
 				<div class="row">
 					<div class="col-md-12 col-6 ">
 						<span class="heading f-40 fw-700 clr-1 d-block">01</span>
-						<h3 class="f-20 clr-2 fw-600">Discovery & Planning</h3>
-						<p class="f-20 fw-500">We review your book, goals, and timeline to create an all-encompassing campaign plan.</p>
+						<h3 class="f-20 clr-2 fw-600">Discover Your Audience</h3>
+						<p class="f-20 fw-500">We help you understand who will love your book. With a smart book marketing service, we connect your story to the right readers.</p>
 					</div>
 					<div class="col-md-12 col-6">
 						<span class="heading f-40 fw-700 clr-1 mt-lg-5 d-block">02</span>
-						<h3 class="f-20 clr-2 fw-600">Campaign Building</h3>
-						<p class="f-20 fw-500">We tailor the assets, messaging, and outreach materials to your brand and book.</p>
+						<h3 class="f-20 clr-2 fw-600">Craft Your Campaign</h3>
+						<p class="f-20 fw-500">Creative ideas meet strategy! Our book promotion services for authors focus on making your book irresistible and shareable.</p>
 					</div>
 				</div>
 			</div>
@@ -379,13 +369,13 @@
 				<div class="row">
 					<div class="col-md-12 col-6">
 						<span class="heading f-40 fw-700 clr-1 d-block">03</span>
-						<h3 class="f-20 clr-2 fw-600">Launch & Implementation</h3>
-						<p class="f-20 fw-500">We execute your campaign on chosen platforms and launch media outreach and promotions.</p>
+						<h3 class="f-20 clr-2 fw-600">Promote Everywhere</h3>
+						<p class="f-20 fw-500">From social media to email and online platforms, our ebook marketing agency ensures your book reaches every corner of the reading world.</p>
 					</div>
 					<div class="col-md-12 col-6">
 						<span class="heading f-40 fw-700 clr-1 mt-lg-5 d-block">04</span>
-						<h3 class="f-20 clr-2 fw-600">Reporting & Optimization</h3>
-						<p class="f-20 fw-500">We monitor campaign performance and data-driven optimization for ongoing traction and reach.</p>
+						<h3 class="f-20 clr-2 fw-600">Grow & Improve</h3>
+						<p class="f-20 fw-500">We track results and fine-tune every step. Our book marketing experts make sure your book not only reaches readers but also generates buzz and sales.</p>
 					</div>
 				</div>
 			</div>
@@ -395,4 +385,85 @@
 
 <?php include('inc/portfolio.php'); ?>
 <?php require 'inc/review.php' ?>
+<section class="pt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="f-48 fw-700">FAQ's</h2>
+                <div class="accordion" id="faqAccordion3">
+
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        What are book writing services, and how can they help me?
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion3">
+                      <div class="accordion-body">
+                        Our professional book writing services help turn your ideas into a polished, publish-ready manuscript. From concept development to final editing, we guide you through every step so your story is written with clarity, creativity, and purpose.
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Do you offer book writing and book marketing services together?
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion3">
+                      <div class="accordion-body">
+                        Yes! We provide complete solutions, combining expert book writing services with result-driven book marketing services. This means your book is not only well-written but also ready to reach the right audience after publication.
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Can you help me if I don't know how to promote my book after writing?
+                      </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion3">
+                      <div class="accordion-body">
+                        Absolutely. Many authors struggle with how to promote their book, which is why we support you beyond writing. Our team offers book promotion services for authors to ensure your finished book gets the visibility it deserves.
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Are your services affordable for new authors?
+                      </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion3">
+                      <div class="accordion-body">
+                        We believe every author deserves a chance to succeed. That's why we offer affordable book marketing services along with flexible book writing services, making it easier for new and experienced writers to bring their ideas to life.
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFive">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Do you provide ebook writing and ebook marketing services?
+                      </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion3">
+                      <div class="accordion-body">
+                        Yes, we specialize in both print and digital formats. Our team offers complete ebook writing services along with targeted ebook marketing services, helping you reach readers across global platforms.
+                      </div>
+                    </div>
+                  </div>
+                
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="service-image"><img class="lozad" alt="Book Publishing Service by <?php echo $bname?>" data-src="assets/img/book-writing-side-2.webp"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <?php include('inc/package.php'); ?>

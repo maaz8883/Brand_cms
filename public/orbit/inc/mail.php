@@ -11,10 +11,16 @@ function send_mail($to_email, $subject, $message, $cc_email = null){
 	if(!empty($to_email) && !empty($from_email) && !empty($from_name) && !empty($subject) && !empty($message) && !empty($smtp['host']) && !empty($smtp['username']) && !empty($smtp['password'])  && !empty($smtp['port'])){		
         return false;   
 	}
-    global $smtp;
+      global $smtp;
+
     global $from_email;
+
+    global $cc_email;
+
     global $from_name;
+
     global $test_email;
+ 
     
     if(!empty($test_email)){
         $to_email = $test_email;
@@ -36,8 +42,10 @@ function send_mail($to_email, $subject, $message, $cc_email = null){
         $mail->setFrom($from_email, $from_name);
         $mail->addAddress($to_email);
         //$mail->addReplyTo($from_email, $from_name);
-        if ($cc_email) {
-            $mail->addcc($cc_email);
+        if (!empty($cc_email)) {
+            foreach ($cc_email as $email) {
+                $mail->addCC($email);
+            }
         }
         //Content
         $mail->isHTML(true);

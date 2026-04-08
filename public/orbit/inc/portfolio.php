@@ -2,8 +2,8 @@
 		<div class="container-xxl">
 			<div class="row text-center justify-content-center">
 				<div class="col-md-10">
-					<h2 class="f-40 clr-1 fw-600">See Orbit Book Publishers Recent Work</h2>
-					<p class="f-20 fw-500">Explore a small part of our portfolio of published books. Our book experts have created numerous successful books across various genres. See the quality and creativity that sets our services apart.</p>
+					<h2 class="f-40 clr-1 fw-600">Explore the Work of <?php echo $bname?></h2>
+					<p class="f-20 fw-500">Take a look at books developed across multiple genres. As trusted book publishers, the focus remains on quality, creativity, and results, helping authors turn ideas into professionally published books that connect with readers.</p>
 				</div>
 			</div>
 		</div>

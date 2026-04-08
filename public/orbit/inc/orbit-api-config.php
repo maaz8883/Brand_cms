@@ -7,5 +7,5 @@
  * Remote CMS ke liye poora URL set karo (trailing slash mat lagao).
  */
 if (! defined('ORBIT_API_BASE_URL')) {
-	define('ORBIT_API_BASE_URL', 'http://127.0.0.1:8000/api/v1');
+	define('ORBIT_API_BASE_URL', 'https://brand.checkyourproject.co/api/v1');
 }

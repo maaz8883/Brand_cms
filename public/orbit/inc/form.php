@@ -17,6 +17,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$url = validate('Url','url', '');
 		$domain = validate('Domain','domain','');
 		$subject = validate('Subject','subject','');
+	    $first_source = validate('first_source','first_source','');
+		$first_medium = validate('first_medium','first_medium','');
+		$first_campaign = validate('first_campaign','first_campaign','');
+		$last_source = validate('last_source','last_source','');
+		$last_medium = validate('last_medium','last_medium','');
+		$last_campaign = validate('last_campaign','last_campaign','');
+
+
+		$url = validate('Url','url', '');
+		$domain = validate('Domain','domain','');
+		$subject = validate('Subject','subject','');
 		$ip = validate('Ip','ip','');
 		$city = validate('City','city','');
 		$region = validate('Region','region','');
@@ -50,7 +61,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		}
 	}
 	elseif(!empty($_POST['cta2'])){	
-        $url = validate('Url','url', '');
+        $first_source = validate('first_source','first_source','');
+		$first_medium = validate('first_medium','first_medium','');
+		$first_campaign = validate('first_campaign','first_campaign','');
+		$last_source = validate('last_source','last_source','');
+		$last_medium = validate('last_medium','last_medium','');
+		$last_campaign = validate('last_campaign','last_campaign','');
+
+
+		$url = validate('Url','url', '');
 		$domain = validate('Domain','domain','');
 		$subject = validate('Subject','subject','');
 		$ip = validate('Ip','ip','');

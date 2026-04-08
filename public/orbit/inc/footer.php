@@ -3,9 +3,9 @@
 		<div class="row py-4 justify-content-between">
 			<div class="col-md-3">
 				<a href="<?php echo $base_url?>" class="logo d-block" aria-label="Home page">
-					<img class="lozad logo" alt="Orbit Book Publishers" data-src="assets/img/logo.png">
+					<img class="lozad logo" alt="<?php echo $bname?>" data-src="assets/img/logo.png">
 				</a>
-				<p class="mt-4">Orbit Book Publishers is your trusted partner in book writing, book editing, book publishing, and book marketing. We help storytellers become published authors with expert support every step of the way!</p>
+				<p class="mt-4">From concept to publication and beyond, every stage is handled with precision and care. Authors receive the support needed to move forward confidently and successfully.</p>
 					
 			</div>
 			<div class="col-md-6 col-lg-5 col-sm-6">
@@ -56,11 +56,11 @@
 							sales@<?= $domainname ?>
 						</a>
 					</li>
-					<!--<li class="mb-3">-->
-					<!--    <span class="d-flex align-items-center mb-3"><span class="icon-location me-2"></span>-->
-					<!--	    <?= $add ?>-->
-					<!--	</span>-->
-					<!--</li>-->
+					<li class="mb-3">
+					    <span class="d-flex align-items-center mb-3"><span class="icon-location me-2"></span>
+						    <?= $add ?>
+						</span>
+					</li>
 					<li class="mb-3">
 					    <ul class="list-unstyled d-flex justify-content-start">
 								<li class="me-3 ms-0">
@@ -109,29 +109,23 @@
 					</div>
 					<div class="col-md-6 align-self-center">
 						<h4 class="f-24 clr-1 fw-700">Start Your Writing Journey</h4>
-						<form action="<?php echo $post_url; ?>" method="post">
+						<form action="<?php echo $current_url ?>" method="post">
 							<div class="form-group">
 								<input type="hidden" name="domain" value="<?php echo $domainname ?>">
-								<input type="hidden" name="ip" value="<?php echo $geoplugin->ip ?>">
-								<input type="hidden" name="city" value="<?php echo $geoplugin->city ?>">
-								<input type="hidden" name="region" value="<?php echo $geoplugin->region ?>">
-								<input type="hidden" name="country" value="<?php echo $geoplugin->countryName ?>">
-								<input type="hidden" name="url" value='<?php
-								if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-									$url = "https://";
-								else
-									$url = "http://";
-								// Append the host(domain name, ip) to the URL.   
-								$url .= $_SERVER['HTTP_HOST'];
+                                        <input type="hidden" name="ip" value="<?php if ($ipData && $ipData['status'] === 'success') {echo $ip;} else {echo "Unable to get location information.";}?>">
+                                            <input type="hidden" name="city" value="<?php if ($ipData && $ipData['status'] === 'success') {echo $ipData['city'];} else {echo "Unable to get location information.";}?>">
+                                            <input type="hidden" name="region" value="<?php if ($ipData && $ipData['status'] === 'success') {echo $ipData['region'];} else {echo "Unable to get location information.";}?>">
+                                            <input type="hidden" name="country" value="<?php if ($ipData && $ipData['status'] === 'success') {echo $ipData['country'];} else {echo "Unable to get location information.";}?>">
+                                            
+                                            <input type="hidden" name="url" value="<?php echo $current_url ?>">
+                                            <input type="hidden" name="subject" value="Popup Form (<?php echo $current_url ?>)">
+											<input type="hidden" name="first_source" value="<?php echo $_SESSION['first_touch']['source']; ?>">
+											<input type="hidden" name="first_medium" value="<?php echo $_SESSION['first_touch']['medium']; ?>">
+											<input type="hidden" name="first_campaign" value="<?php echo $_SESSION['first_touch']['campaign']; ?>">
 
-								// Append the requested resource location to the URL   
-								$url .= $_SERVER['REQUEST_URI'];
-
-								echo $url;
-								?>   '>
-								<input type="hidden" name="domain" value="<?php echo $domainname ?>">
-								<input type="hidden" name="subject" value="Popup Form (<?php echo $url ?>)">
-								<input type="hidden" name="source" value="<?php echo $lead_source ?>" />
+											<input type="hidden" name="last_source" value="<?php echo $_SESSION['last_touch']['source']; ?>">
+											<input type="hidden" name="last_medium" value="<?php echo $_SESSION['last_touch']['medium']; ?>">
+											<input type="hidden" name="last_campaign" value="<?php echo $_SESSION['last_touch']['campaign']; ?>">
 							</div>
 							<div class="form-group mb-3">
 								<input class="form-control" type="text" name="name" placeholder="Your Name" required=""

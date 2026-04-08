@@ -8,7 +8,7 @@ $orbit_form_current_url .= $_SERVER['HTTP_HOST'] ?? '';
 $orbit_form_current_url .= $_SERVER['REQUEST_URI'] ?? '';
 $orbit_form_subject = 'Popup Form (' . $orbit_form_current_url . ')';
 ?>
-<form action="<?php echo htmlspecialchars((string) ($post_url ?? ''), ENT_QUOTES, 'UTF-8'); ?>" method="post" class="row">
+<form action="<?php echo htmlspecialchars((string) ($current_url ?? ''), ENT_QUOTES, 'UTF-8'); ?>" method="post" class="row">
 	<div class="form-group">
 		<input type="hidden" name="domain" value="<?php echo htmlspecialchars((string) ($domainname ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
 		<input type="hidden" name="ip" value="<?php echo htmlspecialchars($orbit_form_ip, ENT_QUOTES, 'UTF-8'); ?>">
