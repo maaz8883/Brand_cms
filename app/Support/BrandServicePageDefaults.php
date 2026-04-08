@@ -175,6 +175,32 @@ class BrandServicePageDefaults
                     ['quote' => 'Their marketing team developed a custom strategy that increased visibility and reviews.', 'author' => 'Cynthia Reed'],
                 ],
             ],
+            'faq' => [
+                'heading' => 'Frequently Asked Questions',
+                'side_image' => '',
+                'items' => [
+                    [
+                        'question' => 'What do your book publishing services include?',
+                        'answer' => 'Our book publishing services cover everything, from editing, formatting, cover design, ISBN registration, and global distribution. We handle it all so you don\'t have to.',
+                    ],
+                    [
+                        'question' => 'What is the difference between self-publishing and traditional publishing?',
+                        'answer' => 'We offer both self-publishing services and traditional publishing. Our expert book publishers help you choose the right path based on your goals and audience.',
+                    ],
+                    [
+                        'question' => 'How do I hire a professional book publisher at Orbit?',
+                        'answer' => 'Simply share your manuscript with us. Our professional book publishers review your goals and build a customized publishing plan tailored specifically to your book.',
+                    ],
+                    [
+                        'question' => 'How long do your book publishing services take?',
+                        'answer' => 'Our professional book publishing process typically takes 4 to 12 weeks. We keep you informed at every stage so there are no surprises.',
+                    ],
+                    [
+                        'question' => 'Which platforms do you distribute books on?',
+                        'answer' => 'As trusted book publishers in USA, we distribute your book on Amazon, Barnes & Noble, Google Books, Apple Books, and all major global platforms.',
+                    ],
+                ],
+            ],
         ];
     }
 

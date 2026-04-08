@@ -498,6 +498,69 @@
             </div>
         </div>
     </div>
+
+    @php
+        $faqItems = old('content.faq.items', data_get($c, 'faq.items', []));
+        if (! is_array($faqItems)) {
+            $faqItems = [];
+        }
+        $faqItems = array_values(array_filter($faqItems, static function ($row) {
+            return is_array($row);
+        }));
+        if ($faqItems === []) {
+            $faqItems = [['question' => '', 'answer' => '']];
+        }
+        $faqNextKey = count($faqItems);
+    @endphp
+    {{-- FAQ --}}
+    <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secFaq">14. FAQ (accordion)</button></h2>
+        <div id="secFaq" class="accordion-collapse collapse" data-bs-parent="#svcSections">
+            <div class="accordion-body row g-3">
+                <div class="col-12"><label class="form-label">Section heading</label><input type="text" class="form-control" name="content[faq][heading]" value="{{ data_get($c, 'faq.heading') }}"></div>
+                <div class="col-md-6">
+                    <label class="form-label">Right column image</label>
+                    @php $faqImgUrl = data_get($c, 'faq.side_image'); @endphp
+                    @if($faqImgUrl)
+                        <input type="hidden" name="content[faq][side_image]" value="{{ $faqImgUrl }}">
+                    @endif
+                    <input type="file" name="file_faq_side_image" class="form-control" accept="image/*">
+                    @if($faqImgUrl)
+                        <div class="mt-2">
+                            <small class="text-muted d-block">Current: <a href="{{ $faqImgUrl }}" target="_blank">view</a></small>
+                            <input type="hidden" name="remove_faq_side_image" value="0">
+                            <div class="form-check mt-2 mb-0">
+                                <input class="form-check-input" type="checkbox" name="remove_faq_side_image" id="remove_faq_side_image" value="1" @checked(old('remove_faq_side_image') == '1')>
+                                <label class="form-check-label" for="remove_faq_side_image">Remove current image</label>
+                            </div>
+                        </div>
+                    @endif
+                    <small class="text-muted d-block mt-1">If empty, the theme default image is used on the site.</small>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <p class="text-muted small mb-0">Questions/answers can be added, edited, or removed. Empty question rows are ignored on frontend.</p>
+                        <button type="button" class="btn btn-outline-primary btn-sm" id="faq-add-row"><i class="bi bi-plus-lg"></i> Add question</button>
+                    </div>
+                    <div id="faq-rows" class="row g-3">
+                        @foreach($faqItems as $fi => $faq)
+                            @php $fi = (int) $fi; @endphp
+                            <div class="col-md-6 faq-row" data-faq-idx="{{ $fi }}">
+                                <div class="border rounded p-2 h-100">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <strong class="small text-muted">FAQ {{ $loop->iteration }}</strong>
+                                        <button type="button" class="btn btn-sm btn-outline-danger faq-remove-row">Remove</button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm my-1 faq-question" placeholder="Question" name="content[faq][items][{{ $fi }}][question]" value="{{ (string) ($faq['question'] ?? '') }}">
+                                    <textarea class="form-control form-control-sm faq-answer" name="content[faq][items][{{ $fi }}][answer]" rows="3" placeholder="Answer">{{ (string) ($faq['answer'] ?? '') }}</textarea>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -579,6 +642,56 @@
             wrap.style.display = this.checked ? 'none' : 'block';
         });
     }
+})();
+
+(function () {
+    var rows = document.getElementById('faq-rows');
+    var addBtn = document.getElementById('faq-add-row');
+    var nextKey = {{ (int) $faqNextKey }};
+
+    function faqRowHtml(i) {
+        return '<div class="col-md-6 faq-row" data-faq-idx="' + i + '">' +
+            '<div class="border rounded p-2 h-100">' +
+            '<div class="d-flex justify-content-between align-items-center mb-1">' +
+            '<strong class="small text-muted">FAQ</strong>' +
+            '<button type="button" class="btn btn-sm btn-outline-danger faq-remove-row">Remove</button>' +
+            '</div>' +
+            '<input type="text" class="form-control form-control-sm my-1 faq-question" placeholder="Question" name="content[faq][items][' + i + '][question]">' +
+            '<textarea class="form-control form-control-sm faq-answer" name="content[faq][items][' + i + '][answer]" rows="3" placeholder="Answer"></textarea>' +
+            '</div>' +
+            '</div>';
+    }
+
+    function relabelFaqRows() {
+        var nodes = rows ? rows.querySelectorAll('.faq-row') : [];
+        nodes.forEach(function (node, idx) {
+            var title = node.querySelector('strong');
+            if (title) {
+                title.textContent = 'FAQ ' + (idx + 1);
+            }
+        });
+    }
+
+    if (addBtn && rows) {
+        addBtn.addEventListener('click', function () {
+            rows.insertAdjacentHTML('beforeend', faqRowHtml(nextKey));
+            nextKey += 1;
+            relabelFaqRows();
+        });
+    }
+
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('faq-remove-row')) {
+            e.preventDefault();
+            var row = e.target.closest('.faq-row');
+            if (row) {
+                row.remove();
+                relabelFaqRows();
+            }
+        }
+    });
+
+    relabelFaqRows();
 })();
 </script>
 

@@ -563,5 +563,81 @@ function orbit_render_dynamic_service(array $payload): void
 		<?php
 	}
 
+	$faqBlock = $c['faq'] ?? [];
+	if (! is_array($faqBlock)) {
+		$faqBlock = [];
+	}
+	$faqItemsRaw = $faqBlock['items'] ?? [];
+	if (! is_array($faqItemsRaw)) {
+		$faqItemsRaw = [];
+	}
+	$faqItems = [];
+	foreach ($faqItemsRaw as $row) {
+		if (! is_array($row)) {
+			continue;
+		}
+		$q = trim((string) ($row['question'] ?? ''));
+		if ($q === '') {
+			continue;
+		}
+		$faqItems[] = [
+			'question' => $q,
+			'answer' => (string) ($row['answer'] ?? ''),
+		];
+	}
+	$faqHeading = trim((string) ($faqBlock['heading'] ?? ''));
+	if ($faqHeading === '') {
+		$faqHeading = 'Frequently Asked Questions';
+	}
+	$faqSideRaw = trim((string) ($faqBlock['side_image'] ?? ''));
+	$faqSideImg = $faqSideRaw !== '' ? orbitMediaUrl($faqSideRaw) : '';
+	if ($faqSideImg === '') {
+		$faqSideImg = 'assets/img/book-writing-side-2.webp';
+	}
+	$faqSlug = isset($service['slug']) ? (string) $service['slug'] : 'service';
+	$faqAccId = 'faqAccordion-' . preg_replace('/[^a-zA-Z0-9_-]/', '', $faqSlug);
+	if ($faqAccId === 'faqAccordion-' || $faqAccId === 'faqAccordion') {
+		$faqAccId = 'faqAccordion-page';
+	}
+
+	if ($faqItems !== []) {
+		?>
+<section class="pt-5 orbit-faq-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<h2 class="f-48 fw-700"><?= orbit_e($faqHeading); ?></h2>
+				<div class="accordion" id="<?= orbit_e($faqAccId); ?>">
+					<?php foreach ($faqItems as $fi => $faqRow) {
+						$collapseId = $faqAccId . '-c' . $fi;
+						$headingId = $faqAccId . '-h' . $fi;
+						$isFirst = $fi === 0;
+						?>
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="<?= orbit_e($headingId); ?>">
+							<button class="accordion-button<?= $isFirst ? '' : ' collapsed'; ?>" type="button" data-bs-toggle="collapse" data-bs-target="#<?= orbit_e($collapseId); ?>" aria-expanded="<?= $isFirst ? 'true' : 'false'; ?>" aria-controls="<?= orbit_e($collapseId); ?>">
+								<?= orbit_e($faqRow['question']); ?>
+							</button>
+						</h2>
+						<div id="<?= orbit_e($collapseId); ?>" class="accordion-collapse collapse<?= $isFirst ? ' show' : ''; ?>" aria-labelledby="<?= orbit_e($headingId); ?>" data-bs-parent="#<?= orbit_e($faqAccId); ?>">
+							<div class="accordion-body">
+								<?= nl2br(orbit_e($faqRow['answer'])); ?>
+							</div>
+						</div>
+					</div>
+					<?php } ?>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="service-image">
+					<img class="lozad" alt="<?= orbit_e('Service by ' . (string) ($bname ?? '')); ?>" data-src="<?= orbit_e($faqSideImg); ?>">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+		<?php
+	}
+
 	include __DIR__ . '/package.php';
 }

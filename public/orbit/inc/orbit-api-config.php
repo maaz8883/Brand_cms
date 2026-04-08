@@ -6,6 +6,12 @@
  * http://localhost/urban_cms/public/api/v1) — zaroori jab aap Apache se open karte ho.
  * Remote CMS ke liye poora URL set karo (trailing slash mat lagao).
  */
-if (! defined('ORBIT_API_BASE_URL')) {
-	define('ORBIT_API_BASE_URL', 'https://brand.checkyourproject.co/api/v1');
+if (!defined('ORBIT_API_BASE_URL')) {
+
+    if ($_SERVER['HTTP_HOST'] === 'localhost' || $_SERVER['HTTP_HOST'] === '127.0.0.1') {
+        define('ORBIT_API_BASE_URL', 'http://127.0.0.1:8000/api/v1'); // local URL
+    } else {
+        define('ORBIT_API_BASE_URL', 'https://brand.checkyourproject.co/api/v1'); // live URL
+    }
+
 }
