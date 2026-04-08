@@ -49,6 +49,27 @@
     </div>
 </div>
 
+<div class="card mb-3">
+    <div class="card-header"><strong>Structured data (JSON-LD)</strong></div>
+    <div class="card-body">
+        <p class="text-muted small mb-2">
+            Optional. Paste valid JSON-LD here to <strong>replace</strong> the auto-generated Organization / Service / Breadcrumb script on the public site for this page only.
+            Leave empty to keep the default generated schema. Typical shape: <code>{"@context":"https://schema.org","@graph":[...]}</code>
+        </p>
+        <label class="form-label">Manual JSON-LD</label>
+        <textarea
+            name="content[seo][json_ld]"
+            class="form-control font-monospace small @error('content.seo.json_ld') is-invalid @enderror"
+            rows="14"
+            spellcheck="false"
+            placeholder='{ "@context": "https://schema.org", "@graph": [ ... ] }'
+        >{{ old('content.seo.json_ld', data_get($c, 'seo.json_ld', '')) }}</textarea>
+        @error('content.seo.json_ld')
+            <div class="invalid-feedback d-block">{{ $message }}</div>
+        @enderror
+    </div>
+</div>
+
 <div class="accordion" id="svcSections">
     <p class="text-muted small mb-2">Site <strong>header</strong> and <strong>footer</strong> stay in your static theme (not managed here).</p>
 

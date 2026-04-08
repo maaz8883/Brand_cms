@@ -8,6 +8,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<?php
+	require_once __DIR__ . '/seo-helpers.php';
+
 	$pageSlug = isset($page) ? preg_replace('/\.php$/', '', (string) $page) : '';
 	$uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';
 	$uri_segments = explode('/', $uri_path);
@@ -18,7 +20,7 @@
 		$svc = $orbit_service_payload['service'];
 		$title = ! empty($svc['meta_title']) ? $svc['meta_title'] : (($svc['title'] ?? 'Service') . ' | Orbit Book Publishers');
 		$discription = $svc['meta_description'] ?? '';
-		$robots = 'NOINDEX, NOFOLLOW';
+		$robots = 'INDEX, FOLLOW';
 		$script = '';
 	} elseif ($pageSlug === 'location') {
 		$class = 'location-page';
@@ -155,19 +157,128 @@
 				$robots="NOINDEX, NOFOLLOW";
 				$script="";
 			}
+
+			$canonical_url = orbit_seo_current_canonical_url();
+			$og_image = (string) $logo;
+			if ($og_image !== '' && ! preg_match('#^https?://#i', $og_image)) {
+				$og_image = rtrim(orbit_seo_absolute_url(''), '/') . '/' . ltrim($og_image, '/');
+			}
+			if ($og_image === '') {
+				$og_image = rtrim(orbit_seo_absolute_url(''), '/') . '/assets/img/logo.png';
+			}
+
+			$service_schema_json = '';
+			if (! empty($orbit_service_payload['service'])) {
+				$svc = $orbit_service_payload['service'];
+				$manual_ld = '';
+				$content = $svc['content'] ?? null;
+				if (is_array($content)) {
+					$raw = $content['seo']['json_ld'] ?? '';
+					if (is_string($raw) && trim($raw) !== '') {
+						$decoded = json_decode(trim($raw), true);
+						if (json_last_error() === JSON_ERROR_NONE && $decoded !== null) {
+							$manual_ld = json_encode(
+								$decoded,
+								JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP
+							);
+							if ($manual_ld === false) {
+								$manual_ld = '';
+							}
+						}
+					}
+				}
+				if ($manual_ld !== '') {
+					$service_schema_json = $manual_ld;
+				} else {
+					$site_base = rtrim((string) $url, '/');
+					$org_id = $site_base . '#organization';
+					$graph = [];
+					$graph[] = [
+						'@type' => 'Organization',
+						'@id' => $org_id,
+						'name' => $bname,
+						'url' => $site_base,
+						'logo' => ['@type' => 'ImageObject', 'url' => $logo],
+						'telephone' => $no,
+						'address' => [
+							'@type' => 'PostalAddress',
+							'streetAddress' => $add,
+						],
+					];
+					$graph[] = [
+						'@type' => 'WebSite',
+						'@id' => $site_base . '#website',
+						'url' => $site_base,
+						'name' => $bname,
+						'publisher' => ['@id' => $org_id],
+					];
+					$graph[] = [
+						'@type' => 'Service',
+						'@id' => $canonical_url . '#service',
+						'name' => $svc['title'] ?? 'Service',
+						'description' => $discription !== '' ? $discription : ($svc['meta_description'] ?? ''),
+						'url' => $canonical_url,
+						'provider' => ['@id' => $org_id],
+					];
+					$trail = $svc['breadcrumb'] ?? [];
+					if (is_array($trail) && $trail !== []) {
+						$items = [];
+						$acc = [];
+						$pos = 1;
+						foreach ($trail as $cr) {
+							if (! is_array($cr)) {
+								continue;
+							}
+							$slug = (string) ($cr['slug'] ?? '');
+							if ($slug === '') {
+								continue;
+							}
+							$acc[] = $slug;
+							$items[] = [
+								'@type' => 'ListItem',
+								'position' => $pos++,
+								'name' => (string) ($cr['title'] ?? ''),
+								'item' => orbit_seo_absolute_url(implode('/', $acc)),
+							];
+						}
+						if ($items !== []) {
+							$graph[] = [
+								'@type' => 'BreadcrumbList',
+								'@id' => $canonical_url . '#breadcrumb',
+								'itemListElement' => $items,
+							];
+						}
+					}
+					$service_schema_json = json_encode(
+						['@context' => 'https://schema.org', '@graph' => $graph],
+						JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP
+					);
+					if ($service_schema_json === false) {
+						$service_schema_json = '';
+					}
+				}
+			}
 			?>
 	
-	<title><?php echo $title ?></title>
-	<meta name="description" content="<?php echo $discription ?>">
-	<meta name="robots" content="<?php echo $robots ?>" />
+	<title><?php echo htmlspecialchars((string) $title, ENT_QUOTES, 'UTF-8'); ?></title>
+	<meta name="description" content="<?php echo htmlspecialchars((string) $discription, ENT_QUOTES, 'UTF-8'); ?>">
+	<meta name="robots" content="<?php echo htmlspecialchars((string) $robots, ENT_QUOTES, 'UTF-8'); ?>" />
 	<?php echo $script ?>
-    <link rel="canonical" href="<?php  echo $current_url?>">
+	<?php if ($service_schema_json !== '') { ?>
+	<script type="application/ld+json"><?php echo $service_schema_json; ?></script>
+	<?php } ?>
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
 		<!-- Open Graph (Facebook/LinkedIn) -->
-        <meta property="og:title" content="<?php echo $title?>">
-        <meta property="og:description" content="<?php echo $discription?>">
-        <meta property="og:url" content="<?php  echo $current_url?>">
         <meta property="og:type" content="website">
-        <meta property="og:image" content="<?php  echo $logo?>">
+        <meta property="og:title" content="<?php echo htmlspecialchars((string) $title, ENT_QUOTES, 'UTF-8'); ?>">
+        <meta property="og:description" content="<?php echo htmlspecialchars((string) $discription, ENT_QUOTES, 'UTF-8'); ?>">
+        <meta property="og:url" content="<?php echo htmlspecialchars($canonical_url, ENT_QUOTES, 'UTF-8'); ?>">
+        <meta property="og:site_name" content="<?php echo htmlspecialchars((string) $bname, ENT_QUOTES, 'UTF-8'); ?>">
+        <meta property="og:image" content="<?php echo htmlspecialchars($og_image, ENT_QUOTES, 'UTF-8'); ?>">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="<?php echo htmlspecialchars((string) $title, ENT_QUOTES, 'UTF-8'); ?>">
+        <meta name="twitter:description" content="<?php echo htmlspecialchars((string) $discription, ENT_QUOTES, 'UTF-8'); ?>">
+        <meta name="twitter:image" content="<?php echo htmlspecialchars($og_image, ENT_QUOTES, 'UTF-8'); ?>">
         
     <link rel="icon" type="image/png" href="<?php echo $url?>assets/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="<?php echo $url?>assets/favicon.svg" />

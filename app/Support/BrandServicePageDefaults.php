@@ -207,6 +207,10 @@ class BrandServicePageDefaults
                 'button_label' => 'Get Started',
                 'support_image' => '',
             ],
+            'seo' => [
+                /** Optional full JSON-LD document; replaces auto-generated Service schema on the public site when non-empty. */
+                'json_ld' => '',
+            ],
         ];
     }
 

@@ -9,6 +9,7 @@ use App\Support\BrandServicePageDefaults;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
 
 class BrandServiceController extends Controller
@@ -78,6 +79,7 @@ class BrandServiceController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'content' => 'nullable|array',
+            'content.seo.json_ld' => 'nullable|string|max:100000',
         ]);
 
         $validated['parent_id'] = $request->filled('parent_id')
@@ -97,6 +99,7 @@ class BrandServiceController extends Controller
         $this->syncFeaturedLogosFromRequest($request, $content);
         $this->syncPlatformRowLogosFromRequest($request, $content);
         $content = BrandServicePageDefaults::stripLayoutOnlyKeys($content);
+        $this->validateContentSeoJsonLd($content);
 
         $validated['content'] = $content;
 
@@ -150,6 +153,7 @@ class BrandServiceController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'content' => 'nullable|array',
+            'content.seo.json_ld' => 'nullable|string|max:100000',
         ]);
 
         $newParentId = $request->filled('parent_id') ? (int) $validated['parent_id'] : null;
@@ -173,6 +177,7 @@ class BrandServiceController extends Controller
         $this->syncFeaturedLogosFromRequest($request, $content);
         $this->syncPlatformRowLogosFromRequest($request, $content);
         $content = BrandServicePageDefaults::stripLayoutOnlyKeys($content);
+        $this->validateContentSeoJsonLd($content);
 
         $service->fill($validated);
         $this->processFileUploads($request, $brand, $service, $content);
@@ -220,6 +225,30 @@ class BrandServiceController extends Controller
     private function authorizeBrand(Brand $brand, BrandService $service): void
     {
         abort_unless($service->brand_id === $brand->id, 404);
+    }
+
+    /**
+     * @param  array<string, mixed>  $content
+     */
+    private function validateContentSeoJsonLd(array &$content): void
+    {
+        $raw = data_get($content, 'seo.json_ld');
+        if (! is_string($raw)) {
+            return;
+        }
+        $raw = trim($raw);
+        if ($raw === '') {
+            data_set($content, 'seo.json_ld', '');
+
+            return;
+        }
+        json_decode($raw);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw ValidationException::withMessages([
+                'content.seo.json_ld' => 'Invalid JSON-LD: '.json_last_error_msg(),
+            ]);
+        }
+        data_set($content, 'seo.json_ld', $raw);
     }
 
     private function uniqueSlugForBrand(int $brandId, string $base, ?int $ignoreId = null): string
