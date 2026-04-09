@@ -1,24 +1,20 @@
-<?php
-$orbit_form_ip = isset($geoplugin->ip) ? (string) $geoplugin->ip : '';
-$orbit_form_city = isset($geoplugin->city) ? (string) $geoplugin->city : '';
-$orbit_form_region = isset($geoplugin->region) ? (string) $geoplugin->region : '';
-$orbit_form_country = isset($geoplugin->countryName) ? (string) $geoplugin->countryName : '';
-$orbit_form_current_url = (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
-$orbit_form_current_url .= $_SERVER['HTTP_HOST'] ?? '';
-$orbit_form_current_url .= $_SERVER['REQUEST_URI'] ?? '';
-$orbit_form_subject = 'Popup Form (' . $orbit_form_current_url . ')';
-?>
 <form action="<?php echo htmlspecialchars((string) ($current_url ?? ''), ENT_QUOTES, 'UTF-8'); ?>" method="post" class="row">
 	<div class="form-group">
 		<input type="hidden" name="domain" value="<?php echo htmlspecialchars((string) ($domainname ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
-		<input type="hidden" name="ip" value="<?php echo htmlspecialchars($orbit_form_ip, ENT_QUOTES, 'UTF-8'); ?>">
-		<input type="hidden" name="city" value="<?php echo htmlspecialchars($orbit_form_city, ENT_QUOTES, 'UTF-8'); ?>">
-		<input type="hidden" name="region" value="<?php echo htmlspecialchars($orbit_form_region, ENT_QUOTES, 'UTF-8'); ?>">
-		<input type="hidden" name="country" value="<?php echo htmlspecialchars($orbit_form_country, ENT_QUOTES, 'UTF-8'); ?>">
-		<input type="hidden" name="url" value="<?php echo htmlspecialchars($orbit_form_current_url, ENT_QUOTES, 'UTF-8'); ?>">
+		<input type="hidden" name="ip" value="<?php if ($ipData && $ipData['status'] === 'success') {echo $ip;} else {echo 'Unable to get location information.';}?>">
+		<input type="hidden" name="city" value="<?php if ($ipData && $ipData['status'] === 'success') {echo $ipData['city'];} else {echo 'Unable to get location information.';}?>">
+		<input type="hidden" name="region" value="<?php if ($ipData && $ipData['status'] === 'success') {echo $ipData['region'];} else {echo 'Unable to get location information.';}?>">
+		<input type="hidden" name="country" value="<?php if ($ipData && $ipData['status'] === 'success') {echo $ipData['country'];} else {echo 'Unable to get location information.';}?>">
+		<input type="hidden" name="url" value="<?php echo htmlspecialchars((string) ($current_url ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
 		<input type="hidden" name="domain" value="<?php echo htmlspecialchars((string) ($domainname ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
-		<input type="hidden" name="subject" value="<?php echo htmlspecialchars($orbit_form_subject, ENT_QUOTES, 'UTF-8'); ?>">
+		<input type="hidden" name="subject" value="Popup Form (<?php echo htmlspecialchars((string) ($current_url ?? ''), ENT_QUOTES, 'UTF-8'); ?>)">
 		<input type="hidden" name="source" value="<?php echo htmlspecialchars((string) ($lead_source ?? ''), ENT_QUOTES, 'UTF-8'); ?>" />
+		<input type="hidden" name="first_source" value="<?php echo htmlspecialchars((string) ($_SESSION['first_touch']['source'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
+		<input type="hidden" name="first_medium" value="<?php echo htmlspecialchars((string) ($_SESSION['first_touch']['medium'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
+		<input type="hidden" name="first_campaign" value="<?php echo htmlspecialchars((string) ($_SESSION['first_touch']['campaign'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
+		<input type="hidden" name="last_source" value="<?php echo htmlspecialchars((string) ($_SESSION['last_touch']['source'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
+		<input type="hidden" name="last_medium" value="<?php echo htmlspecialchars((string) ($_SESSION['last_touch']['medium'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
+		<input type="hidden" name="last_campaign" value="<?php echo htmlspecialchars((string) ($_SESSION['last_touch']['campaign'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
 	</div>
 	<div class="form-group mb-3 col-lg col-md-4 col-sm-6"><input class="form-control" type="text" name="name"
 			placeholder="Your Name" required="" value=""></div>
