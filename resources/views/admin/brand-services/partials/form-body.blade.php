@@ -502,6 +502,19 @@
         </div>
     </div>
 
+    @php
+        $testimonialItems = old('content.testimonials.items', data_get($c, 'testimonials.items', []));
+        if (! is_array($testimonialItems)) {
+            $testimonialItems = [];
+        }
+        $testimonialItems = array_values(array_filter($testimonialItems, static function ($row) {
+            return is_array($row);
+        }));
+        if ($testimonialItems === []) {
+            $testimonialItems = [['quote' => '', 'author' => '']];
+        }
+        $testimonialNextKey = count($testimonialItems);
+    @endphp
     {{-- Testimonials --}}
     <div class="accordion-item">
         <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#secTest">13. Testimonials</button></h2>
@@ -509,13 +522,27 @@
             <div class="accordion-body row g-3">
                 <div class="col-md-4"><label class="form-label">Heading</label><input type="text" class="form-control" name="content[testimonials][heading]" value="{{ data_get($c, 'testimonials.heading') }}"></div>
                 <div class="col-md-8"><label class="form-label">Sidebar text</label><textarea class="form-control js-quill-description" name="content[testimonials][sidebar_text]" rows="2">{{ data_get($c, 'testimonials.sidebar_text') }}</textarea></div>
-                @for($ti = 0; $ti < 6; $ti++)
-                    <div class="col-md-6">
-                        <label class="form-label">Review {{ $ti + 1 }}</label>
-                        <textarea class="form-control mb-1 js-quill-description" name="content[testimonials][items][{{ $ti }}][quote]" rows="3" placeholder="Quote">{{ data_get($c, "testimonials.items.$ti.quote") }}</textarea>
-                        <input type="text" class="form-control" placeholder="Author name" name="content[testimonials][items][{{ $ti }}][author]" value="{{ data_get($c, "testimonials.items.$ti.author") }}">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <p class="text-muted small mb-0">Add, edit, or remove reviews. Empty quote rows are skipped on the public site.</p>
+                        <button type="button" class="btn btn-outline-primary btn-sm" id="testimonial-add-row"><i class="bi bi-plus-lg"></i> Add review</button>
                     </div>
-                @endfor
+                    <div id="testimonial-rows" class="row g-3">
+                        @foreach($testimonialItems as $ti => $titem)
+                            @php $ti = (int) $ti; @endphp
+                            <div class="col-md-6 testimonial-row" data-testimonial-idx="{{ $ti }}">
+                                <div class="border rounded p-2 h-100">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <strong class="small text-muted">Review {{ $loop->iteration }}</strong>
+                                        <button type="button" class="btn btn-sm btn-outline-danger testimonial-remove-row">Remove</button>
+                                    </div>
+                                    <textarea class="form-control mb-1 js-quill-description testimonial-quote" name="content[testimonials][items][{{ $ti }}][quote]" rows="3" placeholder="Quote">{{ (string) ($titem['quote'] ?? '') }}</textarea>
+                                    <input type="text" class="form-control" placeholder="Author name" name="content[testimonials][items][{{ $ti }}][author]" value="{{ (string) ($titem['author'] ?? '') }}">
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -704,6 +731,59 @@
             wrap.style.display = this.checked ? 'none' : 'block';
         });
     }
+})();
+
+(function () {
+    var rows = document.getElementById('testimonial-rows');
+    var addBtn = document.getElementById('testimonial-add-row');
+    var nextKey = {{ (int) $testimonialNextKey }};
+
+    function testimonialRowHtml(i) {
+        return '<div class="col-md-6 testimonial-row" data-testimonial-idx="' + i + '">' +
+            '<div class="border rounded p-2 h-100">' +
+            '<div class="d-flex justify-content-between align-items-center mb-1">' +
+            '<strong class="small text-muted">Review</strong>' +
+            '<button type="button" class="btn btn-sm btn-outline-danger testimonial-remove-row">Remove</button>' +
+            '</div>' +
+            '<textarea class="form-control mb-1 js-quill-description testimonial-quote" name="content[testimonials][items][' + i + '][quote]" rows="3" placeholder="Quote"></textarea>' +
+            '<input type="text" class="form-control" placeholder="Author name" name="content[testimonials][items][' + i + '][author]" value="">' +
+            '</div>' +
+            '</div>';
+    }
+
+    function relabelTestimonialRows() {
+        var nodes = rows ? rows.querySelectorAll('.testimonial-row') : [];
+        nodes.forEach(function (node, idx) {
+            var title = node.querySelector('strong');
+            if (title) {
+                title.textContent = 'Review ' + (idx + 1);
+            }
+        });
+    }
+
+    if (addBtn && rows) {
+        addBtn.addEventListener('click', function () {
+            rows.insertAdjacentHTML('beforeend', testimonialRowHtml(nextKey));
+            nextKey += 1;
+            relabelTestimonialRows();
+            if (typeof window.initBrandServiceQuills === 'function') {
+                window.initBrandServiceQuills();
+            }
+        });
+    }
+
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('testimonial-remove-row')) {
+            e.preventDefault();
+            var row = e.target.closest('.testimonial-row');
+            if (row) {
+                row.remove();
+                relabelTestimonialRows();
+            }
+        }
+    });
+
+    relabelTestimonialRows();
 })();
 
 (function () {

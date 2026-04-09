@@ -98,6 +98,7 @@ class BrandServiceController extends Controller
         );
         $this->syncFeaturedLogosFromRequest($request, $content);
         $this->syncPlatformRowLogosFromRequest($request, $content);
+        $this->syncTestimonialItemsFromRequest($request, $content);
         $content = BrandServicePageDefaults::stripLayoutOnlyKeys($content);
         $this->validateContentSeoJsonLd($content);
 
@@ -176,6 +177,7 @@ class BrandServiceController extends Controller
         $content = BrandServicePageDefaults::merge($base, $request->input('content', []));
         $this->syncFeaturedLogosFromRequest($request, $content);
         $this->syncPlatformRowLogosFromRequest($request, $content);
+        $this->syncTestimonialItemsFromRequest($request, $content);
         $content = BrandServicePageDefaults::stripLayoutOnlyKeys($content);
         $this->validateContentSeoJsonLd($content);
 
@@ -419,5 +421,22 @@ class BrandServiceController extends Controller
             return;
         }
         data_set($content, 'platform_logos_row.logos', $raw);
+    }
+
+    /**
+     * Replace merged testimonial reviews with raw POST so removed rows disappear (deep merge would keep stale indices).
+     */
+    private function syncTestimonialItemsFromRequest(Request $request, array &$content): void
+    {
+        $t = data_get($request->input('content'), 'testimonials');
+        if (! is_array($t)) {
+            return;
+        }
+        if (array_key_exists('items', $t)) {
+            $items = $t['items'];
+            data_set($content, 'testimonials.items', is_array($items) ? array_values($items) : []);
+        } else {
+            data_set($content, 'testimonials.items', []);
+        }
     }
 }
