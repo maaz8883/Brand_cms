@@ -58,7 +58,7 @@
 					</li>
 					<li class="mb-3">
 					    <span class="d-flex align-items-center mb-3"><span class="icon-location me-2"></span>
-						    <?= $add ?>
+						    <?= htmlspecialchars((string) $add, ENT_QUOTES, 'UTF-8') ?>
 						</span>
 					</li>
 					<li class="mb-3">

@@ -115,7 +115,7 @@ if (!empty($components[1]) && $components[1] === 'index.php' && isset($component
 								sales@<?= $domainname ?></a>
 							<span
 								class="d-flex align-items-center mb-3"><span class="icon-location me-2"></span>
-								<?= $add ?></span>
+								<?= htmlspecialchars((string) $add, ENT_QUOTES, 'UTF-8') ?></span>
 							<ul class="list-unstyled d-flex justify-content-start">
 								<li class="me-3 ms-0">
 									<a href="https://www.facebook.com/orbitbookpublishers1/" aria-label="Like and follow <?php echo $bname?>'s facbook page"

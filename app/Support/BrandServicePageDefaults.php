@@ -207,6 +207,10 @@ class BrandServicePageDefaults
                 'button_label' => 'Get Started',
                 'support_image' => '',
             ],
+            'contact_info' => [
+                /** Shown in static theme footer/header on this service URL when non-empty; otherwise global address from theme config is used. */
+                'address' => '',
+            ],
             'seo' => [
                 /** Optional full JSON-LD document; replaces auto-generated Service schema on the public site when non-empty. */
                 'json_ld' => '',

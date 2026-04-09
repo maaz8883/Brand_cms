@@ -26,6 +26,13 @@ if (! in_array($page, $exampted_pages)) {
 			if (is_array($orbit_service_payload) && ! empty($orbit_service_payload['service'])) {
 				$page = 'service-dynamic.php';
 				$path = '';
+				$svcContent = $orbit_service_payload['service']['content'] ?? null;
+				if (is_array($svcContent)) {
+					$svcAddress = trim((string) ($svcContent['contact_info']['address'] ?? ''));
+					if ($svcAddress !== '') {
+						$add = $svcAddress;
+					}
+				}
 			}
 		}
 	}

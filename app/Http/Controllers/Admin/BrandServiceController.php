@@ -79,6 +79,7 @@ class BrandServiceController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'content' => 'nullable|array',
+            'content.contact_info.address' => 'nullable|string|max:500',
             'content.seo.json_ld' => 'nullable|string|max:100000',
         ]);
 
@@ -154,6 +155,7 @@ class BrandServiceController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'content' => 'nullable|array',
+            'content.contact_info.address' => 'nullable|string|max:500',
             'content.seo.json_ld' => 'nullable|string|max:100000',
         ]);
 

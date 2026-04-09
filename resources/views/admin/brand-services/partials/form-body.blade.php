@@ -46,6 +46,11 @@
             <label class="form-label">Meta description</label>
             <textarea name="meta_description" class="form-control" rows="2" maxlength="500">{{ old('meta_description', $service->meta_description ?? '') }}</textarea>
         </div>
+        <div class="col-12">
+            <label class="form-label">Footer address (optional)</label>
+            <textarea name="content[contact_info][address]" class="form-control" rows="2" maxlength="500" placeholder="Leave empty to use the default address from the static site config">{{ old('content.contact_info.address', data_get($c, 'contact_info.address', '')) }}</textarea>
+            <small class="text-muted">If set, this replaces the address in the Orbit theme footer (and mobile header) for this service URL only.</small>
+        </div>
     </div>
 </div>
 
@@ -71,7 +76,7 @@
 </div>
 
 <div class="accordion" id="svcSections">
-    <p class="text-muted small mb-2">Site <strong>header</strong> and <strong>footer</strong> stay in your static theme (not managed here).</p>
+    <p class="text-muted small mb-2">Site <strong>header</strong> and <strong>footer</strong> layout stay in your static theme; optional <strong>footer address</strong> for this page is set under General above.</p>
 
     {{-- Hero --}}
     <div class="accordion-item">
