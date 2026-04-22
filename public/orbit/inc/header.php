@@ -21,8 +21,8 @@ if (!empty($components[1]) && $components[1] === 'index.php' && isset($component
 			</div>
 
 			<div class="col-lg-2 col-md-4 col-6">
-				<a href="<?php echo $base_url?>" class="logo d-block" aria-label="Home page">
-					<img class=" logo" alt="<?php echo $bname?>" src="assets/img/logo.webp">
+				<a href="<?php echo $base_url ?>" class="logo d-block" aria-label="Home page">
+					<img class=" logo" alt="<?php echo $bname ?>" src="assets/img/logo.webp">
 				</a>
 			</div>
 
@@ -39,9 +39,9 @@ if (!empty($components[1]) && $components[1] === 'index.php' && isset($component
 								</div>
 
 								<div class="col-6">
-									<a href="<?php echo $base_url?>" class="logo d-block"
+									<a href="<?php echo $base_url ?>" class="logo d-block"
 										aria-label="Home page">
-										<img class="lozad logo" alt="<?php echo $bname?>"
+										<img class="lozad logo" alt="<?php echo $bname ?>"
 											data-src="assets/img/logo.webp">
 									</a>
 								</div>
@@ -66,42 +66,36 @@ if (!empty($components[1]) && $components[1] === 'index.php' && isset($component
 						<li>
 							<a href="book-writing-services" class="<?php echo $first_part == 'Book-writing' ? 'active' : '' ?>">Book Writing</a>
 						</li>
+						<li>
+							<a href="blogs" class="<?php echo $first_part == 'blogs' || $first_part == 'blog' ? 'active' : '' ?>">Blog</a>
+						</li>
 						<li class="drop-down"> <span class="" style="color: #fff;">More Services ▼</span>
 							<div class="drop-down-cont">
-								
-								<?php $headerlist=['book-editing','Author-Website','audio-book','book-video','book-cover','illustration'];
+
+								<?php $headerlist = ['book-editing', 'Author-Website', 'audio-book', 'book-video', 'book-cover', 'illustration'];
 								$first_class = in_array($first_part, $headerlist) ? 'active clr-1' : ''; ?>
 								<ul class="row list-unstyled p-lg-3 ps-3">
-									
+
 									<li class="mb-lg-3 col-6"><a href="author-website-services" class="<?php echo $first_part == 'author-website' ? 'active' : '' ?>"><img
 												class="lozad nav-icon d-none d-lg-inline"
 												data-src="assets/img/nav-icons/design-service/icon-2.webp"
-												alt="Author Website By <?php echo $bname?>"
-												
-												>Author Website</a></li>
+												alt="Author Website By <?php echo $bname ?>">Author Website</a></li>
 									<li class="mb-lg-3 col-6"><a href="audio-book-services" class="<?php echo $first_part == 'audio-book' ? 'active' : '' ?>"><img
 												class="lozad nav-icon d-none d-lg-inline"
 												data-src="assets/img/nav-icons/design-service/audio-book.webp"
-												alt="Audio Book By <?php echo $bname?>"
-												
-												>Audio Book</a></li>
+												alt="Audio Book By <?php echo $bname ?>">Audio Book</a></li>
 									<li class="mb-lg-3 col-6"><a href="book-video-services" class="<?php echo $first_part == 'book-video' ? 'active' : '' ?>"><img
 												class="lozad nav-icon d-none d-lg-inline"
 												data-src="assets/img/nav-icons/design-service/icon-5.webp"
-												alt="Book Video By <?php echo $bname?>"
-												
-												>Book Video</a></li>
+												alt="Book Video By <?php echo $bname ?>">Book Video</a></li>
 									<li class="mb-lg-3 col-6"><a href="book-cover-services" class="<?php echo $first_part == 'book-cover' ? 'active' : '' ?>"><img
 												class="lozad nav-icon d-none d-lg-inline"
 												data-src="assets/img/nav-icons/design-service/icon-10.webp"
-												alt="Book Cover Design By <?php echo $bname?>"
-												
-												>Book Cover Design</a></li>
+												alt="Book Cover Design By <?php echo $bname ?>">Book Cover Design</a></li>
 									<li class="mb-lg-3 col-6"><a href="book-illustration-services" class="<?php echo $first_part == 'illustration' ? 'active' : '' ?>"><img
 												class="lozad nav-icon d-none d-lg-inline"
 												data-src="assets/img/nav-icons/design-service/icon-18.webp"
-												alt="Illustration By <?php echo $bname?>"
-												>Illustration & Graphics</a></li>
+												alt="Illustration By <?php echo $bname ?>">Illustration & Graphics</a></li>
 								</ul>
 							</div>
 						</li>
@@ -118,11 +112,11 @@ if (!empty($components[1]) && $components[1] === 'index.php' && isset($component
 								<?= htmlspecialchars((string) $add, ENT_QUOTES, 'UTF-8') ?></span>
 							<ul class="list-unstyled d-flex justify-content-start">
 								<li class="me-3 ms-0">
-									<a href="https://www.facebook.com/orbitbookpublishers1/" aria-label="Like and follow <?php echo $bname?>'s facbook page"
+									<a href="https://www.facebook.com/orbitbookpublishers1/" aria-label="Like and follow <?php echo $bname ?>'s facbook page"
 										target="_blank"><span class="icon-fb"></span></a>
 								</li>
 								<li class="ms-0">
-									<a href="https://www.instagram.com/orbitbookpublishers/" aria-label="Follow Book <?php echo $bname?>'s on Instagram"
+									<a href="https://www.instagram.com/orbitbookpublishers/" aria-label="Follow Book <?php echo $bname ?>'s on Instagram"
 										target="_blank"><span class="icon-insta"></span></a>
 								</li>
 							</ul>

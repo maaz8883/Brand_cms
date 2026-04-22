@@ -11,13 +11,42 @@ use Illuminate\Support\Facades\Storage;
 
 class BlogApiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $blogs = Blog::with(['user', 'brand'])->latest()->get();
-        $blogs = $blogs->map(function ($blog) {
-            return $this->formatBlogResponse($blog);
-        });
-        
+        $query = Blog::with(['user', 'brand'])->latest();
+
+        // Filter by brand slug: ?brand=orbit
+        if ($request->filled('brand')) {
+            $query->whereHas('brand', function ($q) use ($request) {
+                $q->where('slug', $request->input('brand'));
+            });
+        }
+
+        // Filter by status: ?status=published (default to published for public API)
+        $status = $request->input('status', 'published');
+        if ($status !== 'all') {
+            $query->where('status', $status);
+        }
+
+        // Pagination: ?per_page=12&page=1
+        $perPage = min((int) $request->input('per_page', 0), 100);
+        if ($perPage > 0) {
+            $paginated = $query->paginate($perPage);
+            $blogs = collect($paginated->items())->map(fn($blog) => $this->formatBlogResponse($blog));
+            return response()->json([
+                'success' => true,
+                'data' => $blogs,
+                'meta' => [
+                    'current_page' => $paginated->currentPage(),
+                    'last_page'    => $paginated->lastPage(),
+                    'per_page'     => $paginated->perPage(),
+                    'total'        => $paginated->total(),
+                ],
+            ]);
+        }
+
+        $blogs = $query->get()->map(fn($blog) => $this->formatBlogResponse($blog));
+
         return response()->json([
             'success' => true,
             'data' => $blogs
@@ -26,10 +55,13 @@ class BlogApiController extends Controller
 
     public function show($slug)
     {
+        // Support both slug and slug_en columns
         $blog = Blog::with(['user', 'brand'])
-            ->where('slug_en', $slug)
+            ->where(function ($q) use ($slug) {
+                $q->where('slug_en', $slug)->orWhere('slug', $slug);
+            })
             ->first();
-        
+
         if (!$blog) {
             return response()->json([
                 'success' => false,
@@ -137,15 +169,23 @@ class BlogApiController extends Controller
             'data' => $this->formatBlogResponse($blog)
         ]);
     }
-    
+
     /**
-     * Format blog response with full URL for featured_image
+     * Format blog response with full URL for featured_image.
+     * Handles both bare filenames (e.g. "1744190412.jpg") stored without
+     * the subfolder prefix, and full paths (e.g. "blogs/1744190412.jpg").
      */
     private function formatBlogResponse(Blog $blog): array
     {
         $featured = null;
         if (! empty($blog->featured_image)) {
-            $featured = url(Storage::url($blog->featured_image));
+            $path = $blog->featured_image;
+            // If the stored value has no directory separator it's a bare filename —
+            // prepend the blogs/ subfolder so Storage::url() resolves correctly.
+            if (! str_contains($path, '/') && ! str_contains($path, '\\')) {
+                $path = 'blogs/' . $path;
+            }
+            $featured = url(Storage::url($path));
         }
 
         return [
