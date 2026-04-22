@@ -312,7 +312,7 @@ function orbit_render_dynamic_service(array $payload): void
 						<div class="seats-us-sec-box my-4 text-center">
 							<img src="<?= orbit_e($img); ?>" alt="">
 							<h4><?= orbit_e($item['title'] ?? ''); ?></h4>
-							<p><?= orbit_e($item['description'] ?? ''); ?></p>
+							<p><?= $item['description'] ?? ''; ?></p>
 						</div>
 					</li>
 					<?php } ?>
