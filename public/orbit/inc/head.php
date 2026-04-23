@@ -265,6 +265,101 @@
 				$service_schema_json = '';
 			}
 		}
+	} elseif (! empty($orbit_blog_data)) {
+		$raw = $orbit_blog_data['json_ld'] ?? '';
+		if (is_string($raw) && trim($raw) !== '') {
+			$decoded = json_decode(trim($raw), true);
+			if (json_last_error() === JSON_ERROR_NONE && $decoded !== null) {
+				$service_schema_json = json_encode(
+					$decoded,
+					JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP
+				);
+				if ($service_schema_json === false) {
+					$service_schema_json = '';
+				}
+			}
+		}
+
+		// If no manual schema was provided, auto-generate default BlogPosting schema
+		if ($service_schema_json === '') {
+			$site_base = rtrim((string) $url, '/');
+			$org_id = $site_base . '#organization';
+			$graph = [];
+			
+			$graph[] = [
+				'@type' => 'Organization',
+				'@id' => $org_id,
+				'name' => $bname,
+				'url' => $site_base,
+				'logo' => ['@type' => 'ImageObject', 'url' => $logo],
+				'telephone' => $no,
+				'address' => [
+					'@type' => 'PostalAddress',
+					'streetAddress' => $add,
+				],
+			];
+			
+			$graph[] = [
+				'@type' => 'WebSite',
+				'@id' => $site_base . '#website',
+				'url' => $site_base,
+				'name' => $bname,
+				'publisher' => ['@id' => $org_id],
+			];
+			
+			$blogPost = [
+				'@type' => 'BlogPosting',
+				'@id' => $canonical_url . '#blogposting',
+				'headline' => $orbit_blog_data['title'] ?? 'Blog',
+				'description' => $discription !== '' ? $discription : ($orbit_blog_data['short_description'] ?? ''),
+				'url' => $canonical_url,
+				'publisher' => ['@id' => $org_id],
+				'author' => [
+				    '@type' => 'Person',
+				    'name' => $orbit_blog_data['author'] ?? ($orbit_blog_data['user']['name'] ?? 'Admin')
+				],
+				'datePublished' => $orbit_blog_data['created_at'] ?? '',
+				'dateModified' => $orbit_blog_data['updated_at'] ?? ''
+			];
+			if (!empty($orbit_blog_data['featured_image'])) {
+			    $blogPost['image'] = $orbit_blog_data['featured_image'];
+			}
+			$graph[] = $blogPost;
+			
+			$items = [];
+			$items[] = [
+				'@type' => 'ListItem',
+				'position' => 1,
+				'name' => 'Home',
+				'item' => $site_base . '/'
+			];
+			$items[] = [
+				'@type' => 'ListItem',
+				'position' => 2,
+				'name' => 'Blogs',
+				'item' => $site_base . '/blogs'
+			];
+			$items[] = [
+				'@type' => 'ListItem',
+				'position' => 3,
+				'name' => $orbit_blog_data['title'] ?? 'Blog',
+				'item' => $canonical_url
+			];
+			
+			$graph[] = [
+				'@type' => 'BreadcrumbList',
+				'@id' => $canonical_url . '#breadcrumb',
+				'itemListElement' => $items,
+			];
+			
+			$service_schema_json = json_encode(
+				['@context' => 'https://schema.org', '@graph' => $graph],
+				JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP
+			);
+			if ($service_schema_json === false) {
+				$service_schema_json = '';
+			}
+		}
 	}
 	?>
 

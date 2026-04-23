@@ -8,6 +8,7 @@ use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class BlogController extends Controller
 {
@@ -139,7 +140,12 @@ class BlogController extends Controller
             'content' => 'nullable|string',
             'brand_id' => 'nullable|exists:brands,id',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
+            'json_ld' => 'nullable|string|max:100000',
         ]);
+
+        $jsonLd = $validated['json_ld'] ?? null;
+        $this->validateSeoJsonLd($jsonLd);
+        $validated['json_ld'] = $jsonLd;
 
         $slug = $validated['slug'] ?? Str::slug($validated['title']);
         $selectedBrand = ! empty($validated['brand_id'])
@@ -169,6 +175,7 @@ class BlogController extends Controller
             'title_en' => $validated['title'],
             'slug_en' => $slug,
             'content_en' => $validated['content'] ?? null,
+            'json_ld' => $validated['json_ld'] ?? null,
             'short_description_en' => $validated['meta_description'] ?? null,
             'user_id' => auth()->id(),
             'status' => 'published',
@@ -204,7 +211,12 @@ class BlogController extends Controller
             'content' => 'nullable|string',
             'brand_id' => 'nullable|exists:brands,id',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
+            'json_ld' => 'nullable|string|max:100000',
         ]);
+
+        $jsonLd = $validated['json_ld'] ?? null;
+        $this->validateSeoJsonLd($jsonLd);
+        $validated['json_ld'] = $jsonLd;
 
         $slug = $validated['slug'] ?? Str::slug($validated['title']);
         $selectedBrand = ! empty($validated['brand_id'])
@@ -240,6 +252,7 @@ class BlogController extends Controller
             'title_en' => $validated['title'],
             'slug_en' => $slug,
             'content_en' => $validated['content'] ?? null,
+            'json_ld' => $validated['json_ld'] ?? null,
             'short_description_en' => $validated['meta_description'] ?? null,
             'author' => $selectedBrand?->name,
         ];
@@ -276,5 +289,23 @@ class BlogController extends Controller
         }
 
         return asset($image);
+    }
+
+    private function validateSeoJsonLd(?string &$raw): void
+    {
+        if (! is_string($raw)) {
+            return;
+        }
+        $raw = trim($raw);
+        if ($raw === '') {
+            $raw = null;
+            return;
+        }
+        json_decode($raw);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw ValidationException::withMessages([
+                'json_ld' => 'Invalid JSON-LD: '.json_last_error_msg(),
+            ]);
+        }
     }
 }

@@ -21,6 +21,7 @@ class Blog extends Model
         'title_en',
         'slug_en',
         'content_en',
+        'json_ld',
         'featured_image',
         'status',
         'user_id',

@@ -109,6 +109,27 @@
                 @enderror
             </div>
 
+            <div class="card mb-4">
+                <div class="card-header"><strong>Structured data (JSON-LD)</strong></div>
+                <div class="card-body">
+                    <p class="text-muted small mb-2">
+                        Optional. Paste valid JSON-LD here to <strong>replace</strong> the auto-generated Organization / Service / Breadcrumb script on the public site for this page only.
+                        Leave empty to keep the default generated schema. Typical shape: <code>{"@context":"https://schema.org","@graph":[...]}</code>
+                    </p>
+                    <label class="form-label">Manual JSON-LD</label>
+                    <textarea
+                        name="json_ld"
+                        class="form-control font-monospace small @error('json_ld') is-invalid @enderror"
+                        rows="10"
+                        spellcheck="false"
+                        placeholder='{ "@context": "https://schema.org", "@graph": [ ... ] }'
+                    >{{ old('json_ld', $blog->json_ld) }}</textarea>
+                    @error('json_ld')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-primary">Update Blog</button>
                 <a href="{{ route('admin.blogs.index') }}" class="btn btn-secondary">Cancel</a>

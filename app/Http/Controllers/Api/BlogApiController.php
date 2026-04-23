@@ -195,6 +195,7 @@ class BlogApiController extends Controller
             'content' => $blog->content_en,
             'short_description' => $blog->short_description_en,
             'featured_image' => $featured,
+            'json_ld' => $blog->json_ld,
             'status' => $blog->status,
             'author' => $blog->author,
             'brand_id' => $blog->brand_id,
