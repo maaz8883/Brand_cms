@@ -135,7 +135,7 @@ $script      = '';
                     <ul class="pagination">
                         <?php if ($currentPage > 1) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=<?= $currentPage - 1 ?>" aria-label="Previous">
+                                <a class="page-link" href="<?= htmlspecialchars($base_url . 'blogs?page=' . ($currentPage - 1), ENT_QUOTES, 'UTF-8') ?>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
@@ -143,13 +143,13 @@ $script      = '';
 
                         <?php for ($p = 1; $p <= $totalPages; $p++) : ?>
                             <li class="page-item <?= $p === $currentPage ? 'active' : '' ?>">
-                                <a class="page-link" href="?page=<?= $p ?>"><?= $p ?></a>
+                                <a class="page-link" href="<?= htmlspecialchars($base_url . 'blogs?page=' . $p, ENT_QUOTES, 'UTF-8') ?>"><?= $p ?></a>
                             </li>
                         <?php endfor; ?>
 
                         <?php if ($currentPage < $totalPages) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?page=<?= $currentPage + 1 ?>" aria-label="Next">
+                                <a class="page-link" href="<?= htmlspecialchars($base_url . 'blogs?page=' . ($currentPage + 1), ENT_QUOTES, 'UTF-8') ?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -217,5 +217,15 @@ $script      = '';
 
     .breadcrumb-item+.breadcrumb-item::before {
         color: rgba(255, 255, 255, .5);
+    }
+
+    .pagination .page-link {
+        color: rgb(81, 223, 207);
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: rgb(81, 223, 207);
+        border-color: rgb(81, 223, 207);
+        color: #fff;
     }
 </style>

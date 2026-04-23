@@ -38,6 +38,28 @@ foreach (orbit_seo_flatten_service_entries($tree['items'] ?? []) as $entry) {
 	];
 }
 
+$blogsApiBase = preg_replace('#/api/v1$#', '/api', orbitApiBaseUrl());
+$blogsUrl = $blogsApiBase . '/blogs?status=published';
+if (defined('ORBIT_BRAND_SLUG') && ORBIT_BRAND_SLUG !== '') {
+	$blogsUrl .= '&brand=' . rawurlencode(ORBIT_BRAND_SLUG);
+}
+$blogsPayload = orbitFetchJson($blogsUrl);
+if (is_array($blogsPayload) && !empty($blogsPayload['success']) && is_array($blogsPayload['data'])) {
+	foreach ($blogsPayload['data'] as $blog) {
+		$slug = $blog['slug'] ?? '';
+		if ($slug === '') {
+			continue;
+		}
+		$lm = $blog['updated_at'] ?? $blog['created_at'] ?? null;
+		$urls[] = [
+			'loc' => orbit_seo_absolute_url('blog/' . ltrim($slug, '/')),
+			'lastmod' => $lm !== null && $lm !== '' ? date('c', strtotime($lm)) : $now,
+			'changefreq' => 'monthly',
+			'priority' => '0.6',
+		];
+	}
+}
+
 header('Content-Type: application/xml; charset=UTF-8');
 
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";

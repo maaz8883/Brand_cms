@@ -13,20 +13,20 @@ $blog = $orbit_blog_data ?? null;
 
 if ($blog === null) {
     // Shouldn't reach here (blog-detail-data.php redirects on null), but guard anyway
-    header('Location: ' . $base_url . '404');
+    header('Location: '.$base_url.'404');
     exit;
 }
 
 // ── View helpers ──────────────────────────────────────────────────────────────
-$blogTitle    = htmlspecialchars((string) ($blog['title']   ?? 'Untitled'), ENT_QUOTES, 'UTF-8');
-$blogContent  = $blog['content'] ?? '';   // raw HTML — rendered as-is
-$blogImage    = ! empty($blog['featured_image'])
+$blogTitle = htmlspecialchars((string) ($blog['title'] ?? 'Untitled'), ENT_QUOTES, 'UTF-8');
+$blogContent = $blog['content'] ?? '';   // raw HTML — rendered as-is
+$blogImage = ! empty($blog['featured_image'])
     ? htmlspecialchars((string) $blog['featured_image'], ENT_QUOTES, 'UTF-8')
     : '';
-$blogDate     = ! empty($blog['created_at'])
+$blogDate = ! empty($blog['created_at'])
     ? date('F j, Y', strtotime((string) $blog['created_at']))
     : '';
-$blogAuthor   = htmlspecialchars(
+$blogAuthor = htmlspecialchars(
     (string) ($blog['author'] ?? ($blog['user']['name'] ?? '')),
     ENT_QUOTES,
     'UTF-8'
@@ -36,7 +36,7 @@ $blogSlugSafe = htmlspecialchars(
     ENT_QUOTES,
     'UTF-8'
 );
-$canonicalUrl = htmlspecialchars($base_url . 'blog/' . $blogSlugSafe, ENT_QUOTES, 'UTF-8');
+$canonicalUrl = htmlspecialchars($base_url.'blog/'.$blogSlugSafe, ENT_QUOTES, 'UTF-8');
 ?>
 
 <!-- ── Hero Banner ─────────────────────────────────────────────────────────── -->
@@ -52,7 +52,7 @@ $canonicalUrl = htmlspecialchars($base_url . 'blog/' . $blogSlugSafe, ENT_QUOTES
                             <a href="<?= htmlspecialchars($base_url, ENT_QUOTES, 'UTF-8') ?>">Home</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="<?= htmlspecialchars($base_url . 'blogs', ENT_QUOTES, 'UTF-8') ?>">Blog</a>
+                            <a href="<?= htmlspecialchars($base_url.'blogs', ENT_QUOTES, 'UTF-8') ?>">Blog</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page"><?= $blogTitle ?></li>
                     </ol>
@@ -72,21 +72,21 @@ $canonicalUrl = htmlspecialchars($base_url . 'blog/' . $blogSlugSafe, ENT_QUOTES
                 <article class="blog-article">
 
                     <!-- Meta -->
-                    <?php if ($blogDate || $blogAuthor) : ?>
+                    <?php if ($blogDate || $blogAuthor) { ?>
                         <div class="blog-article__meta d-flex flex-wrap align-items-center gap-3 mb-4 f-15 border-bottom pb-3">
-                            <?php if ($blogDate) : ?>
+                            <?php if ($blogDate) { ?>
                                 <span class="clr-1 fw-600">
                                     <span class="icon-calendar me-1"></span><?= $blogDate ?>
                                 </span>
-                            <?php endif; ?>
-                            <?php if ($blogAuthor) : ?>
+                            <?php } ?>
+                            <?php if ($blogAuthor) { ?>
                                 <span><span class="icon-user me-1"></span>By <?= $blogAuthor ?></span>
-                            <?php endif; ?>
+                            <?php } ?>
                         </div>
-                    <?php endif; ?>
+                    <?php } ?>
 
                     <!-- Featured Image -->
-                    <?php if ($blogImage) : ?>
+                    <?php if ($blogImage) { ?>
                         <figure class="blog-article__featured mb-4">
                             <img src="<?= $blogImage ?>"
                                 alt="<?= $blogTitle ?>"
@@ -94,7 +94,7 @@ $canonicalUrl = htmlspecialchars($base_url . 'blog/' . $blogSlugSafe, ENT_QUOTES
                                 width="900" height="500"
                                 loading="eager">
                         </figure>
-                    <?php endif; ?>
+                    <?php } ?>
 
                     <!-- Content -->
                     <div class="blog-article__content">
@@ -103,7 +103,7 @@ $canonicalUrl = htmlspecialchars($base_url . 'blog/' . $blogSlugSafe, ENT_QUOTES
 
                     <!-- Share -->
                     <div class="blog-article__share mt-5 pt-4 border-top d-flex align-items-center gap-3 flex-wrap">
-                        <span class="fw-700 f-16">Share:</span>
+                        <!-- <span class="fw-700 f-16">Share:</span>
                         <a href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($canonicalUrl) ?>"
                             target="_blank" rel="noopener noreferrer"
                             class="btn btn-sm btn-outline-primary"
@@ -121,14 +121,14 @@ $canonicalUrl = htmlspecialchars($base_url . 'blog/' . $blogSlugSafe, ENT_QUOTES
                             class="btn btn-sm btn-outline-primary"
                             aria-label="Share on LinkedIn">
                             in LinkedIn
-                        </a>
+                        </a> -->
                     </div>
 
                 </article>
 
                 <!-- Back link -->
                 <div class="mt-4">
-                    <a href="<?= htmlspecialchars($base_url . 'blogs', ENT_QUOTES, 'UTF-8') ?>"
+                    <a href="<?= htmlspecialchars($base_url.'blogs', ENT_QUOTES, 'UTF-8') ?>"
                         class="clr-1 fw-600">
                         <span class="icon-arrow-left me-1"></span> Back to Blog
                     </a>
@@ -136,9 +136,9 @@ $canonicalUrl = htmlspecialchars($base_url . 'blog/' . $blogSlugSafe, ENT_QUOTES
             </div>
 
             <!-- Sidebar -->
-            <aside class="col-lg-4 mt-5 mt-lg-0" aria-label="Blog sidebar">
+            <!-- <aside class="col-lg-4 mt-5 mt-lg-0" aria-label="Blog sidebar">
 
-                <!-- CTA Card -->
+                
                 <div class="sidebar-cta p-4 rounded text-center mb-4">
                     <h3 class="f-22 fw-700 mb-2 clr-l">Ready to Publish?</h3>
                     <p class="f-15 mb-3 clr-l">Let our experts guide you from manuscript to market.</p>
@@ -148,7 +148,7 @@ $canonicalUrl = htmlspecialchars($base_url . 'blog/' . $blogSlugSafe, ENT_QUOTES
                     </button>
                 </div>
 
-                <!-- Contact Card -->
+                
                 <div class="sidebar-contact p-4 rounded border mb-4">
                     <h3 class="f-18 fw-700 mb-3 clr-1">Contact Us</h3>
                     <ul class="list-unstyled mb-0">
@@ -169,7 +169,7 @@ $canonicalUrl = htmlspecialchars($base_url . 'blog/' . $blogSlugSafe, ENT_QUOTES
                     </ul>
                 </div>
 
-            </aside>
+            </aside> -->
 
         </div>
     </div>
