@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class BlogApiController extends Controller
 {
@@ -32,24 +32,25 @@ class BlogApiController extends Controller
         $perPage = min((int) $request->input('per_page', 0), 100);
         if ($perPage > 0) {
             $paginated = $query->paginate($perPage);
-            $blogs = collect($paginated->items())->map(fn($blog) => $this->formatBlogResponse($blog));
+            $blogs = collect($paginated->items())->map(fn ($blog) => $this->formatBlogResponse($blog));
+
             return response()->json([
                 'success' => true,
                 'data' => $blogs,
                 'meta' => [
                     'current_page' => $paginated->currentPage(),
-                    'last_page'    => $paginated->lastPage(),
-                    'per_page'     => $paginated->perPage(),
-                    'total'        => $paginated->total(),
+                    'last_page' => $paginated->lastPage(),
+                    'per_page' => $paginated->perPage(),
+                    'total' => $paginated->total(),
                 ],
             ]);
         }
 
-        $blogs = $query->get()->map(fn($blog) => $this->formatBlogResponse($blog));
+        $blogs = $query->get()->map(fn ($blog) => $this->formatBlogResponse($blog));
 
         return response()->json([
             'success' => true,
-            'data' => $blogs
+            'data' => $blogs,
         ]);
     }
 
@@ -62,16 +63,16 @@ class BlogApiController extends Controller
             })
             ->first();
 
-        if (!$blog) {
+        if (! $blog) {
             return response()->json([
                 'success' => false,
-                'message' => 'Blog not found'
+                'message' => 'Blog not found',
             ], 404);
         }
 
         return response()->json([
             'success' => true,
-            'data' => $this->formatBlogResponse($blog)
+            'data' => $this->formatBlogResponse($blog),
         ]);
     }
 
@@ -88,7 +89,7 @@ class BlogApiController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -112,7 +113,7 @@ class BlogApiController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Blog created successfully',
-            'data' => $this->formatBlogResponse($blog)
+            'data' => $this->formatBlogResponse($blog),
         ], 201);
     }
 
@@ -120,10 +121,10 @@ class BlogApiController extends Controller
     {
         $blog = Blog::find($id);
 
-        if (!$blog) {
+        if (! $blog) {
             return response()->json([
                 'success' => false,
-                'message' => 'Blog not found'
+                'message' => 'Blog not found',
             ], 404);
         }
 
@@ -138,7 +139,7 @@ class BlogApiController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -166,7 +167,7 @@ class BlogApiController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Blog updated successfully',
-            'data' => $this->formatBlogResponse($blog)
+            'data' => $this->formatBlogResponse($blog),
         ]);
     }
 
@@ -183,10 +184,12 @@ class BlogApiController extends Controller
             // If the stored value has no directory separator it's a bare filename —
             // prepend the blogs/ subfolder so Storage::url() resolves correctly.
             if (! str_contains($path, '/') && ! str_contains($path, '\\')) {
-                $path = 'blogs/' . $path;
+                $path = 'blogs/'.$path;
             }
-            $featured = url(Storage::url($path));
+            $featured = asset(Storage::url($path));
         }
+
+        return $featured;
 
         return [
             'id' => $blog->id,
@@ -195,6 +198,7 @@ class BlogApiController extends Controller
             'content' => $blog->content_en,
             'short_description' => $blog->short_description_en,
             'featured_image' => $featured,
+            'image_alt_tag' => $blog->image_alt_tag,
             'json_ld' => $blog->json_ld,
             'status' => $blog->status,
             'author' => $blog->author,
@@ -206,10 +210,10 @@ class BlogApiController extends Controller
                 'id' => $blog->user->id,
                 'name' => $blog->user->name,
             ] : null,
-            'brand' => $blog->relationLoaded('brand') && $blog->brand ? [
-                'id' => $blog->brand->id,
-                'name' => $blog->brand->name,
-                'slug' => $blog->brand->slug,
+            'brand' => $blog->relationLoaded('brand') && $blog->getRelation('brand') ? [
+                'id' => $blog->getRelation('brand')->id,
+                'name' => $blog->getRelation('brand')->name,
+                'slug' => $blog->getRelation('brand')->slug,
             ] : null,
         ];
     }
@@ -218,10 +222,10 @@ class BlogApiController extends Controller
     {
         $blog = Blog::find($id);
 
-        if (!$blog) {
+        if (! $blog) {
             return response()->json([
                 'success' => false,
-                'message' => 'Blog not found'
+                'message' => 'Blog not found',
             ], 404);
         }
 
@@ -233,7 +237,7 @@ class BlogApiController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Blog deleted successfully'
+            'message' => 'Blog deleted successfully',
         ]);
     }
 }

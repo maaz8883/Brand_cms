@@ -140,6 +140,7 @@ class BlogController extends Controller
             'content' => 'nullable|string',
             'brand_id' => 'nullable|exists:brands,id',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
+            'image_alt_tag' => 'nullable|string|max:255',
             'json_ld' => 'nullable|string|max:100000',
         ]);
 
@@ -177,6 +178,7 @@ class BlogController extends Controller
             'content_en' => $validated['content'] ?? null,
             'json_ld' => $validated['json_ld'] ?? null,
             'short_description_en' => $validated['meta_description'] ?? null,
+            'image_alt_tag' => $validated['image_alt_tag'] ?? null,
             'user_id' => auth()->id(),
             'status' => 'published',
             'author' => $selectedBrand?->name,
@@ -211,6 +213,7 @@ class BlogController extends Controller
             'content' => 'nullable|string',
             'brand_id' => 'nullable|exists:brands,id',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
+            'image_alt_tag' => 'nullable|string|max:255',
             'json_ld' => 'nullable|string|max:100000',
         ]);
 
@@ -254,6 +257,7 @@ class BlogController extends Controller
             'content_en' => $validated['content'] ?? null,
             'json_ld' => $validated['json_ld'] ?? null,
             'short_description_en' => $validated['meta_description'] ?? null,
+            'image_alt_tag' => $validated['image_alt_tag'] ?? null,
             'author' => $selectedBrand?->name,
         ];
         $data['featured_image'] = $data['image'];

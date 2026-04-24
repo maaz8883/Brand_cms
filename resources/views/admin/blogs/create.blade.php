@@ -86,6 +86,14 @@
                 @enderror
             </div>
 
+            <div class="mb-3">
+                <label for="image_alt_tag" class="form-label">Image Alt Tag</label>
+                <input type="text" class="form-control @error('image_alt_tag') is-invalid @enderror" id="image_alt_tag" name="image_alt_tag" value="{{ old('image_alt_tag') }}">
+                @error('image_alt_tag')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
             <div class="card mb-4">
                 <div class="card-header"><strong>Structured data (JSON-LD)</strong></div>
                 <div class="card-body">

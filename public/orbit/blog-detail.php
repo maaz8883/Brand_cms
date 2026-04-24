@@ -23,6 +23,9 @@ $blogContent = $blog['content'] ?? '';   // raw HTML — rendered as-is
 $blogImage = ! empty($blog['featured_image'])
     ? htmlspecialchars((string) $blog['featured_image'], ENT_QUOTES, 'UTF-8')
     : '';
+$blogAlt = ! empty($blog['image_alt_tag'])
+    ? htmlspecialchars((string) $blog['image_alt_tag'], ENT_QUOTES, 'UTF-8')
+    : $blogTitle;
 $blogDate = ! empty($blog['created_at'])
     ? date('F j, Y', strtotime((string) $blog['created_at']))
     : '';
@@ -89,7 +92,7 @@ $canonicalUrl = htmlspecialchars($base_url.'blog/'.$blogSlugSafe, ENT_QUOTES, 'U
                     <?php if ($blogImage) { ?>
                         <figure class="blog-article__featured mb-4">
                             <img src="<?= $blogImage ?>"
-                                alt="<?= $blogTitle ?>"
+                                alt="<?= $blogAlt ?>"
                                 class="img-fluid rounded w-100"
                                 width="900" height="500"
                                 loading="eager">

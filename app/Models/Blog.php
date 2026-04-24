@@ -23,6 +23,7 @@ class Blog extends Model
         'content_en',
         'json_ld',
         'featured_image',
+        'image_alt_tag',
         'status',
         'user_id',
         'brand_id',

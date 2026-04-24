@@ -6,22 +6,22 @@
  * Fetches published blogs for the "orbit" brand from the Laravel API.
  */
 
-require_once __DIR__ . '/inc/orbit-api-service.php';
+require_once __DIR__.'/inc/orbit-api-service.php';
 
 // ── Pagination ────────────────────────────────────────────────────────────────
 $currentPage = max(1, (int) ($_GET['page'] ?? 1));
-$perPage     = 9;
+$perPage = 9;
 
 // ── Fetch blogs from API ──────────────────────────────────────────────────────
-$apiBase  = orbitApiBaseUrl();
+$apiBase = orbitApiBaseUrl();
 // The blogs API lives at /api/blogs (not /api/v1/blogs)
 $blogsApiBase = preg_replace('#/api/v1$#', '/api', $apiBase);
-$listUrl  = $blogsApiBase . '/blogs?brand=' . rawurlencode(ORBIT_BRAND_SLUG)
-    . '&status=published&per_page=' . $perPage . '&page=' . $currentPage;
+$listUrl = $blogsApiBase.'/blogs?brand='.rawurlencode(ORBIT_BRAND_SLUG)
+    .'&status=published&per_page='.$perPage.'&page='.$currentPage;
 
-$payload  = orbitFetchJson($listUrl);
+$payload = orbitFetchJson($listUrl);
 
-$blogs      = [];
+$blogs = [];
 $totalPages = 1;
 $totalCount = 0;
 
@@ -34,11 +34,11 @@ if (is_array($payload) && ! empty($payload['success'])) {
 }
 
 // ── SEO (used by head.php) ────────────────────────────────────────────────────
-$title       = 'Blog | Orbit Book Publishers';
+$title = 'Blog | Orbit Book Publishers';
 $discription = 'Explore expert articles, tips, and insights on book publishing, writing, editing, and marketing from Orbit Book Publishers.';
-$robots      = 'INDEX, FOLLOW';
-$class       = 'blogs-page';
-$script      = '';
+$robots = 'INDEX, FOLLOW';
+$class = 'blogs-page';
+$script = '';
 ?>
 
 <!-- ── Hero Banner ─────────────────────────────────────────────────────────── -->
@@ -65,7 +65,7 @@ $script      = '';
 <section class="py-5">
     <div class="container-xl">
 
-        <?php if (empty($blogs)) : ?>
+        <?php if (empty($blogs)) { ?>
             <div class="row justify-content-center text-center py-5">
                 <div class="col-md-6">
                     <h2 class="clr-1 f-30 fw-700">No Posts Yet</h2>
@@ -73,11 +73,11 @@ $script      = '';
                     <a href="<?= htmlspecialchars($base_url, ENT_QUOTES, 'UTF-8') ?>" class="btn mt-3">Back to Home</a>
                 </div>
             </div>
-        <?php else : ?>
+        <?php } else { ?>
 
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
-                <?php foreach ($blogs as $blog) :
-                    $blogSlug  = htmlspecialchars((string) ($blog['slug'] ?? ''), ENT_QUOTES, 'UTF-8');
+                <?php foreach ($blogs as $blog) {
+                    $blogSlug = htmlspecialchars((string) ($blog['slug'] ?? ''), ENT_QUOTES, 'UTF-8');
                     $blogTitle = htmlspecialchars((string) ($blog['title'] ?? 'Untitled'), ENT_QUOTES, 'UTF-8');
                     $blogExcerpt = '';
                     if (! empty($blog['short_description'])) {
@@ -89,76 +89,80 @@ $script      = '';
                         }
                     }
                     $blogImage = ! empty($blog['featured_image']) ? htmlspecialchars((string) $blog['featured_image'], ENT_QUOTES, 'UTF-8') : 'assets/img/article-side.webp';
-                    $blogDate  = ! empty($blog['created_at']) ? date('M j, Y', strtotime((string) $blog['created_at'])) : '';
+                    // echo '<pre>';
+                    // print_r($blogImage);
+                    // echo '</pre>';
+                    $blogAlt = ! empty($blog['image_alt_tag']) ? htmlspecialchars((string) $blog['image_alt_tag'], ENT_QUOTES, 'UTF-8') : $blogTitle;
+                    $blogDate = ! empty($blog['created_at']) ? date('M j, Y', strtotime((string) $blog['created_at'])) : '';
                     $blogAuthor = htmlspecialchars((string) ($blog['author'] ?? ($blog['user']['name'] ?? '')), ENT_QUOTES, 'UTF-8');
-                    $detailUrl = htmlspecialchars($base_url . 'blog/' . $blogSlug, ENT_QUOTES, 'UTF-8');
-                ?>
+                    $detailUrl = htmlspecialchars($base_url.'blog/'.$blogSlug, ENT_QUOTES, 'UTF-8');
+                    ?>
                     <div class="col">
                         <article class="blog-card h-100 d-flex flex-column shadow-sm rounded overflow-hidden">
                             <a href="<?= $detailUrl ?>" class="blog-card__img-wrap d-block overflow-hidden" aria-label="<?= $blogTitle ?>">
                                 <img class="lozad blog-card__img w-100"
                                     data-src="<?= $blogImage ?>"
                                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-                                    alt="<?= $blogTitle ?>"
+                                    alt="<?= $blogAlt ?>"
                                     width="600" height="380"
                                     loading="lazy">
                             </a>
                             <div class="blog-card__body p-4 d-flex flex-column flex-grow-1">
-                                <?php if ($blogDate || $blogAuthor) : ?>
+                                <?php if ($blogDate || $blogAuthor) { ?>
                                     <div class="blog-card__meta d-flex align-items-center gap-3 mb-2 f-14">
-                                        <?php if ($blogDate) : ?>
+                                        <?php if ($blogDate) { ?>
                                             <span class="clr-1"><span class="icon-calendar me-1"></span><?= $blogDate ?></span>
-                                        <?php endif; ?>
-                                        <?php if ($blogAuthor) : ?>
+                                        <?php } ?>
+                                        <?php if ($blogAuthor) { ?>
                                             <span><span class="icon-user me-1"></span><?= $blogAuthor ?></span>
-                                        <?php endif; ?>
+                                        <?php } ?>
                                     </div>
-                                <?php endif; ?>
+                                <?php } ?>
                                 <h2 class="blog-card__title f-20 fw-700 mb-2">
                                     <a href="<?= $detailUrl ?>" class="clr-dark"><?= $blogTitle ?></a>
                                 </h2>
-                                <?php if ($blogExcerpt) : ?>
+                                <?php if ($blogExcerpt) { ?>
                                     <p class="blog-card__excerpt f-15 mb-3 flex-grow-1"><?= $blogExcerpt ?></p>
-                                <?php endif; ?>
+                                <?php } ?>
                                 <a href="<?= $detailUrl ?>" class="blog-card__read-more clr-1 fw-600 f-15 mt-auto">
                                     Read More <span class="icon-arrow-right ms-1"></span>
                                 </a>
                             </div>
                         </article>
                     </div>
-                <?php endforeach; ?>
+                <?php } ?>
             </div>
 
             <!-- ── Pagination ──────────────────────────────────────────────── -->
-            <?php if ($totalPages > 1) : ?>
+            <?php if ($totalPages > 1) { ?>
                 <nav aria-label="Blog pagination" class="d-flex justify-content-center">
                     <ul class="pagination">
-                        <?php if ($currentPage > 1) : ?>
+                        <?php if ($currentPage > 1) { ?>
                             <li class="page-item">
-                                <a class="page-link" href="<?= htmlspecialchars($base_url . 'blogs?page=' . ($currentPage - 1), ENT_QUOTES, 'UTF-8') ?>" aria-label="Previous">
+                                <a class="page-link" href="<?= htmlspecialchars($base_url.'blogs?page='.($currentPage - 1), ENT_QUOTES, 'UTF-8') ?>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                        <?php endif; ?>
+                        <?php } ?>
 
-                        <?php for ($p = 1; $p <= $totalPages; $p++) : ?>
+                        <?php for ($p = 1; $p <= $totalPages; $p++) { ?>
                             <li class="page-item <?= $p === $currentPage ? 'active' : '' ?>">
-                                <a class="page-link" href="<?= htmlspecialchars($base_url . 'blogs?page=' . $p, ENT_QUOTES, 'UTF-8') ?>"><?= $p ?></a>
+                                <a class="page-link" href="<?= htmlspecialchars($base_url.'blogs?page='.$p, ENT_QUOTES, 'UTF-8') ?>"><?= $p ?></a>
                             </li>
-                        <?php endfor; ?>
+                        <?php } ?>
 
-                        <?php if ($currentPage < $totalPages) : ?>
+                        <?php if ($currentPage < $totalPages) { ?>
                             <li class="page-item">
-                                <a class="page-link" href="<?= htmlspecialchars($base_url . 'blogs?page=' . ($currentPage + 1), ENT_QUOTES, 'UTF-8') ?>" aria-label="Next">
+                                <a class="page-link" href="<?= htmlspecialchars($base_url.'blogs?page='.($currentPage + 1), ENT_QUOTES, 'UTF-8') ?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
-                        <?php endif; ?>
+                        <?php } ?>
                     </ul>
                 </nav>
-            <?php endif; ?>
+            <?php } ?>
 
-        <?php endif; ?>
+        <?php } ?>
 
     </div>
 </section>
