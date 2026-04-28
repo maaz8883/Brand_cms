@@ -32,7 +32,7 @@ class BlogApiController extends Controller
         $perPage = min((int) $request->input('per_page', 0), 100);
         if ($perPage > 0) {
             $paginated = $query->paginate($perPage);
-            $blogs = collect($paginated->items())->map(fn ($blog) => $this->formatBlogResponse($blog));
+            $blogs = collect($paginated->items())->map(fn($blog) => $this->formatBlogResponse($blog));
 
             return response()->json([
                 'success' => true,
@@ -46,7 +46,7 @@ class BlogApiController extends Controller
             ]);
         }
 
-        $blogs = $query->get()->map(fn ($blog) => $this->formatBlogResponse($blog));
+        $blogs = $query->get()->map(fn($blog) => $this->formatBlogResponse($blog));
 
         return response()->json([
             'success' => true,
@@ -184,12 +184,13 @@ class BlogApiController extends Controller
             // If the stored value has no directory separator it's a bare filename —
             // prepend the blogs/ subfolder so Storage::url() resolves correctly.
             if (! str_contains($path, '/') && ! str_contains($path, '\\')) {
-                $path = 'blogs/'.$path;
+                $path = 'blogs/' . $path;
             }
-            $featured = asset(Storage::url($path));
+            $featured = url(Storage::url($path));
+            // $featured = asset(Storage::url($path));
         }
 
-        return $featured;
+        // return $featured;
 
         return [
             'id' => $blog->id,
