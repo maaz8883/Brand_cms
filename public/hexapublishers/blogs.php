@@ -28,21 +28,26 @@ if (is_array($payload) && ! empty($payload['success'])) {
 $blogListUrl = rtrim($base_url, '/') . '/blogs';
 ?>
 
-<!-- Inner Banner -->
-<section class="inner-banner py-5 lozad bg" data-background-image="assets/img/banner.webp">
-    <div class="container-xxl py-5">
-        <div class="row justify-content-center text-center">
-            <div class="col-md-10 mt-4">
-                <h1 class="fw-700 clr-l f-60">Our <span class="clr-1">Blog</span></h1>
-                <p class="clr-l f-18 fw-500 mt-3">
-                    Expert insights on book publishing, writing, editing, and marketing — from the <?= htmlspecialchars($bname, ENT_QUOTES, 'UTF-8') ?> team.
-                </p>
-                <nav aria-label="breadcrumb" class="mt-3">
-                    <ol class="breadcrumb justify-content-center" style="background:transparent;">
-                        <li class="breadcrumb-item"><a href="<?= htmlspecialchars($base_url, ENT_QUOTES, 'UTF-8') ?>" class="clr-1">Home</a></li>
-                        <li class="breadcrumb-item active clr-l" aria-current="page">Blog</li>
-                    </ol>
-                </nav>
+<!-- Inner Banner — same pattern as blog-detail.php -->
+<section class="banner bg lozad" data-background-image="<?= getImagePath('assets/img/', 'banner') ?>">
+    <div class="overlay-light py-5">
+        <div class="container-fluid py-5">
+            <div class="row justify-content-center text-center align-items-center pt-5">
+                <div class="col-md-8">
+                    <span class="clr-1 fw-700 f-24">Hexa Publishers</span>
+                    <h1 class="f-55 fw-700">Our Blog</h1>
+                    <p class="f-18 fw-500 mt-2">
+                        Expert insights on book publishing, writing, editing, and marketing — from the <?= htmlspecialchars($bname, ENT_QUOTES, 'UTF-8') ?> team.
+                    </p>
+                    <nav aria-label="breadcrumb" class="mt-3">
+                        <ol class="breadcrumb justify-content-center" style="background:transparent;">
+                            <li class="breadcrumb-item">
+                                <a href="<?= htmlspecialchars($base_url, ENT_QUOTES, 'UTF-8') ?>">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
@@ -184,15 +189,23 @@ $blogListUrl = rtrim($base_url, '/') . '/blogs';
     }
 
     .hp-pagination .page-link {
-        color: var(--clr-1);
+        color: rgba(var(--clr-1), 1);
         border-color: #dee2e6;
+        background-color: #fff;
+        transition: background-color .2s, border-color .2s, color .2s;
     }
 
-    .hp-pagination .page-link:hover,
+    .hp-pagination .page-link:hover {
+        background-color: rgba(var(--clr-1), 1) !important;
+        border-color: rgba(var(--clr-1), 1) !important;
+        color: #fff !important;
+    }
+
     .hp-pagination .page-item.active .page-link {
-        background: var(--clr-1);
-        border-color: var(--clr-1);
-        color: #fff;
+        background-color: rgba(var(--clr-1), 1) !important;
+        border-color: rgba(var(--clr-1), 1) !important;
+        color: #fff !important;
+        font-weight: 700;
     }
 
     .inner-banner {
