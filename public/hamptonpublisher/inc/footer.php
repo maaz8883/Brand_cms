@@ -4,7 +4,7 @@
          <div class="row">
             <div class="col-md-4 cols-m-4 col-lg-4 col-12">
                <div class="footer-logo">
-                  <img src="https://hamptonpublishers.com/images/footer-logo.png" class="img-fluid" alt="<?php echo $bname ?>">
+                  <img src="<?php echo $url ?>images/footer-logo.png" class="img-fluid" alt="<?php echo $bname ?>">
                   <!-- <h3>Logo</h3> -->
                   <p>With 10+ years of hard work and sweat, we stand proudly in the book market knowing that we have no competitors in terms of providing quality and timely delivery both at the same time. Our clients recognize our work in just one glance. Partner with <?php echo $bname ?> and make your book dreams a reality.</p>
                   <ul>
@@ -18,14 +18,14 @@
                <div class="footer-services">
                   <h3>SERVICES</h3>
                   <ul>
-                     <li> <a href="https://hamptonpublishers.com/non-fiction-writing">Non Fiction Writing</a> </li>
-                     <li> <a href="https://hamptonpublishers.com/song-writing">Song Writing</a> </li>
-                     <li> <a href="https://hamptonpublishers.com/rhymes-writing">Poems Writing</a> </li>
-                     <li> <a href="https://hamptonpublishers.com/e-book-writing">E-book Writing</a> </li>
-                     <li> <a href="https://hamptonpublishers.com/memoir-writing">Memoir Writing</a> </li>
-                     <li> <a href="https://hamptonpublishers.com/book-cover-design">Book Cover Design</a> </li>
-                     <li> <a href="https://hamptonpublishers.com/author-website-deisgn">Author website Design</a> </li>
-                     <li> <a href="https://hamptonpublishers.com/children-book-printing">Children's Book Priniting</a> </li>
+                     <li> <a href="<?php echo $url ?>non-fiction-writing">Non Fiction Writing</a> </li>
+                     <li> <a href="<?php echo $url ?>song-writing">Song Writing</a> </li>
+                     <li> <a href="<?php echo $url ?>rhymes-writing">Poems Writing</a> </li>
+                     <li> <a href="<?php echo $url ?>e-book-writing">E-book Writing</a> </li>
+                     <li> <a href="<?php echo $url ?>memoir-writing">Memoir Writing</a> </li>
+                     <li> <a href="<?php echo $url ?>book-cover-design">Book Cover Design</a> </li>
+                     <li> <a href="<?php echo $url ?>author-website-deisgn">Author website Design</a> </li>
+                     <li> <a href="<?php echo $url ?>children-book-printing">Children's Book Priniting</a> </li>
                      <li> <a href="<?php echo $base_url ?>blogs">Blog</a> </li>
                   </ul>
                </div>
@@ -33,7 +33,7 @@
             <div class="col-md-4 cols-m-4 col-lg-4 col-12">
                <div class="footer-payment">
                   <h3>PAYMENT METHODS:</h3>
-                  <img src="https://hamptonpublishers.com/images/payment-method.webp" class="img-fluid"
+                  <img src="<?php echo $url ?>images/payment-method.webp" class="img-fluid"
                      alt="<?php echo $bname ?>">
                   <div class="address-bar">
                      <div class="address-icon"> <i class="fa fa-map-marker"></i> </div>
@@ -71,8 +71,8 @@
             </div>
             <div class="footer-terms">
                <ul>
-                  <li><a href="https://hamptonpublishers.com/privacy">Privacy Policy</a></li>
-                  <li><a href="https://hamptonpublishers.com/terms">Terms & Condition</a></li>
+                  <li><a href="<?php echo $url ?>privacy">Privacy Policy</a></li>
+                  <li><a href="<?php echo $url ?>terms">Terms & Condition</a></li>
                </ul>
             </div>
          </div>
@@ -430,12 +430,12 @@
 <!-- <div class="preloader"></div> -->
 <!-- PRELOADER END -->
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
-<script src="https://hamptonpublishers.com/js/jquery-3.3.1.min.js"></script>
-<script src="https://hamptonpublishers.com/js/jquery.fancybox.min.js"></script>
-<script src="https://hamptonpublishers.com/js/popper-min.js"></script>
-<script src="https://hamptonpublishers.com/js/bootstrap.min.js"></script>
-<script src="https://hamptonpublishers.com/js/owl.carousel.min.js"></script>
-<script src="https://hamptonpublishers.com/js/custom.js"></script>
+<script src="<?php echo $url ?>js/jquery-3.3.1.min.js"></script>
+<script src="<?php echo $url ?>js/jquery.fancybox.min.js"></script>
+<script src="<?php echo $url ?>js/popper-min.js"></script>
+<script src="<?php echo $url ?>js/bootstrap.min.js"></script>
+<script src="<?php echo $url ?>js/owl.carousel.min.js"></script>
+<script src="<?php echo $url ?>js/custom.js"></script>
 <script>
    // FLOATING FORM STARTS
    $(".clickbutton").click(function() {

@@ -1,0 +1,2903 @@
+:root {
+    --buton: #ffb700;
+    --light_purple: linear-gradient(98deg, #20b2aa 0%, #005d56 100%) 0% 0%;
+    --section_purple: #fff;
+    --logo-section: #f0fffe;
+    --black: #000;
+    --white: #fff;
+    --primary_color: #005d56;
+    --secondary_color: linear-gradient(98deg, #20b2aa 0%, #005d56 100%) 0% 0% no-repeat padding-box;
+    --header: #005851;
+    --text_color: #141414;
+    --hover_color: #723dd2;
+}
+@media (min-width: 1701px) and (max-width: 1900px) {
+    .headerMenuWrap ul li a,
+    .headerMenuWrap ul li span {
+        font-size: 13px;
+    }
+}
+@media (min-width: 1701px) {
+    .makesContent ul {
+        margin: 15px 0 0;
+    }
+    .bannerTextInner h1 {
+        font-size: 45px;
+    }
+}
+@media (max-width: 1700px) {
+    button.btnPrimary span svg {
+        right: -102%;
+    }
+    .philImageLeft img {
+        max-width: 85%;
+    }
+    .ctaGreen .container:before,
+    .ctaOrange .container:before {
+        display: none;
+    }
+    .bannerContent h1 {
+        font-size: 66px;
+    }
+}
+@media (min-width: 1200px) and (max-width: 1700px) {
+    .headerCta {
+        display: none;
+    }
+    .HeaderCtaPhoneEmail {
+        border-left: 1px solid #ffffff4d;
+    }
+    .logoMain img {
+        max-width: 80%;
+    }
+    .logoMain {
+        position: static;
+        top: 15px;
+        left: 0;
+    }
+    .logoMainWrap {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+    .headerMenuWrap ul li a,
+    .headerMenuWrap ul li span {
+        font-size: 14px;
+        line-height: 24px;
+        padding: 15px 0;
+    }
+    .HeaderCtaPhoneEmail a {
+        font-size: 15px;
+    }
+    .ctaRight {
+        width: 20%;
+    }
+    .headerMenuWrap ul li + li {
+        margin-left: 15px;
+    }
+    .headerMenuMain {
+        width: 63.333333%;
+        padding: 0;
+    }
+    .headerMenuWrap ul.dropDown li a {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .headerMain:after {
+        width: 100%;
+        display: none;
+    }
+    .headerMenuWrap ul {
+        padding: 0;
+    }
+    header {
+        border-bottom: 1px solid #ffffff4d;
+    }
+    .BannerHome .bannerContent {
+        padding-top: 180px;
+        width: 90%;
+    }
+    .custom-tab-list ul li a {
+        font-size: 30px;
+    }
+    .abtLeft h4 {
+        font-size: 38px;
+        line-height: 48px;
+    }
+    .makesContent ul {
+        margin-top: 12px;
+    }
+    .makesContent ul li {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .philContentRight {
+        max-width: 50% !important;
+    }
+    .bannerTextInner h1 {
+        font-size: 42px;
+        line-height: 50px;
+    }
+    p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .aboutSec2Content .bookContentmain ul li {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    span.footerTitle {
+        font-size: 40px;
+    }
+    footer .container-fluid {
+        padding-left: 3%;
+    }
+    .footerRightWrap {
+        width: 33.3%;
+    }
+    ul.socialFooter li a {
+        width: 120px;
+        font-size: 15px;
+    }
+    .innerBanner .container {
+        max-width: 1230px;
+    }
+    .bannerTextInner h1 {
+        font-size: 42px;
+        line-height: 50px;
+    }
+    .ctaTitleLeft .heading2 {
+        font-size: 30px;
+        line-height: 38px;
+    }
+    .ctaTitleRightInnerLeft .aboutCta a.ctaLinePhone:first-child {
+        font-size: 19px;
+    }
+    .ctaTitleRight {
+        padding-left: 20px;
+    }
+    .ctaTitleRightInnerLeft .ctaWrap a.ctaLinePhone {
+        margin-left: 0px;
+    }
+    .ctaTitleLeft {
+        padding-right: 20px;
+    }
+    .ctaTitleRightInnerLeft .aboutCta {
+        min-width: 60%;
+    }
+    .bannerTextInner h1 {
+        font-size: 42px;
+        line-height: 50px;
+    }
+    .ctaTitleLeft .heading2 {
+        font-size: 30px;
+        line-height: 38px;
+    }
+    .ctaTitleRightInnerLeft .aboutCta a.ctaLinePhone:first-child {
+        font-size: 19px;
+    }
+    .ctaTitleRight {
+        padding-left: 20px;
+    }
+    .ctaTitleLeft {
+        padding-right: 20px;
+    }
+    .ctaTitleRightInnerLeft .aboutCta {
+        min-width: 60%;
+    }
+    .ctaTitleRightInnerLeft .ctaWrap a.ctaLinePhone {
+        margin-left: 0px;
+    }
+    .servicesMarque ul {
+        margin-top: 40px;
+    }
+    .servicesMarque ul li {
+        margin-left: 120px;
+        font-size: 90px;
+        line-height: 140px;
+    }
+    .BannerformWrap button.btnPrimary:after {
+        right: 32.5%;
+    }
+    .popupBox {
+        transform: scale(0.75);
+    }
+    .popupBox.show {
+        transform: scale(0.9);
+    }
+    .bannerContent h1 {
+        max-width: 1000px;
+        margin: 0 auto 25px;
+    }
+    .BannerHome .bannerContent p {
+        max-width: 1100px;
+        margin: 0 auto 25px;
+    }
+    .whyChosseUs .container-fluid {
+        padding: 0 70px;
+    }
+}
+@media only screen and (min-width: 1601px) and (max-width: 1920px) {
+    .headerMenuWrap ul li + li {
+        margin-left: 20px;
+    }
+}
+@media only screen and (min-width: 1400px) and (max-width: 1500px) {
+    .headerMenuWrap ul li + li {
+        margin-left: 13px;
+    }
+    .headerMenuWrap ul li a,
+    .headerMenuWrap ul li span {
+        font-size: 12px;
+    }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .bannerTextInner h1 {
+        font-size: 40px;
+    }
+    .headerMenuWrap ul li + li {
+        margin-left: 9px;
+    }
+    .headerMenuWrap ul li a,
+    .headerMenuWrap ul li span {
+        font-size: 12px;
+    }
+}
+@media only screen and (max-width: 1399px) {
+    button.btnPrimary span svg {
+        right: -100%;
+    }
+    .process-wrapper .process-item:nth-child(2n) .p-img {
+        right: -80px;
+    }
+    .process-wrapper .process-item:nth-child(odd) .p-img {
+        right: -80px;
+    }
+    .heading2-light {
+        font-size: 40px;
+    }
+    .bookContebtHome .heading2 {
+        font-size: 34px;
+        line-height: 45px;
+        margin-bottom: 10px !important;
+    }
+    .ctaWrap {
+        margin-top: 0px !important;
+    }
+    .philImageLeft img {
+        max-width: 100%;
+    }
+    span.faqtitlemain {
+        font-size: 42px;
+        line-height: 52px;
+    }
+    span.ctatilefaq {
+        font-size: 26px;
+        line-height: 35px;
+    }
+    .scoreTitlle {
+        font-size: 45px;
+    }
+    .abtLeft-light h2 {
+        font-size: 40px;
+        line-height: 52px;
+        padding-right: 100px;
+    }
+    .abtLeft h2 {
+        font-size: 40px;
+        line-height: 52px;
+    }
+    ul.footerContactDetails li a {
+        font-size: 24px;
+    }
+}
+@media (max-width: 1300px) {
+    .HeaderCtaPhoneEmail a {
+        font-size: 13px;
+    }
+    .headerMenuWrap ul li a,
+    .headerMenuWrap ul li span {
+        font-size: 11px;
+    }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .innerBanner {
+        padding-top: 140px;
+    }
+    .innerBanner .btnBanner {
+        margin-top: 30px;
+    }
+    .bannerTextInner h1 {
+        font-size: 36px;
+    }
+    .tabCont p,
+    p {
+        font-size: 16px;
+    }
+    span.offertitle {
+        font-size: 20px;
+        line-height: 1.6em;
+    }
+    span.sepTitle {
+        font-size: 20px;
+    }
+    .bannerTitle span {
+        font-size: 20px;
+    }
+    .bannerContent h1 {
+        font-size: 46px;
+        line-height: 1.3em;
+    }
+    .BannerHome .bannerContent p {
+        font-size: 18px;
+    }
+    .abtLeft-light h2 {
+        font-size: 34px;
+        padding-right: 40px;
+    }
+    .abtRight-light p {
+        font-size: 18px;
+    }
+    .abtRight p {
+        font-size: 18px;
+    }
+    a.ctaLinePhone svg {
+        padding: 12px;
+        width: 14px;
+        height: 14px;
+    }
+    .aboutCta a.ctaLinePhone {
+        margin-left: 20px;
+    }
+    a.ctaLinePhone {
+        padding-left: 40px;
+    }
+    .aboutCta {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .custom-tab-list ul {
+        margin-top: 80px;
+    }
+    .custom-tab-list ul li a {
+        font-size: 26px;
+    }
+    .tabCont .heading3 {
+        font-size: 26px;
+    }
+    .heading2-light {
+        font-size: 38px;
+    }
+    .serviceBoxinner {
+        padding: 50px 0px;
+    }
+    .serviceBoxinner span.servTitle {
+        font-size: 20px;
+    }
+    .heading2 {
+        font-size: 36px;
+    }
+    .processMain p {
+        font-size: 18px;
+    }
+    .abtLeft h4 {
+        font-size: 36px;
+        line-height: 1.4em;
+    }
+    .makesTitle span,
+    .whyChooseLeft .abtLeft h4 {
+        font-size: 36px;
+    }
+    .makesContent ul li {
+        font-size: 16px;
+        line-height: 1.4em;
+    }
+    .philContentRight {
+        max-width: 44% !important;
+    }
+    .philMain {
+        padding-block: 60px;
+    }
+    .philImageLeft {
+        display: flex;
+        align-items: center;
+    }
+    .contentChoose span {
+        font-size: 24px;
+    }
+    .tabCont p {
+        font-size: 18px;
+    }
+    .abtLeft h4,
+    .iconChoose,
+    .makesTitle span,
+    .portfolioSlider {
+        margin-bottom: 10px;
+    }
+    .whychooseRight {
+        padding-left: 40px !important;
+    }
+    .whychooeIconBoxInner .letsconnect {
+        padding: 20px;
+    }
+    .whychooeIconBoxInner .letsconnect p {
+        font-size: 18px;
+    }
+    .scoreTitlle {
+        font-size: 40px;
+        line-height: 1.3em;
+        padding-right: 90px;
+    }
+    .testCenter .abtLeft h4 {
+        font-size: 36px;
+        line-height: 1.4em;
+    }
+    .mainCOntentSlider {
+        padding: 30px 30px 0;
+    }
+    .testCon p {
+        font-size: 18px;
+    }
+    span.faqtitlemain {
+        font-size: 36px;
+        line-height: 45px;
+    }
+    span.ctatilefaq {
+        font-size: 20px;
+    }
+    .servicesMarque ul li {
+        font-size: 70px;
+        line-height: 80px;
+        margin-left: 100px;
+    }
+    .abtLeft-light h4 {
+        font-size: 40px;
+    }
+    .contactFormBottom input,
+    .contactFormBottom textarea {
+        font-size: 16px;
+    }
+    button.btnPrimary {
+        font-size: 16px;
+    }
+    footer .container-fluid {
+        padding-left: 6%;
+    }
+    span.footerTitle {
+        font-size: 36px;
+    }
+}
+@media (max-width: 1199px) {
+    .contactFormRight button.btnPrimary span svg {
+        right: -58%;
+    }
+    .BannerFields .formFields input {
+        padding: 10px 0;
+    }
+    .BannerFields .formFields {
+        width: 100%;
+    }
+    .BannerFields .formFields input {
+        padding: 10px 0;
+    }
+    .formFields textarea {
+        height: 70px;
+    }
+    .process-wrapper .process-item:hover .cont-2-text,
+    .process-wrapper .process-item:hover .cont-1-text {
+        display: none !important;
+    }
+    .process-wrapper {
+        margin-top: 00px;
+    }
+    .process-wrapper .process-item {
+        padding: 0;
+        width: 200px;
+        display: flex;
+        height: 200px;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        border: 4px solid #005851;
+        margin: 1%;
+        background: #20b2aa;
+        border-radius: 20px;
+    }
+    .process-wrapper .process-item h3 {
+        position: relative;
+        top: 0 !important;
+        bottom: 0 !important;
+    }
+    .process-wrapper .process-item div {
+        width: auto;
+        height: auto;
+        position: relative;
+    }
+    .process-wrapper {
+        flex-wrap: wrap;
+    }
+    .process-wrapper .process-item .p-img,
+    .process-wrapper .process-item div::after,
+    .process-wrapper .process-item div::before {
+        display: none;
+    }
+    .process-wrapper .process-item img:nth-child(3),
+    .process-wrapper .process-item img:nth-child(4) {
+        display: none !important;
+    }
+    .process-wrapper .process-item.active {
+        background: rgba(var(--clr-1), 1);
+    }
+    .process-wrapper .process-item.active h3,
+    .process-wrapper .process-item.active h3::before,
+    .process-wrapper .process-item:hover h3::before {
+        color: #fff;
+    }
+    .process-wrapper .process-item div img:first-child {
+        margin-bottom: 20px;
+    }
+    .reviewBTn a {
+        border-radius: 20px;
+    }
+    .testImageName {
+        bottom: -20px;
+        left: -00px;
+    }
+    span.ctatilefaq {
+        font-size: 20px;
+        line-height: 25px;
+    }
+    .accordion__panel {
+        margin-bottom: 0px;
+    }
+    .accordion__button {
+        font-size: 24px;
+        line-height: 34px;
+        padding: 10px 0px;
+        padding-right: 50px;
+        display: block;
+        text-decoration: none;
+        position: relative;
+    }
+    .servicesMarque ul {
+        margin: 20px 0 0;
+    }
+    .bookContent {
+        padding: 60px 0 50px;
+    }
+    .processMain {
+        padding: 50px 0;
+    }
+    .custom-tab-list ul {
+        margin-top: 40px;
+    }
+    .abtSection {
+        padding: 50px 0 0;
+    }
+    .coreServices {
+        padding: 60px 0;
+    }
+    section.sec4.servicesMainboxes {
+        padding: 50px 0;
+    }
+    .headerMenuWrap ul.dropDown {
+        display: none;
+        position: static;
+        padding-top: 11px;
+        min-width: 100%;
+        background: #f6f6f6;
+        margin-top: 12px;
+    }
+    .headerMenuWrap ul.dropDown li {
+        border: none !important;
+    }
+    .headerMenuWrap ul.dropDown:before {
+        display: none;
+    }
+    .headerMenuWrap ul.dropDown li {
+        border: none !important;
+    }
+    .headerMenuWrap ul.dropDown:before {
+        display: none;
+    }
+    .headerMenuWrap > ul > li + li {
+        margin: 0;
+        border-top: 1px solid #eee;
+    }
+    .headerMenuWrap ul li.hasChild.parentMenu > span > a svg {
+        display: none;
+    }
+    .openDropdown {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 54px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        justify-content: end;
+        width: 100%;
+        padding-right: 20px;
+    }
+    .openDropdown svg {
+        margin: 0 !important;
+    }
+    .headerMenuWrap > ul {
+        width: 100%;
+    }
+    .headerMenuWrap ul li a,
+    .headerMenuWrap ul li span {
+        font-size: 14px;
+    }
+    .mobile-logo img {
+        width: 80%;
+        padding: 20px;
+        max-width: 400px;
+        min-width: 100px;
+    }
+    .mobile-logo {
+        display: block;
+    }
+    .col-md-5.reliable-agencyRight img {
+        width: 100%;
+        padding: 0px 10px;
+    }
+    .contactFormFields button.btnPrimary:after {
+        right: 37.4% !important;
+    }
+    .platformsInner.proDesktop img {
+        width: 90%;
+        margin: auto;
+        display: block;
+    }
+    .ctabtnrightsocial img {
+        max-width: 80px !important;
+    }
+    .ctaTitleRightInnerLeft .aboutCta a.btnPrimary {
+        margin: 25px 0 0 20px;
+    }
+    .ctaTitleRightInnerLeft .aboutCta {
+        margin-right: 0px;
+    }
+    .connectMaininner {
+        padding: 20px;
+        border-radius: 25px;
+    }
+    .connectMainwrap {
+        padding: 20px;
+    }
+    button.btnPrimary span svg {
+        right: -47px;
+    }
+    .headerMenuMain {
+        display: none;
+        position: fixed;
+        left: 0;
+        padding: 0;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        background: rgb(0 0 0 / 80%);
+    }
+    .mobileMenuIcon,
+    .mobileMenuIcon img {
+        display: block;
+        width: 40px;
+    }
+    .headerMenuWrap ul {
+        flex-direction: column;
+        width: fit-content;
+        align-items: start;
+        width: 100%;
+    }
+    .headerMenuWrap ul li + li {
+        margin-left: 0px;
+    }
+    .closeMenu.mobileMenuIcon {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+    .headerMenuWrap {
+        width: 80%;
+        height: 100%;
+        background: #fff;
+        overflow-y: auto;
+    }
+    .headerMenuWrap ul li a,
+    .headerMenuWrap ul li span {
+        color: #333 !important;
+        text-align: left;
+        padding: 0;
+        display: block;
+    }
+    .ctaRight {
+        display: none;
+    }
+    .headerMain:after {
+        width: 100%;
+    }
+    .logoMain a img {
+        max-width: 240px;
+    }
+    .logoMain {
+        width: 100%;
+        position: static;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 10px;
+    }
+    .headerMenuWrap > ul > li {
+        display: block;
+        width: 100%;
+        padding: 15px 20px;
+    }
+    .headerMenuMain.showMenu {
+        display: block;
+    }
+    header.sticky-header .logoMain a img {
+        max-width: 240px;
+    }
+    header.sticky-header .logoMain .mobileMenuIcon img {
+        max-width: 40px;
+    }
+    span.ghostTitleheading {
+        font-size: 36px;
+    }
+    .connectCOntent {
+        padding: 0px;
+        margin-top: 20px;
+        font-weight: 500;
+    }
+    .connectCOntent p span {
+        font-size: 20px;
+    }
+    .aboutCta a.ctaLinePhone {
+        font-size: 17px;
+    }
+    .ctabtnrightsocial .reviewBTn a {
+        width: fit-content;
+        height: auto;
+        padding: 10px 30px;
+    }
+    .ctaTitleRightInnerLeft .aboutCta {
+        padding-right: 20px;
+    }
+    .ctaTitleRightInnerLeft .aboutCta a.ctaLinePhone:first-child span {
+        margin-top: 0px;
+    }
+    .ctaTitleLeft p {
+        font-size: 20px;
+    }
+    .ProContentLeft .abtLeft h4 {
+        font-size: 36px;
+        line-height: 1.5em;
+    }
+    .proconImageLeft img {
+        width: 100%;
+    }
+    .footerRightTop {
+        padding-left: 0px;
+    }
+    .copyRighgtBottom {
+        padding-left: 0px;
+    }
+    .footerRightWrap {
+        width: 33%;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .BannerFormRight {
+        width: 40%;
+    }
+    .bannerContent h1 {
+        font-size: 44px;
+        line-height: 1.4em;
+    }
+    .BannerHome .bannerContent p {
+        font-size: 16px;
+    }
+    .tabCont p,
+    p {
+        font-size: 16px;
+    }
+    .abtRight-light p {
+        font-size: 16px;
+    }
+    .aboutCta {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .reliable-agency .aboutCta {
+        flex-wrap: wrap;
+        gap: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .abtRight p {
+        font-size: 16px;
+    }
+    .BannerHome .bannerContent {
+        padding-top: 140px;
+    }
+    .abtSection {
+        padding-top: 60px;
+        padding-bottom: 50px;
+    }
+    .abtLeft-light h2 {
+        padding-right: 20px;
+        font-size: 30px;
+    }
+    a.btnPrimary,
+    a.btnSecondary {
+        font-size: 13px;
+    }
+    a.ctaLinePhone svg {
+        width: 20px;
+        height: 20px;
+    }
+    .aboutCta a.ctaLinePhone {
+        font-size: 10px;
+    }
+    .abtLeft h2 {
+        font-size: 30px;
+        padding-right: 20px;
+    }
+    .custom-tab-list ul {
+        margin-top: 70px;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: start;
+    }
+    .custom-tab-list ul li {
+        width: fit-content;
+        padding-right: 40px;
+    }
+    .custom-tab-list ul li a {
+        font-size: 28px;
+    }
+    .port-content {
+        max-width: 100% !important;
+    }
+    .tabCont .heading3 {
+        font-size: 24px;
+    }
+    section.sec4.servicesMainboxes {
+        padding: 60px 0px;
+    }
+    .heading2-light {
+        font-size: 34px;
+    }
+    .serviceBoxinner {
+        padding: 40px 20px;
+        height: 100%;
+    }
+    .servicesMainboxes .row {
+        --bs-gutter-y: 1.5rem;
+    }
+    .serviceBoxinner span.servTitle {
+        font-size: 18px;
+        text-align: center;
+    }
+    .bookContent {
+        padding: 60px 0px;
+    }
+    .heading2 {
+        font-size: 30px;
+        line-height: 1.5em;
+    }
+    .processMain {
+        padding: 60px 0px;
+    }
+    .processMain p {
+        font-size: 16px;
+    }
+    .abtLeft h4 {
+        font-size: 30px;
+        line-height: 1.5em;
+    }
+    .makesTitle span,
+    .whyChooseLeft .abtLeft h4 {
+        font-size: 30px;
+        line-height: 1.5em;
+    }
+    .makesTitle {
+        margin-top: 20px;
+    }
+    .makesContent ul {
+        margin: 20px 0 0;
+    }
+    .makesContent ul li {
+        font-size: 16px;
+    }
+    .philContentRight {
+        max-width: 100% !important;
+    }
+    .philMain {
+        padding: 60px 0px;
+    }
+    .testimonialMain,
+    .whyChosseUs {
+        padding: 60px 0px;
+    }
+    .contentChoose span {
+        font-size: 20px;
+        line-height: 1.5em;
+    }
+    .whychooseRight {
+        padding-left: 30px !important;
+    }
+    .reviewBTn a {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        padding: 10px 40px;
+    }
+    .reviewBTn a img {
+        width: 96%;
+        object-fit: contain;
+    }
+    .whychooeIconMyBox {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .whychooeIconMyBox .whychooeIconBoxInner {
+        width: 100%;
+    }
+    .whychooeIconBoxInner .letsconnect {
+        padding: 30px 20px;
+    }
+    .whychooeIconBoxInner .letsconnect p {
+        font-size: 16px;
+    }
+    .whychooeIconBox {
+        padding-bottom: 20px;
+    }
+    .whychooeIconBoxInner.ctaWhyChoose a.btnPrimary {
+        margin-bottom: 0px;
+    }
+    .whychooeIconBoxInner .contentChoose {
+        height: 130px;
+        overflow-y: scroll;
+    }
+    .scoreTitlle {
+        font-size: 40px;
+        line-height: 1.3em;
+    }
+    .scroreBig {
+        padding: 60px 0px;
+    }
+    .testCenter .abtLeft h4 {
+        font-size: 25px;
+        line-height: 1.3em;
+    }
+    .mainCOntentSlider {
+        padding: 30px;
+    }
+    .testCon p {
+        font-size: 16px;
+        line-height: 1.8em;
+    }
+    .testLeft .reviewBTn a {
+        padding: 20px;
+    }
+    .testImageName img {
+        width: 100px;
+        height: 100px;
+    }
+    .contactFormContentLeft .aboutCta a.ctaLinePhone,
+    span.nameClient {
+        font-size: 18px;
+        line-height: 1.5em;
+    }
+    .ratingStar svg {
+        font-size: 14px;
+    }
+    .testCon {
+        height: auto;
+        overflow-y: scroll;
+        padding-right: 6px;
+    }
+    .testCon::-webkit-scrollbar {
+        width: 8px;
+    }
+    .testCon::-webkit-scrollbar-thumb {
+        background-color: #fff;
+        border-radius: 10px;
+    }
+    span.faqtitlemain {
+        font-size: 30px;
+        line-height: 1.5em;
+    }
+    .accordion__button {
+        font-size: 18px;
+    }
+    span.ctatilefaq {
+        font-size: 18px;
+        line-height: 1.5em;
+    }
+    .servicesMarque ul li {
+        font-size: 70px;
+        line-height: 1.5em;
+    }
+    .servicesMarque ul {
+        margin-top: 30px;
+    }
+    section.sec11.faqsMain {
+        padding-block: 60px;
+    }
+    .faqimageright {
+        padding-left: 0px;
+    }
+    .abtLeft-light h4 {
+        font-size: 36px;
+    }
+    .contactFormBottom input,
+    .contactFormBottom textarea,
+    .contactFormBottom input::placeholder,
+    .contactFormBottom textarea::placeholder {
+        font-size: 16px;
+    }
+    button.btnPrimary {
+        font-size: 14px;
+    }
+    .contactFormBottom {
+        padding-block: 60px 60px;
+    }
+    span.footerTitle {
+        font-size: 36px;
+        line-height: 1.5em;
+    }
+    .footerRightTop {
+        padding-left: 0px;
+    }
+    .footerRightWrap {
+        width: 33%;
+        padding-right: 20px;
+    }
+    ul.FooterMenu.padingRight {
+        padding-right: 0px;
+    }
+    .footerLeft {
+        padding-right: 30px;
+    }
+    ul.footerContactDetails {
+        margin-top: 10px;
+    }
+    ul.footerContactDetails li a {
+        font-size: 20px;
+    }
+    .copyRighgtBottom {
+        padding-left: 0px;
+    }
+    .footerLeft {
+        padding: 50px 0;
+    }
+    .footerRightTop {
+        padding: 50px 0 0;
+    }
+    .innerBanner {
+        padding-top: 140px;
+    }
+    .bannerTextInner h1 {
+        font-size: 36px;
+        line-height: 1.5em;
+    }
+    .reviewLogos ul {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .reviewLogos ul li + li {
+        margin-left: 0px;
+    }
+    span.offertitle {
+        font-size: 18px;
+        line-height: 1.5em;
+    }
+    span.sepTitle {
+        font-size: 18px;
+        line-height: 1.5em;
+    }
+    .bannerTitle span {
+        font-size: 18px;
+    }
+    .BannerFields .formFields input {
+        font-size: 14px;
+    }
+}
+@media only screen and (min-width: 300px) and (max-width: 519px) {
+    .aboutCta {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+@media (min-width: 991px) {
+    .port-content {
+        margin: 10px auto 0 !important;
+    }
+    .logoMain img {
+        max-width: 90%;
+    }
+    .headerMenuWrap ul li.hasChild.parentMenu:hover ul.dropDown {
+        display: flex;
+    }
+    a.btnPrimary:hover span svg {
+        transform: rotate(0deg);
+        right: -30px;
+    }
+    .headerCta:hover a {
+        background: #f8b205;
+        color: #1b1402 !important;
+    }
+    .headerCta:hover a svg {
+        color: #1b1402 !important;
+    }
+    .welcomepopupinner button.btnPrimary:after {
+        content: "";
+        right: 38.7%;
+    }
+    .aboutCta {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .welcomepopupcol {
+        background: #fdb612;
+        padding: 8px;
+        border-radius: 10px;
+    }
+    .welcomepopupBox.show {
+        transform: scale(1);
+    }
+    button.btnPrimary:hover span svg {
+        right: -26px;
+        top: 4px;
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    button.btnPrimary:hover {
+        color: #fff !important;
+    }
+    button.btnPrimary:hover:after {
+        width: 105%;
+        height: 105%;
+        border-radius: 0;
+        right: -5px !important;
+        bottom: -5px;
+    }
+    .BannerformWrap button.btnPrimary:after {
+        right: 26.5%;
+    }
+    .contactFormFields button.btnPrimary:after {
+        right: 32.5%;
+    }
+    .contactFormleftwrp button.btnPrimary:after {
+        right: 23%;
+    }
+    .contactFormleftwrp .formFields.FieldButton {
+        width: 216px;
+    }
+    button.btnPrimary:after {
+        content: "";
+        width: 28px;
+        height: 28px;
+        background: #20b3aa !important;
+        position: absolute;
+        border-radius: 100%;
+        right: 36.5%;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: 0.25s;
+        color: var(--white);
+    }
+    ul.socialFooter li a {
+        overflow: hidden;
+        position: relative;
+        transition: 0.3s;
+    }
+    ul.socialFooter li a:after {
+        transition: 0.3s;
+    }
+    ul.socialFooter li:hover a:after {
+        width: 105%;
+        height: 105%;
+        border-radius: 0;
+        top: 0;
+        right: 0;
+        z-index: 9;
+    }
+    ul.socialFooter li a span {
+        position: relative;
+        z-index: 999;
+    }
+    ul.socialFooter li:hover a {
+        color: #223a36 !important;
+        text-align: center;
+    }
+}
+@media (max-width: 850px) {
+    .logoMain img {
+        max-width: 80%;
+    }
+    .HeaderCtaPhoneEmaillp {
+        flex-direction: column;
+    }
+    section.sec1.innerBanner.fantasyBanner.lpBanner {
+        padding-top: 210px;
+    }
+    .logoMainlp {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    header.lpHeader .logoMainlp img {
+        max-width: 150px;
+    }
+    .HederCtaRightlp a {
+        padding: 5px 0;
+    }
+    .ctaRightLp {
+        padding-top: 12px;
+    }
+    .bannerList ul {
+        max-width: 100%;
+        column-count: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .bannerList ul li {
+        font-size: 16px;
+    }
+    section.sec2.ourServicesLp {
+        padding: 40px 0;
+    }
+    .serviceBoxMain {
+        margin-top: 30px;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .serviceIcon {
+        margin-bottom: 20px;
+    }
+    .serviceContent {
+        width: 100%;
+        margin: 0;
+    }
+    section.sec1.innerBanner.fantasyBanner.lpBanner p {
+        text-align: center;
+        margin-top: 12px;
+        display: block;
+    }
+    .bannerList {
+        margin-top: 20px;
+    }
+    .tabContentRight {
+        margin-top: 40px;
+    }
+    span.MainTitleTabs {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .tabcontentwrap {
+        padding: 40px 0;
+    }
+    .spectrum-genres {
+        padding: 40px 0;
+    }
+    .tabTitle span {
+        font-size: 16px;
+        white-space: nowrap;
+    }
+    .tablistMain ul.react-tabs__tab-list li {
+        min-width: auto !important;
+        padding: 0 30px;
+        background: #ebefda;
+        margin-right: 8px;
+        box-shadow: 0 0 8px #ebefda;
+    }
+    .tablistMain ul.react-tabs__tab-list {
+        overflow-x: auto;
+    }
+    .tablistMain {
+        padding: 0;
+    }
+    .tablistMain ul.react-tabs__tab-list li img {
+        max-width: 50px;
+        min-height: 70px;
+    }
+    .tablistMain ul.react-tabs__tab-list li:nth-child(6) img {
+        max-width: 40px;
+    }
+    .whychooseMain {
+        background: rgb(231 240 230 / 50%) !important;
+        text-align: center;
+    }
+    .lpSliderInner {
+        flex-direction: column;
+    }
+    .lpsliderBook {
+        width: 100%;
+    }
+    .lpsliderBook img {
+        max-width: 80%;
+        margin: 0 auto 10px;
+        display: table;
+        position: relative;
+        left: -15px;
+    }
+    .TestiSliderMainLP span.testTitle {
+        font-size: 22px;
+        text-align: center;
+        line-height: 38px;
+    }
+    .lpsliderTestCOntent {
+        text-align: center;
+    }
+    .ourServicesLp .platformsTitle p,
+    .TestiSliderMainLP .platformsTitle p {
+        max-width: 100%;
+    }
+    .TestiSliderMainLP {
+        padding: 40px 0;
+    }
+    .TestiSliderMainLP span.smallTitle {
+        font-size: 20px;
+        line-height: 36px;
+    }
+    .whychooseuslp .platformsTitle {
+        margin-bottom: 30px;
+    }
+    .lpsliderTestCOntent img {
+        display: table;
+        margin: 0 auto;
+    }
+}
+@media (max-width: 991px) {
+    .publisher-review .reviewLogos ul li + li {
+        margin-left: 20px;
+    }
+    .publisher-review {
+        background: none;
+    }
+    .pop-div {
+        max-width: 90%;
+    }
+    .contactFormRight button.btnPrimary span svg {
+        right: -65%;
+    }
+    .sec2.abtSection.process-sec {
+        padding-bottom: 0px;
+    }
+    .ctaGreen {
+        background-position: left;
+    }
+    span.ghostTitleheading {
+        font-size: 36px;
+        line-height: 46px;
+    }
+    .ghostTitleagency {
+        margin-bottom: 10px;
+    }
+    .ghostagecnyContent {
+        background: var(--section_purple);
+        padding: 50px 0px 60px;
+    }
+    .reliable-agency {
+        background: var(--section_purple);
+        padding: 50px 0 60px;
+    }
+    .reliable-agencyRight {
+        margin-top: 30px;
+    }
+    .mainCOntentSlider {
+        border-bottom: 20px solid var(--primary_color);
+    }
+    .testCenter .abtLeft h4 {
+        margin-bottom: 20px;
+    }
+    .faqTitle {
+        margin-bottom: 10px;
+    }
+    .faqTitle {
+        margin-bottom: 10px;
+    }
+    span.ctatilefaq {
+        padding: 30px 30px 0px 30px;
+    }
+    span.faqtitlemain {
+        font-size: 25px;
+        line-height: 1.5em;
+    }
+    .reliable-agency .abtLeft-light {
+        text-align: center;
+    }
+    .custom-tab-list {
+        overflow: hidden;
+    }
+    .custom-tab-list ul {
+        padding: 0;
+        margin: 40px 0 30px;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        padding-bottom: 16px;
+        flex-wrap: nowrap;
+    }
+    .custom-tab-list ul::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        border-radius: 10px;
+    }
+    .custom-tab-list ul::-webkit-scrollbar-track {
+        background: #d4d4d42f;
+    }
+    .custom-tab-list ul::-webkit-scrollbar-thumb {
+        background: #fff;
+        border-radius: 10px;
+    }
+    .custom-tab-list ul li {
+        width: auto;
+    }
+    .whychooseRight.ghostContentagency {
+        width: 100%;
+    }
+    .connectMain {
+        width: 60%;
+        margin: auto;
+        margin-top: 20px;
+    }
+    .ctaTitleRightInnerLeft a.btnPrimary span svg {
+        right: -30px;
+        top: 2px;
+    }
+    .ctaTitleRightInnerLeft .aboutCta {
+        padding-right: 10px;
+    }
+    .ctaTitleRightInnerLeft a.btnPrimary {
+        padding: 15px 50px 15px 20px;
+    }
+    .aboutCta a.ctaLinePhone {
+        margin-left: 15px;
+    }
+    .ctaTitleRightInnerLeft .aboutCta a.btnPrimary {
+        margin: 10px 0 0 10px;
+    }
+    .ctaTitleRight {
+        padding-left: 10px;
+    }
+    .contactFormFields button.btnPrimary:after {
+        right: 34% !important;
+        top: 54%;
+    }
+    .BannerformWrap button.btnPrimary:after {
+        display: none !important;
+    }
+    .aboutCta a.ctaLinePhone span.smallTitleLine:before {
+        width: 0px;
+    }
+    .aboutCta a.ctaLinePhone span.smallTitleLine {
+        padding-left: 0px;
+    }
+    .ctaOrange .ctaTitleRight {
+        border-left: 1px solid #2cfff3;
+        padding-left: 10px;
+    }
+}
+@media (max-width: 767px) {
+    li.publisher-number-btn a.btnPrimary span svg {
+        right: -45%;
+        top: 4%;
+    }
+    li.publisher-number-btn {
+        min-width: 100%;
+        margin: 0px !important;
+        margin-top: 20px !important;
+        text-align: center;
+    }
+    .pop-div button.btnPrimary span:after {
+        background: #20b2aa !important;
+        right: -35px;
+    }
+    .pop-div .popupBox button.btnPrimary span svg {
+        right: -50%;
+    }
+    .pop-div .popupBox {
+        width: 100%;
+    }
+    .pop-div .popup-img-col {
+        display: none;
+    }
+    .BannerFields .formFields {
+        padding: 0 18px;
+    }
+    .AboutSecimage img {
+        width: 80%;
+        margin-top: 10px;
+    }
+    .copyRightContent {
+        margin-top: 10px;
+    }
+    ul.socialFooter {
+        justify-content: center;
+    }
+    span.footerTitle {
+        margin-bottom: 10px !important;
+    }
+    .testCon {
+        min-height: auto;
+        height: 100px;
+    }
+    .mainCOntentSlider {
+        border-bottom: 0px;
+    }
+    .reviewBTn a {
+        border-radius: 20px;
+    }
+    .scroreBig {
+        padding: 70px 0;
+        background-position: left;
+    }
+    .whychooeIconBoxInner .contentChoose {
+        height: auto;
+        padding-right: 6px;
+        overflow-y: auto;
+    }
+    a.ctaLinePhone {
+        padding-left: 50px;
+    }
+    span.faqtitlemain {
+        margin-bottom: 10px;
+    }
+    .faqctaimage {
+        max-width: 70%;
+        margin: auto;
+    }
+    .popupBox button.btnPrimary span svg {
+        right: -60%;
+    }
+    .logoMain {
+        padding: 0px;
+    }
+    .logoMain img {
+        max-width: 80%;
+    }
+    .headerMenuMain {
+        display: none;
+        position: fixed;
+        left: 0;
+        padding: 0;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        background: rgb(0 0 0 / 80%);
+    }
+    .headerMenuMain.showMenu {
+        display: block;
+    }
+    .ctaRight {
+        display: none;
+    }
+    .bannerContent h1 {
+        font-size: 26px;
+        line-height: 35px;
+        margin-bottom: 18px;
+    }
+    .BannerHome .bannerContent p,
+    p {
+        font-size: 14px !important;
+        line-height: 23px !important;
+        text-align: center;
+    }
+    .smallHeading {
+        font-size: 14px;
+    }
+    .tabCont a {
+        display: block;
+        margin: auto;
+        text-align: center;
+    }
+    .scoreTitlle {
+        font-size: 28px;
+        margin-bottom: 20px;
+        line-height: 1.5em;
+        text-align: center;
+    }
+    .btnBanner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .btnBanner a {
+        font-size: 14px;
+    }
+    .row.criclerow {
+        display: none;
+    }
+    .BookTitle {
+        display: none;
+    }
+    .sliderCircle {
+        position: relative;
+        left: -230px;
+    }
+    .btnBanner a.btnSecondary {
+        margin-top: 20px;
+    }
+    .BannerHome {
+        height: auto;
+        padding: 80px 0 60px;
+    }
+    .abtLeft-light h2 {
+        padding-right: 0;
+        text-align: center;
+    }
+    span.smallTitleLine {
+        width: fit-content;
+        margin: auto;
+    }
+    .abtLeft h2 {
+        font-size: 24px;
+        line-height: 37px;
+        text-align: center;
+        padding-right: 0;
+    }
+    .abtLeft-light h2 {
+        font-size: 24px;
+        line-height: 37px;
+    }
+    .cupImage {
+        display: none;
+    }
+    .abtRight p {
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 5px;
+        margin-bottom: 25px;
+    }
+    .abtRight-light p {
+        margin-top: 0;
+        text-align: center;
+    }
+    .aboutCta {
+        flex-direction: column;
+        align-items: start;
+        margin: auto;
+        margin-top: 0px;
+    }
+    .coreServices .abtRight p {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .aboutCta a.btnPrimary {
+        margin-bottom: 10px;
+    }
+    a.btnPrimary {
+        padding: 13px 60px 13px 20px;
+    }
+    a.btnPrimary,
+    a.btnSecondary {
+        font-size: 13px;
+    }
+    .abtSection {
+        padding: 50px 0px;
+    }
+    .custom-tab-list ul {
+        padding: 0;
+        margin: 40px 0 30px;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        padding-bottom: 16px;
+    }
+    .custom-tab-list ul::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        border-radius: 10px;
+    }
+    .custom-tab-list ul::-webkit-scrollbar-track {
+        background: #d4d4d42f;
+    }
+    .custom-tab-list ul::-webkit-scrollbar-thumb {
+        background: #fff;
+        border-radius: 10px;
+    }
+    .custom-tab-list ul li {
+        width: auto;
+    }
+    .custom-tab-list ul li a {
+        font-size: 22px;
+        line-height: 36px;
+    }
+    .custom-tab-list ul li + li {
+        margin-left: 30px;
+    }
+    .custom-tab-list {
+        overflow: hidden;
+    }
+    .port-content {
+        max-width: 100% !important;
+        border: none;
+        padding-left: 0 !important;
+        margin: 10px auto 0 !important;
+    }
+    .custom-tab-list ul li:last-child {
+        min-width: 160px !important;
+    }
+    .coreServices .aboutCta a.ctaLinePhone {
+        margin-left: 12px;
+        margin-top: 10px;
+    }
+    .servicebox {
+        width: 50%;
+    }
+    .faqgirlimg img {
+        display: block;
+    }
+    .serviceBoxinner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 30px 15px;
+        margin: 10px 0;
+    }
+    .servicesMainboxesInner .sericoText {
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+    }
+    .servicesMainboxesInner .sericoText lottie-player {
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    .servicesMainboxesInner .sericoText p {
+        text-align: center;
+        font-size: 16px !important;
+    }
+    .serviceBoxinner span.servTitle {
+        font-size: 13px;
+        line-height: 21px;
+        min-height: 48px;
+        margin-top: 0px;
+    }
+    .serviceBoxinner svg {
+        max-height: 65px;
+    }
+    .lordicon-size {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    section.sec4.servicesMainboxes {
+        background-position: bottom;
+        padding: 50px 0;
+    }
+    .heading2 {
+        margin-bottom: 30px;
+        font-size: 23px;
+        line-height: 36px;
+    }
+    .heading2-light {
+        margin-bottom: 20px;
+        font-size: 28px;
+        line-height: 36px;
+    }
+    #lord-icon {
+        width: 50px !important;
+    }
+    .container,
+    .container-fluid,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+        padding: 0 30px;
+    }
+    .aboutCta a.ctaLinePhone {
+        margin-left: 0px;
+    }
+    .servicesMainboxesContent {
+        padding: 50px 0;
+    }
+    .bookContent {
+        padding: 50px 0;
+        background-position: left;
+    }
+    .processMain,
+    .whyChosseUs {
+        padding: 50px 0;
+    }
+    .portfolioMain {
+        padding: 50px 0;
+    }
+    .PortfolioTitle span.heading2 {
+        padding-right: 70px;
+    }
+    .portArrow {
+        position: absolute;
+        right: 20px;
+        top: 100px;
+    }
+    .philMain .row {
+        display: flex;
+        flex-direction: column-reverse;
+        padding: 0px 0 0;
+    }
+    .philContentRight {
+        max-width: 100% !important;
+        margin-bottom: 0px;
+    }
+    .abtLeft h4 {
+        font-size: 30px;
+        line-height: 36px;
+        text-align: center;
+    }
+    span.smallTitleLine-light {
+        margin: auto;
+        width: fit-content;
+    }
+    .makesTitle span,
+    .whyChooseLeft .abtLeft h4,
+    .testCenter .abtLeft h4 {
+        font-size: 22px;
+        line-height: 33px;
+    }
+    .makesTitle {
+        text-align: center;
+    }
+    .makesContent ul {
+        column-count: 1;
+        margin-top: 20px;
+    }
+    .makesContent ul li {
+        font-size: 16px;
+        line-height: 24px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+    .makesContent ul li svg {
+        display: none;
+    }
+    .philImageLeft {
+        position: relative;
+        left: -18px;
+        display: none;
+    }
+    .philMain {
+        overflow: hidden;
+    }
+    .servicesMainboxesContent .heading2 {
+        text-align: center;
+    }
+    .logoMain {
+        position: static;
+        display: flex;
+        justify-content: space-between;
+    }
+    .logoMain img {
+        max-width: 150px;
+    }
+    .headerMain:after {
+        display: none;
+    }
+    .headerMain {
+        padding: 20px 0px;
+    }
+    .BannerHome .bannerContent {
+        padding-top: 60px;
+    }
+    .reviewBTn a img {
+        max-width: 90px;
+    }
+    .reviewBTn a {
+        width: 100%;
+        height: 70px;
+    }
+    .reviewBTn {
+        display: inline-block;
+        width: 48%;
+    }
+    .trustpilotGoogleBox {
+        margin-top: 30px;
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .reviewBTn + .reviewBTn {
+        margin: 0;
+    }
+    .whychooseRight {
+        padding-left: calc(var(--bs-gutter-x) * 0.5) !important;
+    }
+    .whychooeIconBox {
+        flex-direction: column;
+        border: none;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+    .whychooeIconBoxInner {
+        width: 100%;
+        border-bottom: 1px solid #cae2d6;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+    .whychooeIconBoxInner .letsconnect {
+        padding: 25px;
+        margin-bottom: 40px;
+    }
+    .contentChoose p {
+        margin-bottom: 0px;
+    }
+    .whychooeIconBox:last-child .whychooeIconBoxInner {
+        border: none;
+        margin: 0;
+        padding-bottom: 0;
+        justify-content: center;
+    }
+    .iconChoose svg {
+        height: 70px !important;
+    }
+    .testimonialMain {
+        padding: 50px 0;
+        padding-bottom: 110px;
+    }
+    .testLeft,
+    .testRight {
+        display: none !important;
+    }
+    .testCenter .abtLeft h4 {
+        margin-bottom: 20px;
+    }
+    .testLeftImage {
+        pointer-events: auto;
+    }
+    .mainCOntentSlider {
+        padding: 30px;
+    }
+    .testCon {
+        min-height: auto !important;
+    }
+    .testImageName {
+        position: static;
+    }
+    .testImageName img {
+        max-width: 120px;
+    }
+    span.nameClient {
+        font-size: 22px;
+        line-height: 26px;
+        margin: 0;
+    }
+    .testimonialMain .nextArrow {
+        position: absolute;
+        right: 0;
+        bottom: -80px;
+        cursor: pointer;
+        z-index: 99999;
+    }
+    .testimonialMain .prevArrow {
+        position: absolute;
+        left: 0;
+        bottom: -80px;
+        cursor: pointer;
+        z-index: 99999;
+    }
+    span.ServicClient {
+        margin-top: 3px;
+    }
+    .servicesMarque ul li {
+        font-size: 38px;
+        line-height: 48px;
+        margin-left: 50px;
+    }
+    .servicesMarque ul {
+        margin-top: 40px;
+    }
+    .BlogMain {
+        padding: 50px 0;
+        background-position: left;
+        display: none;
+    }
+    .BlogMain .container-fluid {
+        max-width: 100%;
+        padding-left: calc(var(--bs-gutter-x) * 0.5);
+        padding: 0 30px;
+    }
+    .blogSlider {
+        margin-top: 30px !important;
+    }
+    .blogSlider .swiper-wrapper {
+        align-items: start !important;
+    }
+    span.cateReadTime {
+        font-size: 13px;
+    }
+    span.blogTitle {
+        font-size: 22px;
+        line-height: 30px;
+        margin-bottom: 8px;
+    }
+    .contactFormBottom {
+        padding: 50px 0;
+    }
+    .contactFormContentLeft {
+        margin-bottom: 50px;
+    }
+    ul.socialFooter li + li {
+        margin-left: 12px;
+    }
+    footer .container-fluid .col-md-8 {
+        padding-left: calc(var(--bs-gutter-x) * 0.5);
+    }
+    .BlogMain .container-fluid {
+        max-width: 100%;
+        padding-left: calc(var(--bs-gutter-x) * 0.5);
+        padding: 0 30px;
+    }
+    .blogSlider {
+        margin-top: 30px !important;
+    }
+    .blogSlider .swiper-wrapper {
+        align-items: start !important;
+    }
+    span.cateReadTime {
+        font-size: 13px;
+    }
+    span.blogTitle {
+        font-size: 22px;
+        line-height: 30px;
+        margin-bottom: 8px;
+    }
+    .contactFormBottom {
+        padding: 50px 0;
+    }
+    .contactFormContentLeft {
+        margin-bottom: 20px;
+    }
+    footer .container-fluid {
+        padding: 0 30px;
+    }
+    span.footerTitle {
+        font-size: 24px;
+        line-height: 1.6em;
+        text-align: center;
+    }
+    .footerLeft {
+        padding: 40px 0;
+        border: none;
+    }
+    ul.socialFooter li a {
+        font-size: 12px;
+        width: 100px;
+        line-height: 22px;
+        padding: 10px 12px;
+    }
+    ul.socialFooter li a:after {
+        width: 12px;
+        height: 12px;
+    }
+    .footerRightTop {
+        padding: 0;
+        flex-direction: column;
+        display: none;
+    }
+    .copyRighgtBottom {
+        padding-left: 0px;
+        margin-top: 0px !important;
+        padding-bottom: 30px;
+    }
+    ul.socialFooter li + li {
+        margin-left: 12px;
+    }
+    footer .container-fluid .col-md-8 {
+        padding-left: calc(var(--bs-gutter-x) * 0.5);
+    }
+    .copyRighgtBottom ul {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+    .copyRighgtBottom ul li {
+        margin-bottom: 10px;
+    }
+    .copyRightContent {
+        flex-direction: column;
+        text-align: center;
+    }
+    .copyRightContent p {
+        margin: 0 0 10px;
+    }
+    section.sec5.platforms {
+        padding: 50px 0;
+        display: none;
+    }
+    .platformsInner img {
+        max-width: 100%;
+        width: 60%;
+        margin: auto;
+        display: block;
+        filter: brightness(100);
+    }
+    .formFields.FieldButton input {
+        font-size: 14px;
+    }
+    .innerBanner p {
+        display: none;
+    }
+    .innerBanner h1 {
+        font-size: 32px;
+        line-height: 40px;
+        text-align: center;
+        margin-bottom: 0px;
+    }
+    .reliable-agencyRight img {
+        max-width: 80%;
+    }
+    .ghostTitleagency {
+        margin-bottom: 30px;
+    }
+    .bannerTitle span {
+        font-size: 18px;
+    }
+    span.offertitle {
+        font-size: 24px;
+        line-height: 30px;
+    }
+    span.sepTitle {
+        font-size: 16px;
+    }
+    .bannerFormRightMain {
+        margin-top: 30px;
+        border-radius: 0px;
+    }
+    .bannerWraptile {
+        padding: 15px 30px;
+    }
+    section.ghostTabs {
+        display: none !important;
+    }
+    .reliable-agency {
+        padding: 50px 0 60px;
+    }
+    .mobileMenuIcon img {
+        height: 25px;
+    }
+    .mobileMenuIcon {
+        display: block;
+    }
+    .connectMain {
+        display: none;
+    }
+    .innerBanner .btnBanner {
+        margin-top: 40px;
+        display: none;
+    }
+    .TestiSliderMain .container-fluid {
+        max-width: 100%;
+        padding: 0 30px;
+        width: 100%;
+    }
+    .TestiSliderMain {
+        padding: 50px 0;
+    }
+    .ghostagecnyContent,
+    section.sec11.faqsMain {
+        padding: 50px 0;
+    }
+    span.ghostTitleheading,
+    span.faqtitlemain {
+        font-size: 26px;
+        line-height: 1.5em;
+        text-align: center;
+        display: block;
+    }
+    .content.accordion__panel p {
+        text-align: left;
+    }
+    .ghostContentagency .whychooeIconBox:last-child .whychooeIconBoxInner {
+        width: 100%;
+        border-bottom: 1px solid #cae2d6;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+    .ghostContentagency .whychooeIconBox:last-child .whychooeIconBoxInner:last-child {
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+    .accordion__button {
+        font-size: 20px;
+        line-height: 28px;
+    }
+    .faqimageright {
+        padding: 50px 0 0;
+    }
+    .contentChoose span {
+        font-size: 22px;
+        text-align: center;
+    }
+    .iconChoose {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .ctaTitleRightInnerLeft .ctaWrap {
+        flex-direction: column;
+    }
+    .ctaTitleRightInnerLeft .aboutCta {
+        margin: 0;
+    }
+    .ctabtnrightsocial {
+        display: flex;
+        flex-direction: column;
+    }
+    .ctabtnrightsocial .trustpilotGoogleBox {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    .ctabtnrightsocial .reviewBTn a {
+        width: 220px;
+        height: auto;
+        height: 70px;
+    }
+    .ctaTitleRight {
+        padding-left: 0;
+        border: none;
+        margin: 30px 0 0;
+    }
+    .ctabtnrightsocial .reviewBTn {
+        width: 100%;
+    }
+    .ctabtnrightsocial .trustpilotGoogleBox .reviewBTn + .reviewBTn {
+        margin-top: 22px;
+    }
+    .ctaGreen {
+        background-position: center;
+    }
+    .ctaTitleLeft {
+        padding-right: calc(var(--bs-gutter-x) * 0.5);
+    }
+    .ctaTitleLeft .heading2 {
+        font-size: 30px;
+        line-height: 40px;
+        text-align: center;
+    }
+    .ctaTitleLeft p {
+        text-align: center;
+    }
+    .ctaOrange .ctaTitleRight {
+        padding-left: 0px;
+        border: none;
+    }
+    .platformsInner.proMobile {
+        transform: inherit;
+        margin-bottom: 0px;
+    }
+    .reviewLogos ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .reviewLogos ul li {
+        width: calc(33.3% - 20px);
+    }
+    .reviewLogos ul li img {
+        max-width: 100%;
+    }
+    .reviewManinHeader {
+        padding: 30px 0 30px;
+        background-size: cover;
+        margin-top: 0px;
+    }
+    .BannerFormRight {
+        width: calc(100% + 60px);
+        max-width: calc(100% + 60px);
+        margin-left: -30px;
+    }
+    .BannerFields .formFields input {
+        padding: 15px 0;
+        font-size: 15px;
+    }
+    .BannerFields .formFields {
+        padding: 0 12px;
+    }
+    .reviewLogos ul li + li {
+        margin-left: 30px;
+    }
+    .headerMenuWrap {
+        width: 80%;
+        height: 100%;
+        background: #fff;
+        overflow-y: auto;
+    }
+    .headerMenuWrap > ul {
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        padding: 15px 0;
+    }
+    .headerMenuWrap ul li a,
+    .headerMenuWrap ul li span {
+        color: #333 !important;
+        text-align: left;
+        padding: 0;
+        display: block;
+    }
+    .headerMenuWrap > ul > li {
+        display: block;
+        width: 100%;
+        padding: 15px 20px;
+    }
+    .headerMenuWrap ul > li.parentMenu a > svg,
+    .headerMenuWrap ul > li.parentMenu span > svg {
+        display: none !important;
+    }
+    .openDropdown {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 54px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        justify-content: end;
+        width: 100%;
+        padding-right: 20px;
+    }
+    .openDropdown svg {
+        margin: 0 !important;
+    }
+    span.ghostTitleheading br {
+        display: none;
+    }
+    .philMain.ProContent {
+        padding: 50px 0;
+    }
+    .philMain.ProContent .proconImageLeft img {
+        max-width: 100%;
+    }
+    .ProContentLeft .abtLeft h4 {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .ProContentLeft .abtLeft {
+        margin-top: 40px;
+    }
+    .philMain.ProContent .row {
+        padding: 0px;
+    }
+    section.sec13.bookmarketMobile {
+        padding: 50px 0;
+    }
+    h3.bookheadingmain {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    span.countHas {
+        font-size: 24px;
+    }
+    span.countHas b {
+        width: 85px;
+        letter-spacing: 30px;
+    }
+    span.countHas b span {
+        left: 13px;
+    }
+    .bookmarketMobileLeft span.earnText {
+        font-size: 28px;
+        line-height: 38px;
+    }
+    span.countHas b:before {
+        left: 40px;
+    }
+    .bookmarketMobileRight img {
+        max-width: 100%;
+        margin-top: 50px;
+    }
+    .bookmarketMobileLeft .btnBanner {
+        align-items: start;
+    }
+    .bookmarketingRightImage {
+        margin-bottom: 50px;
+    }
+    .philMain.ProContent.servingMainbox {
+        padding-bottom: 50px !important;
+    }
+    .bookmarketingRightImage {
+        margin-bottom: 50px;
+    }
+    .philMain.ProContent.servingMainbox {
+        padding-bottom: 50px !important;
+    }
+    .servicesMainboxesInner .serviceTitle p {
+        max-width: 100%;
+    }
+    .servicesMainboxesInner .servicebox {
+        width: 100%;
+    }
+    .servicesMainboxesInner .serviceBoxinner span.servTitle {
+        margin-bottom: 0;
+        margin: auto;
+    }
+    .formfieldmain.halfField .formField {
+        width: 100%;
+    }
+    .formfieldmain.halfField {
+        flex-direction: column;
+    }
+    .formfieldmain.halfField .formField + .formField {
+        margin-top: 3%;
+    }
+    .conRightDetails {
+        padding-left: 0px;
+    }
+    .conRightDetails ul li {
+        font-size: 16px;
+    }
+    .contactUsBanner,
+    .AboutUsBanner {
+        padding: 150px 0 40px;
+    }
+    .Aboutsec1Content .bookContentmain {
+        max-width: 100%;
+    }
+    .Aboutsec1Content .bookContentmain {
+        max-width: 100%;
+    }
+    .aboutSec2Content {
+        padding: 50px 0;
+    }
+    .aboutSec2Content .row:nth-child(2n) .bookContentmain {
+        padding: 0 calc(var(--bs-gutter-x) * 0.5);
+    }
+    .aboutSec2Content .row + .row {
+        margin-top: 50px;
+    }
+    .aboutSec2Content ul.twoCol {
+        column-count: 1;
+    }
+    .aboutSec2Content ul.twoCol li,
+    .aboutSec2Content .bookContentmain ul li {
+        font-size: 16px !important;
+        line-height: 24px !important;
+    }
+    .Aboutsec1Content .bookContentmain {
+        text-align: left;
+    }
+    .Aboutsec1Content .bookContent .heading2 {
+        text-align: left;
+    }
+    .wrapper {
+        overflow: hidden;
+    }
+    span.ctatilefaq {
+        font-size: 24px;
+        line-height: 36px;
+        text-align: center;
+    }
+    span.ctatilefaq {
+        font-size: 24px;
+        line-height: 36px;
+    }
+    .fictioncatboxesulInner ul {
+        padding: 0;
+        column-count: 2;
+        font-size: 15px;
+        line-height: 23px;
+    }
+    .fictionInnerCaterow {
+        max-width: 100%;
+        margin: 0 auto 20px;
+    }
+    .fictionInnerCaterow span {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .fictionInnerCate {
+        padding: 50px 0;
+    }
+    span.ctatilefaq {
+        font-size: 24px;
+        line-height: 36px;
+    }
+    .fictioncatboxesulInner ul {
+        padding: 0;
+        column-count: 2;
+        font-size: 15px;
+        line-height: 23px;
+    }
+    .fictionInnerCaterow {
+        max-width: 100%;
+    }
+    .fictionInnerCaterow span {
+        font-size: 30px;
+        line-height: 36px;
+    }
+    .fictionInnerCate {
+        padding: 50px 0;
+    }
+    .fictioncatboxesulInner ul li svg {
+        margin-right: 5px;
+    }
+    ul.footerContactDetails li a {
+        font-size: 18px;
+        text-align: center;
+        display: block;
+        line-height: 2em;
+    }
+    ul.footerContactDetails {
+        margin-top: 0px;
+    }
+    .bookPubsec3 .reliable-agencyRight {
+        position: relative;
+    }
+    .scoreTitle {
+        font-size: 30px;
+        line-height: 38px;
+        margin-bottom: 20px;
+    }
+    .scroreBig {
+        padding: 40px 0 30px;
+    }
+    .innerPageDefaultContent h3.heading2 {
+        font-size: 26px;
+        line-height: 34px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .aboutSec2Content .bookContentmain {
+        padding: 0 5px;
+    }
+    button.btnPrimary span:after {
+        content: "";
+        width: 28px;
+        height: 28px;
+        background: #1a1302 !important;
+        position: absolute;
+        border-radius: 100%;
+        right: -40px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: 0.25s;
+        z-index: -1;
+    }
+    .popupBox {
+        width: 86%;
+        padding: 20px;
+    }
+    span.popTitMain {
+        font-size: 28px;
+        line-height: 36px;
+    }
+    .popuptitle {
+        margin-bottom: 12px;
+    }
+    .popupBox {
+        transform: scale(0.85);
+    }
+    .popupBox.show {
+        transform: scale(0.95);
+    }
+    .closeMenu.mobileMenuIcon {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+    .closeMenu.mobileMenuIcon img {
+        width: 35px;
+        height: 35px;
+    }
+    .swal2-popup {
+        width: 90% !important;
+    }
+    .swal2-title {
+        font-size: 24px !important;
+        line-height: 34px !important;
+    }
+    div#swal2-html-container {
+        padding: 0 15px;
+        font-size: 18px;
+        line-height: 26px;
+    }
+    .StickyCta {
+        display: none !important;
+    }
+    .proMobile {
+        display: block;
+        transform: scale(1.12);
+        margin-bottom: 30px;
+    }
+    .proDesktop {
+        display: none !important;
+    }
+    .bookPrintingMain {
+        background: #e7f0e6 !important;
+        padding: 40px 0 !important;
+    }
+    .bookorintboxmaininner {
+        margin-top: 20px;
+    }
+    span.protypeHeading.text-center {
+        font-size: 32px;
+        margin-bottom: 0px;
+        line-height: 36px;
+    }
+    section.booksliderandboxes {
+        padding: 40px 0;
+    }
+    .bookprintingSec .col-md-12.ghostTitleagency {
+        margin-bottom: 0px;
+    }
+    .bookdetailSlider {
+        flex-direction: column;
+    }
+    .booksliderleft {
+        width: 100%;
+    }
+    .booksliderRight {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .booksliderleft h3 {
+        font-size: 44px;
+        line-height: 50px;
+    }
+    .booksliderinner .swiper-pagination {
+        display: none !important;
+    }
+    .promotionImageLeft {
+        display: none;
+    }
+    .welcomepopupBox {
+        width: 90%;
+        border-radius: 8px;
+        padding: 30px 20px 15px;
+    }
+    .welcomepopupinner span.popTitMain {
+        font-size: 20px;
+        line-height: 24px;
+        margin: 0 0 6px;
+    }
+    .welcomepopupinner .popuptitle p {
+        font-size: 24px !important;
+        line-height: 30px !important;
+    }
+    .contactContentLeft .abtLeft h4 {
+        font-family: ivy_modesemibold;
+        font-size: 24px;
+        line-height: normal;
+        margin-bottom: 4px;
+    }
+    .contactContentLeft .abtLeft span {
+        font-size: 18px;
+    }
+    .processMain .heading2 {
+        margin-bottom: 10px;
+    }
+    .contactFormContentLeft .aboutCta a.ctaLinePhone,
+    span.nameClient {
+        font-size: 23px;
+        line-height: 40px;
+    }
+    .iconChoose lottie-player {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    .BannerHome:after {
+        height: 54px;
+    }
+    .aboutCta {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+    a.ctaLinePhone svg {
+        width: 18px;
+        height: 18px;
+        padding: 13px;
+        top: 2px;
+    }
+    .abtLeft-light h4 {
+        font-size: 26px;
+        text-align: center;
+    }
+    .contactContentLeft {
+        margin: auto;
+        text-align: center;
+        display: block;
+    }
+    .contactFormBottom input,
+    .contactFormBottom textarea,
+    .contactFormBottom input::placeholder,
+    .contactFormBottom textarea::placeholder {
+        font-size: 14px;
+        padding-block: 12px;
+    }
+    button.btnPrimary {
+        font-size: 14px;
+        padding-block: 12px;
+    }
+    .innerBanner {
+        padding-top: 160px;
+    }
+    .ctaTitleRightInnerLeft .aboutCta a.btnPrimary {
+        margin: auto;
+        margin-top: 20px;
+    }
+    .ctaTitleRightInnerLeft .aboutCta {
+        padding-right: 0px;
+    }
+    a.btnPrimary span svg {
+        right: -35%;
+        top: 4%;
+    }
+    button.btnPrimary span svg {
+        right: -62%;
+        top: 8%;
+    }
+    .reliable-agencyLeft .ctaWrap {
+        margin-bottom: 0px;
+    }
+    .bookContentmain p {
+        text-align: center;
+    }
+    .bookContebtHome.bookContent .heading2 {
+        text-align: center;
+    }
+    .tabCont .heading3 {
+        text-align: center;
+    }
+    .philContentRight .ctaWrap {
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media (max-width: 575px) {
+    .bannerWraptile {
+        padding: 15px 5%;
+    }
+    
+ 
+    .testCon {
+        min-height: auto;
+        height: 100px;
+        margin-bottom: 10px;
+        overflow-y: scroll;
+        padding-right: 10px;
+    }
+    span.footerTitle {
+        font-size: 28px;
+    }
+    .nextArrow img,
+    .prevArrow img {
+        max-width: 25px;
+    }
+    .ratingStar svg {
+        font-size: 12px;
+    }
+    span.ServicClient {
+        font-size: 14px;
+    }
+    span.nameClient {
+        font-size: 18px;
+        line-height: 28px;
+    }
+    .philMain {
+        padding-block: 50px;
+    }
+    .serviceBoxinner span.servTitle {
+        font-size: 12px;
+        min-height: 22px;
+        margin-top: 10px;
+    }
+    .serviceBoxinner span.servTitle {
+        min-height: 0px;
+    }
+    .lordicon-size {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    .custom-tab-list ul {
+        margin: 30px 0 10px;
+    }
+    .servicesMarque ul {
+        margin-top: 30px;
+    }
+    .faqctaimage {
+        max-width: 300px;
+    }
+    .mobile-logo img {
+        padding-bottom: 0px;
+    }
+    ul.socialFooter {
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+    }
+    ul.socialFooter li {
+        width: 28%;
+        min-width: 110px;
+    }
+    ul.socialFooter li a {
+        width: 100%;
+    }
+}
+@media (max-width: 400px) {
+    
+
+
+    ul.socialFooter {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    ul.socialFooter li + li {
+        margin-left: 0px;
+    }
+    .serviceBoxinner {
+        padding: 30px 10px;
+    }
+    span.popTitMainup {
+        font-size: 24px;
+        line-height: 30px;
+    }
+}
+@media (max-width: 375px) {
+    
+   
+
+    
+    span.ServicClient {
+        font-size: 12px;
+    }
+    header.sticky-header .logoMain a img {
+        max-width: 180px;
+    }
+    .testImageName img {
+        max-width: 70px;
+    }
+    .lordicon-size {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    .serviceBoxinner {
+        padding: 20px 10px;
+    }
+    .serviceBoxinner span.servTitle {
+        margin-top: 0px;
+    }
+    .serviceBoxinner span.servTitle {
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    span.ctatilefaq {
+        font-size: 20px;
+        line-height: 26px;
+    }
+    .makesContent ul li {
+        font-size: 14px;
+    }
+    .bannerContent h1 {
+        font-size: 22px;
+        line-height: 32px;
+        margin-bottom: 10px;
+    }
+    span.nameClient {
+        font-size: 15px;
+        line-height: 25px;
+    }
+}

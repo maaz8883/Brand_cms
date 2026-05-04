@@ -105,28 +105,70 @@ $_SESSION['last_touch'] = $current;
 // Cookies (30 days)
 setcookie('first_touch', json_encode($_SESSION['first_touch']), time() + 2592000, "/");
 setcookie('last_touch', json_encode($_SESSION['last_touch']), time() + 2592000, "/");
-$base_url  = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
-$base_url .= preg_replace('@/+$@', '', dirname($_SERVER['SCRIPT_NAME'])) . '/';
-$current_url  = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$post_url = htmlspecialchars((isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'] . str_replace('index.php/', '', $_SERVER["PHP_SELF"]));
-$path = str_replace($base_url, '', $current_url);
-$path_prams = explode('?', $path);
-$path = $path_prams[0];
-$prams = !empty($path_prams[1]) ? $path_prams[1] : '';
-$pages = explode('/', $path);
-if (!empty($pages) && count($pages) > 0) {
-    $page = array_pop($pages);
-    $path = implode('/', $pages);
-    $path = !empty($path) ? $path . '/' : '';
+// Force http on localhost to avoid XAMPP SSL redirect issues
+$_isLocalhost = in_array($_SERVER['HTTP_HOST'], ['localhost', '127.0.0.1'], true)
+    || str_starts_with($_SERVER['HTTP_HOST'], 'localhost:')
+    || str_starts_with($_SERVER['HTTP_HOST'], '127.0.0.1:');
+$_scheme = $_isLocalhost ? 'http' : ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http');
+
+$current_url  = $_scheme . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$post_url = htmlspecialchars($_scheme . '://' . $_SERVER['HTTP_HOST'] . str_replace('index.php/', '', $_SERVER["PHP_SELF"]));
+
+// REQUEST_URI-based routing (matches orbit pattern)
+$requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '';
+$requestPath = str_replace('\\', '/', $requestPath);
+$brandPos = stripos($requestPath, '/hamptonpublisher/');
+if ($brandPos !== false) {
+    $base_url = $_scheme . '://' . $_SERVER['HTTP_HOST'];
+    $base_url .= substr($requestPath, 0, $brandPos + strlen('/hamptonpublisher/'));
+
+    $relative = substr($requestPath, $brandPos + strlen('/hamptonpublisher/'));
+    if (stripos($relative, 'index.php/') === 0) {
+        $relative = substr($relative, strlen('index.php/'));
+    } elseif (strcasecmp($relative, 'index.php') === 0) {
+        $relative = '';
+    }
+    $relative = trim($relative, '/');
+    if (preg_match('#\.php$#i', $relative)) {
+        $relative = preg_replace('#\.php$#i', '', $relative);
+    }
+    if ($relative === '' || strcasecmp($relative, 'index') === 0) {
+        $page = 'home';
+        $path = '';
+    } else {
+        $parts = array_values(array_filter(explode('/', $relative), static fn ($s) => $s !== ''));
+        $page = array_pop($parts);
+        $path = count($parts) ? implode('/', $parts) . '/' : '';
+    }
+    if (strpos($page, '.php') !== false) {
+        $page = str_replace('.php', '', $page);
+    }
+    $page = (empty($page) || $page == 'index') ? 'home' : $page;
+    $page .= '.php';
 } else {
-    $page = $path;
-    $path = '';
+    $base_url  = $_scheme . '://' . $_SERVER['HTTP_HOST'];
+    $script_dir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
+    $base_url .= preg_replace('@/+$@', '', $script_dir) . '/';
+    $path = str_replace($base_url, '', $current_url);
+    $path_prams = explode('?', $path);
+    $path = $path_prams[0];
+    $pages = explode('/', $path);
+    if (!empty($pages) && count($pages) > 0) {
+        $page = array_pop($pages);
+        $path = implode('/', $pages);
+        $path = !empty($path) ? $path . '/' : '';
+    } else {
+        $page = $path;
+        $path = '';
+    }
+    if (strpos($page, '.php') !== false) {
+        $page = str_replace('.php', '', $page);
+    }
+    $page = (empty($page) || $page == 'index') ? 'home' : $page;
+    $page .= '.php';
 }
-if (strpos($page, '.php') !== false) {
-    $page = str_replace('.php', '', $page);
-}
-$page = (empty($page) || $page == 'index') ? 'home' : $page;
-$page .= '.php';
+$path_prams = explode('?', str_replace($base_url, '', $current_url));
+$prams = !empty($path_prams[1]) ? $path_prams[1] : '';
 $exampted_pages = array('thankyou.php', '404.php', 'enroll-now.php', 'logo.php', 'website.php', 'brief/seo.php', 'smm.php', 'create_link.php', 'link_details.php', 'paynow.php', 'charge.php', 'fail.php', 'confirm_payment.php');
 $exampt_allfiles = array('create_payment.php', 'confirm_payment.php');
 $no = "(210) 201-5932";
@@ -134,10 +176,10 @@ $no1 = "tel:+12102015932";
 $email = "info@hamptonpublishers.com";
 $add = "Head Office : 3936 Galbrath Drive, North Highlands, CA 95660";
 $add1 = "Address: 1021 E Lincolnway Unit 1253, Cheyenne, WY 82001";
-$url = "https://hamptonpublishers.com/";
+$url = $_isLocalhost ? $base_url : "https://hamptonpublishers.com/";
 $bname = "Hampton Publishers";
 $date = date('Y-m-d H:i:s');
-$logo = 'https://hamptonpublishers.com/images/logo2.png';
+$logo = $_isLocalhost ? $base_url . 'images/logo2.png' : 'https://hamptonpublishers.com/images/logo2.png';
 
 // $title =  'Welcome To US Logo Designs';
 // $keywords =  '';

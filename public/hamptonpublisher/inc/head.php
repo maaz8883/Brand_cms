@@ -7,14 +7,14 @@
     <link rel="icon" href="../images/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
     <meta name="google-site-verification" content="mvdMZfuXILfaQzmdz81woRdQk5AokWXS4RZFTMfmlco" />
-    <link rel="stylesheet" href="https://hamptonpublishers.com/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="<?php echo $base_url ?>css/bootstrap.min.css" />
     <!-- <link rel="stylesheet" href="css/font-awesome.css"> -->
-    <link rel="stylesheet" href="https://hamptonpublishers.com/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="https://hamptonpublishers.com/css/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="<?php echo $base_url ?>css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="<?php echo $base_url ?>css/jquery.fancybox.min.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://hamptonpublishers.com/css/style.css" />
-    <link rel="stylesheet" href="https://hamptonpublishers.com/css/responsive.css" />
-    <link rel="canonical" href="https://hamptonpublishers.com<?= $_SERVER['REQUEST_URI'] ?>" />
+    <link rel="stylesheet" href="<?php echo $base_url ?>css/style.css" />
+    <link rel="stylesheet" href="<?php echo $base_url ?>css/responsive.css" />
+    <link rel="canonical" href="<?php echo $url . $_pathInfo ?>" />
     <!--<link rel="canonical" href="https://www.hamptonpublishers/" />-->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">

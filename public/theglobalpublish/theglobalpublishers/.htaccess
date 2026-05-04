@@ -1,0 +1,33 @@
+# RewriteEngine On
+
+# Redirect both www and HTTP to https://theglobalpublishers.com/
+
+# RewriteCond %{HTTP_HOST} ^www\.theglobalpublishers\.com$ [NC,OR]
+
+# RewriteCond %{HTTPS} off
+
+# RewriteRule ^(.\*)$ https://theglobalpublishers.com/$1 [L,R=301]
+
+# <Files 403.shtml>
+
+# order allow,deny
+
+# allow from all
+
+# </Files>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /theglobalpublishers/
+
+    # Route blog slugs to blog-details.php
+    RewriteRule ^blogs/([a-zA-Z0-9_-]+)$ blogs/blog-details.php?id=$1 [L]
+
+    # Prevent rewrites for existing files or folders
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . index.php [L]
+
+</IfModule>
+
+# deny from 154.57.218.56

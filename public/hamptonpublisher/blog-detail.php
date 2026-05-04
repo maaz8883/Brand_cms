@@ -5,34 +5,33 @@
  * URL: /hamptonpublisher/blog/{slug}
  * Data pre-fetched in inc/hp-blog-detail-data.php (included by index.php before head.php).
  */
-
 $blog = $hp_blog_data ?? null;
 
 if ($blog === null) {
-    header('Location: ' . $base_url . '404');
+    header('Location: '.$base_url.'404');
     exit;
 }
 
 // ── View helpers ──────────────────────────────────────────────────────────────
-$blogTitle    = htmlspecialchars((string) ($blog['title'] ?? 'Untitled'), ENT_QUOTES, 'UTF-8');
-$blogContent  = $blog['content'] ?? '';
-$blogImage    = ! empty($blog['featured_image'])
+$blogTitle = htmlspecialchars((string) ($blog['title'] ?? 'Untitled'), ENT_QUOTES, 'UTF-8');
+$blogContent = $blog['content'] ?? '';
+$blogImage = ! empty($blog['featured_image'])
     ? htmlspecialchars((string) $blog['featured_image'], ENT_QUOTES, 'UTF-8')
     : '';
-$blogAlt      = htmlspecialchars(
+$blogAlt = htmlspecialchars(
     (string) (! empty($blog['image_alt_tag']) ? $blog['image_alt_tag'] : ($blog['title'] ?? 'Blog image')),
     ENT_QUOTES,
     'UTF-8'
 );
-$blogDate     = ! empty($blog['created_at']) ? date('F j, Y', strtotime((string) $blog['created_at'])) : '';
-$blogAuthor   = htmlspecialchars((string) ($blog['author'] ?? ($blog['user']['name'] ?? '')), ENT_QUOTES, 'UTF-8');
+$blogDate = ! empty($blog['created_at']) ? date('F j, Y', strtotime((string) $blog['created_at'])) : '';
+$blogAuthor = htmlspecialchars((string) ($blog['author'] ?? ($blog['user']['name'] ?? '')), ENT_QUOTES, 'UTF-8');
 $blogSlugSafe = htmlspecialchars((string) ($blog['slug'] ?? ($hp_blog_slug_raw ?? '')), ENT_QUOTES, 'UTF-8');
-$canonicalUrl = htmlspecialchars(rtrim((string) $url, '/') . '/blog/' . $blogSlugSafe, ENT_QUOTES, 'UTF-8');
-$blogsUrl     = htmlspecialchars(rtrim((string) $base_url, '/') . '/blogs', ENT_QUOTES, 'UTF-8');
+$canonicalUrl = htmlspecialchars(rtrim((string) $url, '/').'/blog/'.$blogSlugSafe, ENT_QUOTES, 'UTF-8');
+$blogsUrl = htmlspecialchars(rtrim((string) $base_url, '/').'/blogs', ENT_QUOTES, 'UTF-8');
 ?>
 
 <!-- Inner Banner -->
-<section class="inner-banner" style="background: url('<?= $blogImage ?: 'images/inner.jpg' ?>') center/cover no-repeat; padding:100px 0 60px; position:relative;">
+<section class="inner-banner" style="background: url('<?= $base_url ?>images/inner.jpg') center/cover no-repeat; padding:100px 0 60px; position:relative;">
     <div style="position:absolute;inset:0;background:rgba(0,0,0,.55);"></div>
     <div class="container" style="position:relative;z-index:1;">
         <div class="row justify-content-center text-center">
@@ -53,33 +52,33 @@ $blogsUrl     = htmlspecialchars(rtrim((string) $base_url, '/') . '/blogs', ENT_
 <!-- Article Body -->
 <section style="padding:60px 0; background:#f9f9f9;">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
 
             <!-- Main Content -->
-            <div class="col-lg-8 col-md-12">
+            <div class="col-lg-8 col-md-12 m-auto">
                 <article class="hp-blog-article">
 
                     <!-- Meta -->
-                    <?php if ($blogDate || $blogAuthor) : ?>
+                    <?php if ($blogDate || $blogAuthor) { ?>
                         <div class="hp-blog-article__meta">
-                            <?php if ($blogDate) : ?>
+                            <?php if ($blogDate) { ?>
                                 <span><i class="fa fa-calendar"></i> <?= $blogDate ?></span>
-                            <?php endif; ?>
-                            <?php if ($blogAuthor) : ?>
+                            <?php } ?>
+                            <?php if ($blogAuthor) { ?>
                                 <span><i class="fa fa-user"></i> By <?= $blogAuthor ?></span>
-                            <?php endif; ?>
+                            <?php } ?>
                         </div>
-                    <?php endif; ?>
+                    <?php } ?>
 
                     <!-- Featured Image -->
-                    <?php if ($blogImage) : ?>
+                    <?php if ($blogImage) { ?>
                         <figure style="margin:0 0 25px;">
                             <img src="<?= $blogImage ?>"
                                 alt="<?= $blogAlt ?>"
                                 style="width:100%; height:auto; border-radius:8px; max-height:450px; object-fit:cover;"
                                 loading="eager">
                         </figure>
-                    <?php endif; ?>
+                    <?php } ?>
 
                     <!-- Content -->
                     <div class="hp-blog-article__content">
@@ -88,8 +87,8 @@ $blogsUrl     = htmlspecialchars(rtrim((string) $base_url, '/') . '/blogs', ENT_
 
                     <!-- Share -->
                     <div class="hp-blog-article__share">
-                        <span style="font-weight:700;">Share:</span>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($canonicalUrl) ?>"
+                        <!-- <span style="font-weight:700;">Share:</span> -->
+                        <!-- <a href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($canonicalUrl) ?>"
                             target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
                             <i class="fa fa-facebook"></i> Facebook
                         </a>
@@ -100,7 +99,7 @@ $blogsUrl     = htmlspecialchars(rtrim((string) $base_url, '/') . '/blogs', ENT_
                         <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= urlencode($canonicalUrl) ?>&title=<?= urlencode($blogTitle) ?>"
                             target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
                             <i class="fa fa-linkedin"></i> LinkedIn
-                        </a>
+                        </a> -->
                     </div>
 
                     <!-- Back link -->
@@ -114,16 +113,16 @@ $blogsUrl     = htmlspecialchars(rtrim((string) $base_url, '/') . '/blogs', ENT_
             </div>
 
             <!-- Sidebar -->
-            <aside class="col-lg-4 col-md-12 mt-4 mt-lg-0">
+            <!-- <aside class="col-lg-4 col-md-12 mt-4 mt-lg-0">
 
-                <!-- CTA Card -->
+               
                 <div class="hp-sidebar-cta">
                     <h3>Ready to Publish?</h3>
                     <p>Let our experts guide you from manuscript to market.</p>
                     <a href="#!" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Get a Free Quote</a>
                 </div>
 
-                <!-- Contact Card -->
+                
                 <div class="hp-sidebar-contact">
                     <h3>Contact Us</h3>
                     <ul>
@@ -132,7 +131,7 @@ $blogsUrl     = htmlspecialchars(rtrim((string) $base_url, '/') . '/blogs', ENT_
                     </ul>
                 </div>
 
-            </aside>
+            </aside> -->
 
         </div>
     </div>
@@ -150,9 +149,9 @@ $blogsUrl     = htmlspecialchars(rtrim((string) $base_url, '/') . '/blogs', ENT_
     </div>
 </section>
 
-<?php if (! empty($hp_blog_schema_script)) : ?>
+<?php if (! empty($hp_blog_schema_script)) { ?>
     <?= $hp_blog_schema_script ?>
-<?php endif; ?>
+<?php } ?>
 
 <style>
     /* ── Article ── */

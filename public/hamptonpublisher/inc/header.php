@@ -26,7 +26,7 @@
     <header>
         <div class="mobile-menu">
             <div class="mobile-menu-bar">
-                <div class="mobile-logo"> <img src="https://hamptonpublishers.com/images/logo.png" class="img-fluid">
+                <div class="mobile-logo"> <img src="<?php echo $url ?>images/logo.png" class="img-fluid">
                 </div>
                 <div class="circle" id="navbar"><i class="fa fa-bars" aria-hidden="true"></i></div>
             </div>
@@ -34,76 +34,76 @@
                 <div class="mobile-cross close-btn-nav" id="navbar"><i class="fa fa-times" aria-hidden="true"></i></div>
                 <div>
                     <a href="<?php echo $url ?>"><img
-                            src="https://hamptonpublishers.com/images/logo2.jpg" class="img-fluid"
+                            src="<?php echo $url ?>images/logo2.jpg" class="img-fluid"
                             alt="<?php echo $bname ?>" /></a>
                     <!-- <h3>Logo</h3> -->
                 </div>
                 <ul class="navlinks p-0 mt-4">
                     <li> <a href="<?php echo $url ?>" class="active">HOME</a> </li>
-                    <li> <a href="https://hamptonpublishers.com/about">ABOUT</a> </li>
-                    <li class="dropdown"> <a href="https://hamptonpublishers.com/ghostwriting"
+                    <li> <a href="<?php echo $url ?>about">ABOUT</a> </li>
+                    <li class="dropdown"> <a href="<?php echo $url ?>ghostwriting"
                             class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                             aria-expanded="true">GHOST WRITING</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li> <a href="https://hamptonpublishers.com/non-fiction-writing">Non Fiction Writing</a>
+                            <li> <a href="<?php echo $url ?>non-fiction-writing">Non Fiction Writing</a>
                             </li>
-                            <li> <a href="https://hamptonpublishers.com/song-writing">Song Writing</a> </li>
-                            <li> <a href="https://hamptonpublishers.com/rhymes-writing">Poems Writing</a> </li>
-                            <li> <a href="https://hamptonpublishers.com/e-book-writing">E-book Writing</a> </li>
-                            <li> <a href="https://hamptonpublishers.com/memoir-writing">Memoir Writing</a> </li>
+                            <li> <a href="<?php echo $url ?>song-writing">Song Writing</a> </li>
+                            <li> <a href="<?php echo $url ?>rhymes-writing">Poems Writing</a> </li>
+                            <li> <a href="<?php echo $url ?>e-book-writing">E-book Writing</a> </li>
+                            <li> <a href="<?php echo $url ?>memoir-writing">Memoir Writing</a> </li>
                         </ul>
                     </li>
 
-                    <li class="dropdown"> <a href="https://hamptonpublishers.com/book-editing"
+                    <li class="dropdown"> <a href="<?php echo $url ?>book-editing"
                             class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                             aria-expanded="false">Design</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li> <a href="https://hamptonpublishers.com/book-cover-design">Book Cover Design</a>
+                            <li> <a href="<?php echo $url ?>book-cover-design">Book Cover Design</a>
                             </li>
-                            <li> <a href="https://hamptonpublishers.com/author-website-deisgn">Author website
+                            <li> <a href="<?php echo $url ?>author-website-deisgn">Author website
                                     Design</a> </li>
 
-                            <li> <a href="https://hamptonpublishers.com/children-book-printing">Children's Book
+                            <li> <a href="<?php echo $url ?>children-book-printing">Children's Book
                                     Priniting</a> </li>
                         </ul>
                     </li>
-                    <li class="dropdown"> <a href="https://hamptonpublishers.com/book-publishing"
+                    <li class="dropdown"> <a href="<?php echo $url ?>book-publishing"
                             class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                             aria-expanded="false">Publishing</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li> <a href="https://hamptonpublishers.com/book-publishing">Book Publishing &
+                            <li> <a href="<?php echo $url ?>book-publishing">Book Publishing &
                                     Writing</a> </li>
-                            <li><a href="https://hamptonpublishers.com/amazon-publishing">Amazon Publishing</a></li>
+                            <li><a href="<?php echo $url ?>amazon-publishing">Amazon Publishing</a></li>
                             <!-- <li><a href="book-editing">Book Editing</a></li> -->
-                            <li> <a href="https://hamptonpublishers.com/book-marketing">Book Marketing</a> </li>
-                            <li> <a href="https://hamptonpublishers.com/book-cover-design">Book Cover Design</a>
+                            <li> <a href="<?php echo $url ?>book-marketing">Book Marketing</a> </li>
+                            <li> <a href="<?php echo $url ?>book-cover-design">Book Cover Design</a>
                             </li>
 
                         </ul>
                     </li>
-                    <li class="dropdown"> <a href="https://hamptonpublishers.com/book-publishing"
+                    <li class="dropdown"> <a href="<?php echo $url ?>book-publishing"
                             class="dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                             aria-expanded="false">Services</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li> <a href="script-writing">Script Writing</a> </li>
-                            <li> <a href="https://hamptonpublishers.com/narative-writing">Narrative Writing</a>
+                            <li> <a href="<?php echo $url ?>narative-writing">Narrative Writing</a>
                             </li>
-                            <li> <a href="https://hamptonpublishers.com/novel-writing">Novel Writing</a> </li>
-                            <li> <a href="https://hamptonpublishers.com/audiobook-narrator">Audio Book
+                            <li> <a href="<?php echo $url ?>novel-writing">Novel Writing</a> </li>
+                            <li> <a href="<?php echo $url ?>audiobook-narrator">Audio Book
                                     Narrator</a> </li>
-                            <li> <a href="https://hamptonpublishers.com/book-trailer">Book Trailer</a> </li>
-                            <li> <a href="https://hamptonpublishers.com/comedy-writing">Comedy Writing</a> </li>
-                            <li> <a href="https://hamptonpublishers.com/comic-book-writing">Comic Book Writing</a>
+                            <li> <a href="<?php echo $url ?>book-trailer">Book Trailer</a> </li>
+                            <li> <a href="<?php echo $url ?>comedy-writing">Comedy Writing</a> </li>
+                            <li> <a href="<?php echo $url ?>comic-book-writing">Comic Book Writing</a>
                             </li>
-                            <li> <a href="https://hamptonpublishers.com/children-book">Children's Book</a> </li>
-                            <li> <a href="https://hamptonpublishers.com/story-writing">Story Writing</a> </li>
-                            <li> <a href="https://hamptonpublishers.com/wiki-writing">Wiki Writing</a> </li>
+                            <li> <a href="<?php echo $url ?>children-book">Children's Book</a> </li>
+                            <li> <a href="<?php echo $url ?>story-writing">Story Writing</a> </li>
+                            <li> <a href="<?php echo $url ?>wiki-writing">Wiki Writing</a> </li>
 
                         </ul>
                     </li>
-                    <!--<li> <a href="https://hamptonpublishers.com/blogs/index">Blogs</a> </li>-->
+                    <!--<li> <a href="<?php echo $url ?>blogs/index">Blogs</a> </li>-->
                     <li> <a href="<?php echo $base_url ?>blogs">Blog</a> </li>
-                    <li> <a href="https://hamptonpublishers.com/testimonial">Testimonials</a> </li>
+                    <li> <a href="<?php echo $url ?>testimonial">Testimonials</a> </li>
 
                 </ul>
             </div>
@@ -124,21 +124,21 @@
                         <div class="navigation">
                             <ul>
                                 <li> <a href="<?php echo $url ?>">HOME</a> </li>
-                                <li> <a href="https://hamptonpublishers.com/about">ABOUT</a> </li>
-                                <li> <a href="https://hamptonpublishers.com/ghostwriting">GHOST WRITING</a>
+                                <li> <a href="<?php echo $url ?>about">ABOUT</a> </li>
+                                <li> <a href="<?php echo $url ?>ghostwriting">GHOST WRITING</a>
                                     <i class="fa fa-sort-desc"></i>
                                     <ul class="secondry-menu">
                                         <div class="three-col-menu d-flex justify-content-between">
                                             <div>
-                                                <li> <a href="https://hamptonpublishers.com/non-fiction-writing">Non
+                                                <li> <a href="<?php echo $url ?>non-fiction-writing">Non
                                                         Fiction Writing</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/song-writing">Song
+                                                <li> <a href="<?php echo $url ?>song-writing">Song
                                                         Writing</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/rhymes-writing">Poems
+                                                <li> <a href="<?php echo $url ?>rhymes-writing">Poems
                                                         Writing</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/e-book-writing">E-book
+                                                <li> <a href="<?php echo $url ?>e-book-writing">E-book
                                                         Writing</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/memoir-writing">Memoir
+                                                <li> <a href="<?php echo $url ?>memoir-writing">Memoir
                                                         Writing</a> </li>
                                                 <!-- <li> <a href="biography-writing">Biography Writing</a> </li> -->
                                             </div>
@@ -161,7 +161,7 @@
 										</div> -->
                                     </ul>
                                 </li>
-                                <li> <a href="https://hamptonpublishers.com/book-cover-design">Design</a><i
+                                <li> <a href="<?php echo $url ?>book-cover-design">Design</a><i
                                         class="fa fa-sort-desc"></i>
                                     <!-- <ul class="secondry-menu">
 										<li> <a href="action-adventure">Action & Adventure</a> </li>
@@ -173,25 +173,25 @@
                                     <ul class="secondry-menu">
 
                                         <!-- <li> <a href="book-cover-design">Book Cover Design</a> </li> -->
-                                        <li> <a href="https://hamptonpublishers.com/author-website-deisgn">Author
+                                        <li> <a href="<?php echo $url ?>author-website-deisgn">Author
                                                 website Design</a> </li>
 
-                                        <li> <a href="https://hamptonpublishers.com/children-book-printing">Children's
+                                        <li> <a href="<?php echo $url ?>children-book-printing">Children's
                                                 Book Printing</a> </li>
 
                                     </ul>
                                 </li>
-                                <li> <a href="https://hamptonpublishers.com/book-editing">Publishing</a> <i
+                                <li> <a href="<?php echo $url ?>book-editing">Publishing</a> <i
                                         class="fa fa-sort-desc"></i>
                                     <ul class="secondry-menu">
-                                        <li> <a href="https://hamptonpublishers.com/book-publishing">Book Publishing
+                                        <li> <a href="<?php echo $url ?>book-publishing">Book Publishing
                                                 & Writing</a> </li>
-                                        <li><a href="https://hamptonpublishers.com/amazon-publishing">Amazon
+                                        <li><a href="<?php echo $url ?>amazon-publishing">Amazon
                                                 Publishing</a></li>
                                         <!-- <li><a href="book-editing">Book Editing</a></li> -->
-                                        <li> <a href="https://hamptonpublishers.com/book-marketing">Book
+                                        <li> <a href="<?php echo $url ?>book-marketing">Book
                                                 Marketing</a> </li>
-                                        <li> <a href="https://hamptonpublishers.com/book-cover-design">Book Cover
+                                        <li> <a href="<?php echo $url ?>book-cover-design">Book Cover
                                                 Design</a> </li>
                                         <!-- <li> <a href="author-website-deisgn">Authore website Design</a> </li> -->
 
@@ -207,38 +207,38 @@
                                         <div class="three-col-menu d-flex justify-content-between">
 
                                             <div>
-                                                <li> <a href="https://hamptonpublishers.com/script-writing">Script
+                                                <li> <a href="<?php echo $url ?>script-writing">Script
                                                         Writing</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/narative-writing">Narrative
+                                                <li> <a href="<?php echo $url ?>narative-writing">Narrative
                                                         Writing</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/novel-writing">Novel
+                                                <li> <a href="<?php echo $url ?>novel-writing">Novel
                                                         Writing</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/audiobook-narrator">Audio
+                                                <li> <a href="<?php echo $url ?>audiobook-narrator">Audio
                                                         Book Narrator</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/book-trailer">Book
+                                                <li> <a href="<?php echo $url ?>book-trailer">Book
                                                         Trailer</a> </li>
 
-                                                <li> <a href="https://hamptonpublishers.com/screen-writing">Screen
+                                                <li> <a href="<?php echo $url ?>screen-writing">Screen
                                                         Writing</a> </li>
                                             </div>
                                             <div>
-                                                <li> <a href="https://hamptonpublishers.com/comedy-writing">Comedy
+                                                <li> <a href="<?php echo $url ?>comedy-writing">Comedy
                                                         Writing</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/comic-book-writing">Comic
+                                                <li> <a href="<?php echo $url ?>comic-book-writing">Comic
                                                         Book Writing</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/children-book">Children's
+                                                <li> <a href="<?php echo $url ?>children-book">Children's
                                                         Book</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/story-writing">Story
+                                                <li> <a href="<?php echo $url ?>story-writing">Story
                                                         Writing</a> </li>
-                                                <li> <a href="https://hamptonpublishers.com/wiki-writing">Wiki
+                                                <li> <a href="<?php echo $url ?>wiki-writing">Wiki
                                                         Writing</a> </li>
                                             </div>
                                         </div>
                                     </ul>
                                 </li>
-                                <!--<li> <a href="https://hamptonpublishers.com/blogs/index">Blogs</a> </li>-->
+                                <!--<li> <a href="<?php echo $url ?>blogs/index">Blogs</a> </li>-->
                                 <li> <a href="<?php echo $base_url ?>blogs">Blog</a> </li>
-                                <li> <a href="https://hamptonpublishers.com/testimonial">Testimonials</a>
+                                <li> <a href="<?php echo $url ?>testimonial">Testimonials</a>
 
                                 </li>
 

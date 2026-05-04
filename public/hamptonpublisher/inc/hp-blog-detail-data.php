@@ -56,47 +56,55 @@ if (! empty($hp_blog_data['short_description'])) {
     );
 }
 
-// ── JSON-LD BlogPosting schema ────────────────────────────────────────────────
-$_hpBlogUrl     = rtrim((string) $url, '/') . '/blog/' . rawurlencode((string) ($hp_blog_data['slug'] ?? $hp_blog_slug_raw));
-$_hpBlogImgUrl  = (string) ($hp_blog_data['featured_image'] ?? '');
-$_hpBlogDate    = (string) ($hp_blog_data['created_at'] ?? '');
-$_hpBlogUpd     = (string) ($hp_blog_data['updated_at'] ?? $_hpBlogDate);
-$_hpAuthorName  = (string) ($hp_blog_data['author'] ?? ($hp_blog_data['user']['name'] ?? $bname));
+// ── JSON-LD schema: use manual json_ld from admin if set, else auto-generate ─
+$_manualJsonLd = trim((string) ($hp_blog_data['json_ld'] ?? ''));
 
-$_hpSchema = [
-    '@context' => 'https://schema.org',
-    '@graph'   => [
-        array_merge(
-            [
-                '@type'            => 'BlogPosting',
-                '@id'              => $_hpBlogUrl . '#blogposting',
-                'headline'         => (string) ($hp_blog_data['title'] ?? ''),
-                'description'      => mb_substr(strip_tags((string) ($hp_blog_data['short_description'] ?? $hp_blog_data['content'] ?? '')), 0, 200),
-                'url'              => $_hpBlogUrl,
-                'datePublished'    => $_hpBlogDate,
-                'dateModified'     => $_hpBlogUpd,
-                'author'           => ['@type' => 'Person', 'name' => $_hpAuthorName],
-                'publisher'        => [
-                    '@type' => 'Organization',
-                    '@id'   => 'https://hamptonpublishers.com/#organization',
-                    'name'  => $bname,
-                    'logo'  => ['@type' => 'ImageObject', 'url' => 'https://hamptonpublishers.com/images/logo2.png'],
+if ($_manualJsonLd !== '') {
+    // Admin ne manual JSON-LD set kiya hai — use it directly
+    $hp_blog_schema_script = '<script type="application/ld+json">' . $_manualJsonLd . '</script>';
+} else {
+    // Auto-generate BlogPosting schema
+    $_hpBlogUrl     = rtrim((string) $url, '/') . '/blog/' . rawurlencode((string) ($hp_blog_data['slug'] ?? $hp_blog_slug_raw));
+    $_hpBlogImgUrl  = (string) ($hp_blog_data['featured_image'] ?? '');
+    $_hpBlogDate    = (string) ($hp_blog_data['created_at'] ?? '');
+    $_hpBlogUpd     = (string) ($hp_blog_data['updated_at'] ?? $_hpBlogDate);
+    $_hpAuthorName  = (string) ($hp_blog_data['author'] ?? ($hp_blog_data['user']['name'] ?? $bname));
+
+    $_hpSchema = [
+        '@context' => 'https://schema.org',
+        '@graph'   => [
+            array_merge(
+                [
+                    '@type'            => 'BlogPosting',
+                    '@id'              => $_hpBlogUrl . '#blogposting',
+                    'headline'         => (string) ($hp_blog_data['title'] ?? ''),
+                    'description'      => mb_substr(strip_tags((string) ($hp_blog_data['short_description'] ?? $hp_blog_data['content'] ?? '')), 0, 200),
+                    'url'              => $_hpBlogUrl,
+                    'datePublished'    => $_hpBlogDate,
+                    'dateModified'     => $_hpBlogUpd,
+                    'author'           => ['@type' => 'Person', 'name' => $_hpAuthorName],
+                    'publisher'        => [
+                        '@type' => 'Organization',
+                        '@id'   => 'https://hamptonpublishers.com/#organization',
+                        'name'  => $bname,
+                        'logo'  => ['@type' => 'ImageObject', 'url' => 'https://hamptonpublishers.com/images/logo2.png'],
+                    ],
+                    'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $_hpBlogUrl],
                 ],
-                'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $_hpBlogUrl],
-            ],
-            $_hpBlogImgUrl !== '' ? ['image' => ['@type' => 'ImageObject', 'url' => $_hpBlogImgUrl]] : []
-        ),
-        [
-            '@type'           => 'BreadcrumbList',
-            'itemListElement' => [
-                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',  'item' => rtrim((string) $url, '/')],
-                ['@type' => 'ListItem', 'position' => 2, 'name' => 'Blog',  'item' => rtrim((string) $url, '/') . '/blogs'],
-                ['@type' => 'ListItem', 'position' => 3, 'name' => (string) ($hp_blog_data['title'] ?? ''), 'item' => $_hpBlogUrl],
+                $_hpBlogImgUrl !== '' ? ['image' => ['@type' => 'ImageObject', 'url' => $_hpBlogImgUrl]] : []
+            ),
+            [
+                '@type'           => 'BreadcrumbList',
+                'itemListElement' => [
+                    ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',  'item' => rtrim((string) $url, '/')],
+                    ['@type' => 'ListItem', 'position' => 2, 'name' => 'Blog',  'item' => rtrim((string) $url, '/') . '/blogs'],
+                    ['@type' => 'ListItem', 'position' => 3, 'name' => (string) ($hp_blog_data['title'] ?? ''), 'item' => $_hpBlogUrl],
+                ],
             ],
         ],
-    ],
-];
+    ];
 
-$hp_blog_schema_script = '<script type="application/ld+json">'
-    . json_encode($_hpSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
-    . '</script>';
+    $hp_blog_schema_script = '<script type="application/ld+json">'
+        . json_encode($_hpSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+        . '</script>';
+}

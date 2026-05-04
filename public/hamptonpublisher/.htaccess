@@ -1,27 +1,21 @@
 
 RewriteEngine On
-RewriteBase /
 
-# 1. Force HTTPS
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Production: force HTTPS (comment out on localhost/dev)
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ https://%1%{REQUEST_URI} [R=301,QSA,NC,L]
 
-# 2. Remove www
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+# SEO: friendly sitemap (before front controller)
+RewriteRule ^sitemap\.xml$ sitemap.php [L,QSA]
 
-# 3. Remove .php from URL
-RewriteCond %{THE_REQUEST} \s/([^.]+)\.php [NC]
-RewriteRule ^ %1 [R=301,L]
-
-# 4. Send all requests to index.php (Front Controller)
+# Front controller: route all non-file/non-dir requests through index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^sitemap\.xml$ sitemap.php [L,QSA]
-RewriteRule ^(.+)$ index.php?page=$1 [L,QSA]
+RewriteRule ^(.*)$ index.php/$1 [L]
 
 Options -Indexes
-DirectoryIndex index.php
 
 # Compress HTML, CSS, JavaScript, Text, XML and fonts
 <IfModule mod_deflate.c>

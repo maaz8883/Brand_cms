@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<!-- Homepage -->
+<url>
+<loc>https://hireabookwriter.com/</loc>
+<lastmod>2026-02-25</lastmod>
+<priority>1.00</priority>
+</url>
+
+<!-- Core Pages -->
+<url>
+<loc>https://hireabookwriter.com/about-us</loc>
+<lastmod>2026-02-25</lastmod>
+<priority>0.80</priority>
+</url>
+
+<url>
+<loc>https://hireabookwriter.com/contact</loc>
+<lastmod>2026-02-25</lastmod>
+<priority>0.80</priority>
+</url>
+
+<!-- Primary Services -->
+<url><loc>https://hireabookwriter.com/ghostwriting-services</loc><lastmod>2026-02-25</lastmod><priority>0.95</priority></url>
+<url><loc>https://hireabookwriter.com/book-publication-company</loc><lastmod>2026-02-25</lastmod><priority>0.95</priority></url>
+<url><loc>https://hireabookwriter.com/book-editing-services</loc><lastmod>2026-02-25</lastmod><priority>0.95</priority></url>
+<url><loc>https://hireabookwriter.com/book-marketing-company</loc><lastmod>2026-02-25</lastmod><priority>0.95</priority></url>
+
+<!-- Writing Services -->
+<url><loc>https://hireabookwriter.com/story-writing-services</loc><lastmod>2026-02-25</lastmod><priority>0.90</priority></url>
+<url><loc>https://hireabookwriter.com/autobiography-writing-services</loc><lastmod>2026-02-25</lastmod><priority>0.90</priority></url>
+<url><loc>https://hireabookwriter.com/novel-writing</loc><lastmod>2026-02-25</lastmod><priority>0.90</priority></url>
+<url><loc>https://hireabookwriter.com/songwriting-services</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/seo-content-writing-services</loc><lastmod>2026-02-25</lastmod><priority>0.90</priority></url>
+<url><loc>https://hireabookwriter.com/wiki-writing</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/memoir-writing-services</loc><lastmod>2026-02-25</lastmod><priority>0.90</priority></url>
+<url><loc>https://hireabookwriter.com/military-fiction-writing</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/speech-writing</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/non-fiction-writing-services</loc><lastmod>2026-02-25</lastmod><priority>0.90</priority></url>
+<url><loc>https://hireabookwriter.com/script-writing-services</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/movie-writing</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/rhyme-writing-services</loc><lastmod>2026-02-25</lastmod><priority>0.80</priority></url>
+<url><loc>https://hireabookwriter.com/narrative-writing-services</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/screen-writing</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/comic-writing</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/fantasy-writing</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/fiction-writing-servces</loc><lastmod>2026-02-25</lastmod><priority>0.90</priority></url>
+<url><loc>https://hireabookwriter.com/horror-book-writing</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/science-fiction-writing</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/action-adventure</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/biography-writing-services</loc><lastmod>2026-02-25</lastmod><priority>0.90</priority></url>
+
+<!-- Publishing & Editorial -->
+<url><loc>https://hireabookwriter.com/book-formatting</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/children-book-editors</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/book-proofreaders</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/book-cover</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/translation</loc><lastmod>2026-02-25</lastmod><priority>0.80</priority></url>
+<url><loc>https://hireabookwriter.com/audiobook-narrators</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/book-trailer</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/book-illustration-services</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/author-website-design</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+<url><loc>https://hireabookwriter.com/children-book</loc><lastmod>2026-02-25</lastmod><priority>0.85</priority></url>
+
+<!-- Blog Section -->
+<url><loc>https://hireabookwriter.com/blogs/why-hybrid-ghostwriting-is-growing-co-creation-with-authors</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/the-blueprint-for-writing-high-impact-nonfiction-books</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/how-to-convert-real-life-events-into-compelling-narratives</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/the-art-of-screenwriting-from-concept-to-script</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/fiction-vs-non-fiction-choosing-the-right-path-as-a-writer</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/how-professional-ghostwriters-capture-an-authors-voice</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/from-memoir-to-masterpiece-writing-your-life-story-right</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/why-storytelling-is-the-foundation-of-every-great-book</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/the-process-of-turning-ideas-into-books-a-writers-roadmap</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/how-to-write-a-compelling-memoir-that-connects-readers</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/the-step-by-step-process-of-professional-book-writing</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/how-to-collaborate-effectively-with-your-book-writer</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/why-outlining-is-the-most-important-step-in-writing</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/turning-personal-experiences-into-compelling-narratives</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+<url><loc>https://hireabookwriter.com/blogs/how-to-find-the-right-ghostwriter-for-your-book-genre</loc><lastmod>2026-02-25</lastmod><priority>0.70</priority></url>
+
+</urlset>

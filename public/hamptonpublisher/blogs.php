@@ -5,19 +5,19 @@
  * URL: /hamptonpublisher/blogs
  */
 
-require_once __DIR__ . '/inc/hp-api-config.php';
-require_once __DIR__ . '/inc/hp-api-service.php';
+require_once __DIR__.'/inc/hp-api-config.php';
+require_once __DIR__.'/inc/hp-api-service.php';
 
 // ── Pagination ────────────────────────────────────────────────────────────────
 $currentPage = max(1, (int) ($_GET['page'] ?? 1));
-$perPage     = 9;
+$perPage = 9;
 
 // ── Fetch blogs from API ──────────────────────────────────────────────────────
-$listUrl = hpBlogsApiBase() . '/blogs?brand=' . rawurlencode(HP_BRAND_SLUG)
-    . '&status=published&per_page=' . $perPage . '&page=' . $currentPage;
+$listUrl = hpBlogsApiBase().'/blogs?brand='.rawurlencode(HP_BRAND_SLUG)
+    .'&status=published&per_page='.$perPage.'&page='.$currentPage;
 
-$payload    = hpFetchJson($listUrl);
-$blogs      = [];
+$payload = hpFetchJson($listUrl);
+$blogs = [];
 $totalPages = 1;
 $totalCount = 0;
 
@@ -30,7 +30,7 @@ if (is_array($payload) && ! empty($payload['success'])) {
 }
 
 // ── Pagination base URL ───────────────────────────────────────────────────────
-$blogListUrl = rtrim($base_url, '/') . '/blogs';
+$blogListUrl = rtrim($base_url, '/').'/blogs';
 ?>
 
 <!-- Inner Banner -->
@@ -57,7 +57,7 @@ $blogListUrl = rtrim($base_url, '/') . '/blogs';
 <section style="padding: 60px 0; background:#f9f9f9;">
     <div class="container">
 
-        <?php if (empty($blogs)) : ?>
+        <?php if (empty($blogs)) { ?>
             <div class="row justify-content-center text-center" style="padding:60px 0;">
                 <div class="col-md-6">
                     <h2 style="color:#0e3193;">No Posts Yet</h2>
@@ -65,12 +65,12 @@ $blogListUrl = rtrim($base_url, '/') . '/blogs';
                     <a href="<?= htmlspecialchars($url, ENT_QUOTES, 'UTF-8') ?>" class="btn" style="background:#0e3193; color:#fff; padding:10px 30px; border-radius:5px; margin-top:15px; display:inline-block;">Back to Home</a>
                 </div>
             </div>
-        <?php else : ?>
+        <?php } else { ?>
 
             <div class="row">
-                <?php foreach ($blogs as $blog) :
-                    $blogSlug    = htmlspecialchars((string) ($blog['slug'] ?? ''), ENT_QUOTES, 'UTF-8');
-                    $blogTitle   = htmlspecialchars((string) ($blog['title'] ?? 'Untitled'), ENT_QUOTES, 'UTF-8');
+                <?php foreach ($blogs as $blog) {
+                    $blogSlug = htmlspecialchars((string) ($blog['slug'] ?? ''), ENT_QUOTES, 'UTF-8');
+                    $blogTitle = htmlspecialchars((string) ($blog['title'] ?? 'Untitled'), ENT_QUOTES, 'UTF-8');
                     $blogExcerpt = '';
                     if (! empty($blog['short_description'])) {
                         $blogExcerpt = htmlspecialchars(strip_tags((string) $blog['short_description']), ENT_QUOTES, 'UTF-8');
@@ -81,75 +81,75 @@ $blogListUrl = rtrim($base_url, '/') . '/blogs';
                             $blogExcerpt .= '…';
                         }
                     }
-                    $blogImage  = ! empty($blog['featured_image'])
+                    $blogImage = ! empty($blog['featured_image'])
                         ? htmlspecialchars((string) $blog['featured_image'], ENT_QUOTES, 'UTF-8')
                         : 'images/blog.jpg';
-                    $blogAlt    = htmlspecialchars(
+                    $blogAlt = htmlspecialchars(
                         (string) (! empty($blog['image_alt_tag']) ? $blog['image_alt_tag'] : ($blog['title'] ?? 'Blog image')),
                         ENT_QUOTES,
                         'UTF-8'
                     );
-                    $blogDate   = ! empty($blog['created_at']) ? date('M j, Y', strtotime((string) $blog['created_at'])) : '';
+                    $blogDate = ! empty($blog['created_at']) ? date('M j, Y', strtotime((string) $blog['created_at'])) : '';
                     $blogAuthor = htmlspecialchars((string) ($blog['author'] ?? ($blog['user']['name'] ?? '')), ENT_QUOTES, 'UTF-8');
-                    $detailUrl  = htmlspecialchars(rtrim($base_url, '/') . '/blog/' . $blogSlug, ENT_QUOTES, 'UTF-8');
-                ?>
+                    $detailUrl = htmlspecialchars(rtrim($base_url, '/').'/blog/'.$blogSlug, ENT_QUOTES, 'UTF-8');
+                    ?>
                     <div class="col-md-4 col-sm-6 col-12 mb-4">
                         <article class="hp-blog-card">
                             <a href="<?= $detailUrl ?>" class="hp-blog-card__img-wrap" aria-label="<?= $blogTitle ?>">
                                 <img src="<?= $blogImage ?>" alt="<?= $blogAlt ?>" class="hp-blog-card__img" loading="lazy">
                             </a>
                             <div class="hp-blog-card__body">
-                                <?php if ($blogDate || $blogAuthor) : ?>
+                                <?php if ($blogDate || $blogAuthor) { ?>
                                     <div class="hp-blog-card__meta">
-                                        <?php if ($blogDate) : ?>
+                                        <?php if ($blogDate) { ?>
                                             <span><i class="fa fa-calendar"></i> <?= $blogDate ?></span>
-                                        <?php endif; ?>
-                                        <?php if ($blogAuthor) : ?>
+                                        <?php } ?>
+                                        <?php if ($blogAuthor) { ?>
                                             <span><i class="fa fa-user"></i> <?= $blogAuthor ?></span>
-                                        <?php endif; ?>
+                                        <?php } ?>
                                     </div>
-                                <?php endif; ?>
+                                <?php } ?>
                                 <h2 class="hp-blog-card__title">
                                     <a href="<?= $detailUrl ?>"><?= $blogTitle ?></a>
                                 </h2>
-                                <?php if ($blogExcerpt) : ?>
+                                <?php if ($blogExcerpt) { ?>
                                     <p class="hp-blog-card__excerpt"><?= $blogExcerpt ?></p>
-                                <?php endif; ?>
+                                <?php } ?>
                                 <a href="<?= $detailUrl ?>" class="hp-blog-card__readmore">
                                     Read More <i class="fa fa-arrow-right"></i>
                                 </a>
                             </div>
                         </article>
                     </div>
-                <?php endforeach; ?>
+                <?php } ?>
             </div>
 
             <!-- Pagination -->
-            <?php if ($totalPages > 1) : ?>
+            <?php if ($totalPages > 1) { ?>
                 <div class="row mt-4">
                     <div class="col-12 d-flex justify-content-center">
                         <ul class="pagination hp-pagination">
-                            <?php if ($currentPage > 1) : ?>
+                            <?php if ($currentPage > 1) { ?>
                                 <li class="page-item">
                                     <a class="page-link" href="<?= $blogListUrl ?>?page=<?= $currentPage - 1 ?>" aria-label="Previous">&laquo;</a>
                                 </li>
-                            <?php endif; ?>
-                            <?php for ($p = 1; $p <= $totalPages; $p++) : ?>
+                            <?php } ?>
+                            <?php for ($p = 1; $p <= $totalPages; $p++) { ?>
                                 <li class="page-item <?= $p === $currentPage ? 'active' : '' ?>">
                                     <a class="page-link" href="<?= $blogListUrl ?>?page=<?= $p ?>"><?= $p ?></a>
                                 </li>
-                            <?php endfor; ?>
-                            <?php if ($currentPage < $totalPages) : ?>
+                            <?php } ?>
+                            <?php if ($currentPage < $totalPages) { ?>
                                 <li class="page-item">
                                     <a class="page-link" href="<?= $blogListUrl ?>?page=<?= $currentPage + 1 ?>" aria-label="Next">&raquo;</a>
                                 </li>
-                            <?php endif; ?>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
-            <?php endif; ?>
+            <?php } ?>
 
-        <?php endif; ?>
+        <?php } ?>
 
     </div>
 </section>
