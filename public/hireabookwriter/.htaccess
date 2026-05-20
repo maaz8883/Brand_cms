@@ -10,6 +10,10 @@ RewriteEngine On
 # SEO: friendly sitemap (before front controller)
 RewriteRule ^sitemap\.xml$ sitemap.php [L,QSA]
 
+# RSS Feed: friendly feed URL
+RewriteRule ^feed/?$ feed.php [L,QSA]
+RewriteRule ^rss/?$ feed.php [L,QSA]
+
 # Front controller: route all non-file/non-dir requests through index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
